@@ -1,0 +1,32 @@
+﻿<Page x:Class="StudentSystem.Pages.ListViewGroup"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StudentSystem.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListViewGroup">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <ListBox x:Name="ListBoxStudent" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel   Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock Text="{Binding Path=SpecTitle}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock Text="{Binding Path=Code}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+</Page>

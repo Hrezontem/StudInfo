@@ -1,0 +1,172 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"  
+               TargetType="{x:Type RadioButton}"
+               x:Key="MenuButton" >
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate x:Name="MenuButton" TargetType="RadioButton">
+                        <Border CornerRadius="5 5 5 5" Background="{TemplateBinding Background}">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+                                <Border  Width="4" Height="16" Background="#0C66E4" CornerRadius="0 4 4 0">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Setters>
+                                                <Setter Property="Visibility" Value="Hidden"/>
+
+                                            </Style.Setters>
+                                            <Style.Triggers >
+                                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type RadioButton}}, Path=IsChecked}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                        
+                                    </Border.Style>
+                                </Border>
+                                <TextBlock x:Name="MenuBtn"  Text="{TemplateBinding Property=Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="Center"
+                                       Padding="20 5 20 5"/>
+
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#44546F"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style.Setters>
+
+        <Style.Triggers>
+
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="False"/>
+                    <Condition Property="IsMouseOver" Value="True"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard HandoffBehavior="Compose" >
+                        <Storyboard >
+                            <ColorAnimation Duration="0:0:0.200" From="Transparent" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"  To="#F1F2F4" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ColorAnimation Duration="0:0:0.100" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"  To="Transparent" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsChecked" Value="True"/>
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Background" Value="#E9F2FF"/>
+                    <Setter Property="Control.Foreground"  Value="#0C66E4"/>
+                </MultiTrigger.Setters>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard HandoffBehavior="Compose" >
+                        <Storyboard >
+                            <ColorAnimation Duration="0"  Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"  To="#E9F2FF" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+
+            </MultiTrigger>
+            <Trigger Property="IsChecked" Value="True">
+
+
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="SystemButtonClose" TargetType="Button">
+        <Style.Setters >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border Background="Transparent" >
+                            <Path Fill="{TemplateBinding Foreground}" Data="M8.06465 0.15L4.88065 3.335L1.69465 0.149C1.59938 0.0558398 1.47127 0.00392562 1.33803 0.00448704C1.20479 0.00504846 1.07712 0.0580401 0.982647 0.152L0.282647 0.853C0.234727 0.898967 0.196526 0.954089 0.170307 1.0151C0.144088 1.0761 0.130386 1.14175 0.130013 1.20815C0.12964 1.27455 0.142604 1.34035 0.168135 1.40165C0.193667 1.46295 0.231247 1.5185 0.278647 1.565L3.46365 4.749L0.279647 7.935C0.186619 8.0304 0.134884 8.15858 0.135633 8.29182C0.136381 8.42506 0.189553 8.55266 0.283647 8.647L0.983647 9.347C1.18965 9.554 1.49965 9.547 1.69565 9.351L4.88165 6.166L8.06565 9.351C8.16104 9.44403 8.28922 9.49576 8.42247 9.49501C8.55571 9.49427 8.6833 9.44109 8.77765 9.347L9.47865 8.647C9.5265 8.60097 9.56463 8.54579 9.59076 8.48475C9.61689 8.4237 9.6305 8.35804 9.63078 8.29163C9.63106 8.22523 9.618 8.15945 9.59239 8.09819C9.56677 8.03693 9.52911 7.98144 9.48165 7.935L6.29565 4.749L9.48165 1.565C9.57481 1.46974 9.62672 1.34163 9.62616 1.20838C9.6256 1.07514 9.57261 0.947475 9.47865 0.853L8.77865 0.153C8.73173 0.104972 8.67576 0.0667222 8.61396 0.0404606C8.55217 0.014199 8.48579 0.000447085 8.41865 0C8.35283 0.000538105 8.28777 0.0140653 8.22719 0.0398059C8.16662 0.0655465 8.11172 0.102994 8.06565 0.15H8.06465Z" Width="10" Height="10"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter  Property="BorderBrush" Value="Transparent" />
+            <Setter  Property="Background" Value="Transparent" />
+            <Setter  Property="Foreground" Value="#44546F" />
+
+
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter  Property="BorderBrush" Value="Transparent" />
+                <Setter  Property="Background" Value="Transparent" />
+                <Setter  Property="Foreground" Value="#0C66E4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="SystemButtonMinimize" TargetType="Button">
+        <Style.Setters >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border  Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                            <Border  HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Path  Fill="{TemplateBinding Foreground}"  Data="M0.308833 0.732957C0.210928 0.830752 0.133259 0.946886 0.0802674 1.07472C0.0272755 1.20255 0 1.33958 0 1.47796C0 1.61634 0.0272755 1.75336 0.0802674 1.88119C0.133259 2.00903 0.210928 2.12516 0.308833 2.22296L4.85583 6.77996C4.94872 6.87308 5.05908 6.94697 5.18057 6.99738C5.30206 7.04779 5.4323 7.07374 5.56383 7.07374C5.69537 7.07374 5.82561 7.04779 5.9471 6.99738C6.06859 6.94697 6.17894 6.87308 6.27183 6.77996L10.8218 2.22196C11.0192 2.02464 11.13 1.75701 11.13 1.47796C11.13 1.1989 11.0192 0.931277 10.8218 0.733956C10.6245 0.536635 10.3569 0.425781 10.0778 0.425781C9.79878 0.425781 9.53115 0.536635 9.33383 0.733956L5.56383 4.50996L1.79583 0.733956C1.69823 0.636263 1.58232 0.558763 1.45475 0.505887C1.32718 0.453011 1.19043 0.425795 1.05233 0.425795C0.914235 0.425795 0.777491 0.453011 0.649917 0.505887C0.522342 0.558763 0.40644 0.636263 0.308833 0.733956V0.732957Z"></Path>
+                            </Border>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter  Property="BorderBrush" Value="Transparent" />
+            <Setter  Property="Background" Value="Transparent" />
+            <Setter  Property="Foreground" Value="#44546F" />
+
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter  Property="BorderBrush" Value="Transparent" />
+                <Setter  Property="Background" Value="Transparent" />
+                <Setter  Property="Foreground" Value="#0C66E4" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="SystemToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}"  TargetType="ToggleButton">
+        <Style.Setters >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border Background="Transparent" >
+                            <Border CornerRadius="1" BorderThickness="1.5" BorderBrush="{TemplateBinding Foreground}" Background="Transparent" Width="10" Height="10"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter  Property="BorderBrush" Value="Transparent" />
+            <Setter  Property="Background" Value="Transparent" />
+            <Setter  Property="Foreground" Value="#44546F" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter  Property="BorderBrush" Value="Transparent" />
+                <Setter  Property="Background" Value="Transparent" />
+                <Setter  Property="Foreground" Value="#0C66E4" />
+
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
