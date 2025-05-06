@@ -15,7 +15,7 @@ namespace StudentSystem
     internal class GroupsViewModel : INotifyPropertyChanged
     {
         private string conn = "Server=localhost;Port=5432;User Id=postgres;Password=123; Database=postgres";
-        private string sql = @"select * from group_select()";
+        private string sql = @"select * from groups";
         public ObservableCollection<Groups> Groups { get; set; }
 
         public GroupsViewModel()
@@ -33,7 +33,7 @@ namespace StudentSystem
                     {
                         while (reader.Read())
                         {
-                            string title = reader.GetValue(0).ToString();
+                            string title = reader.GetValue(1).ToString();
                             string specTitle = reader.GetValue(2).ToString();
                             string code = reader.GetValue(3).ToString();
 

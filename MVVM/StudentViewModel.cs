@@ -16,7 +16,7 @@ namespace StudentSystem
     public class StudentViewModel : INotifyPropertyChanged
     {
         private string conn = "Server=localhost;Port=5432;User Id=postgres;Password=123; Database=postgres";
-        private string sql = @"select * from students_select(1) order by students_name ";
+        private string sql = @"select * from students order by students_name ";
         public ObservableCollection<Student> Students { get; set; }
         public DataTable DataTableStudents;
         Stopwatch stopwatch = new Stopwatch();
