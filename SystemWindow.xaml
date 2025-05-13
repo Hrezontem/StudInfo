@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="Auto" MinWidth="187"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image HorizontalAlignment="Center" Width="50" Source="/peeing-man-icon-1615c4.png" Height="50" VerticalAlignment="Center" Grid.Row="1"/>
+            <!-- Здесь будет логотип учебной организации -->
             <StackPanel Grid.Row="2" Orientation="Horizontal">
 
                 <StackPanel x:Name="MenuButton" Margin="20,0,0,10" Width="156" >
