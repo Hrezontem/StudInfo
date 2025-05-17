@@ -66,6 +66,13 @@ namespace StudentSystem
         {
             Application.Current.Shutdown();
         }
+
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            SystemWindow systemWindow = new SystemWindow();
+            this.Hide();
+            systemWindow.Show();
+        }
     }
 
 }
