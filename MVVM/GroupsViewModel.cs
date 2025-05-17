@@ -14,8 +14,11 @@ namespace StudentSystem
 {
     internal class GroupsViewModel : INotifyPropertyChanged
     {
-        private string conn = "Server=localhost;Port=5432;User Id=postgres;Password=123; Database=postgres";
-        private string sql = @"select * from group_select()";
+        private string conn = String.Format("Server={0};Port={1};" +
+            "User Id={2};Password={3};Database={4}",
+            $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+            $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
+        private string sql = @"select * from groups";
         public ObservableCollection<Groups> Groups { get; set; }
 
         public GroupsViewModel()

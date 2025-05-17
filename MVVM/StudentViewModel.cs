@@ -10,12 +10,17 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using StudInfo.Properties;
+using System.Configuration;
 
 namespace StudentSystem
 {
     public class StudentViewModel : INotifyPropertyChanged
     {
-        private string conn = "Server=localhost;Port=5432;User Id=postgres;Password=123; Database=postgres";
+        private string conn = String.Format("Server={0};Port={1};" +
+            "User Id={2};Password={3};Database={4}",
+            $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+            $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private string sql = @"select * from students_select(1) order by students_name ";
         public ObservableCollection<Student> Students { get; set; }
         public DataTable DataTableStudents;

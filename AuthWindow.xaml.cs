@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Configuration;
+using StudInfo.Properties;
+using System.ComponentModel;
 
 namespace StudentSystem
 {
@@ -25,7 +28,19 @@ namespace StudentSystem
         public AuthWindow()
         {
             InitializeComponent();
+            var BaseName = StudInfo.Properties.Settings.Default["BaseName"].ToString();
+            var BaseIP = StudInfo.Properties.Settings.Default["BaseIP"].ToString();
+            var BasePort = StudInfo.Properties.Settings.Default["BasePort"].ToString();
+            var BaseLogIn = StudInfo.Properties.Settings.Default["BaseLogIn"].ToString();
+            var BasePassword = StudInfo.Properties.Settings.Default["BasePassword"].ToString();
+            BaseNameTB.Text = BaseName;
+            IPTB.Text = BaseIP;
+            PortTB.Text = BasePort;
+            LoginTB.Text = BaseLogIn;
+            PasswordTB.Text = BasePassword;
         }
+
+        
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -69,6 +84,12 @@ namespace StudentSystem
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
+            StudInfo.Properties.Settings.Default["BaseName"] = BaseNameTB.Text;
+            StudInfo.Properties.Settings.Default["BaseIP"] = IPTB.Text;
+            StudInfo.Properties.Settings.Default["BasePort"] = PortTB.Text;
+            StudInfo.Properties.Settings.Default["BaseLogIn"] = LoginTB.Text;
+            StudInfo.Properties.Settings.Default["BasePassword"] = PasswordTB.Text;
+            StudInfo.Properties.Settings.Default.Save();
             SystemWindow systemWindow = new SystemWindow();
             this.Hide();
             systemWindow.Show();
