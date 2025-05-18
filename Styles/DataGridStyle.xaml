@@ -13,7 +13,6 @@
                 <ControlTemplate   TargetType="{x:Type DataGridCell}">
                     <ContentPresenter Margin="0"  HorizontalAlignment="Left"  UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
                 </ControlTemplate>
-
             </Setter.Value>
         </Setter>
         <Style.Triggers>
@@ -21,14 +20,10 @@
                 <Setter Property="Foreground" Value="#0C66E4" />
             </Trigger>
         </Style.Triggers>
-
     </Style>
-
+    
     <Style x:Key="RowHeaderTemplate" >
-
-
     </Style>
-
 
     <Style TargetType="{x:Type DataGridRow}" x:Key="DataRowStudent">
         <Style.Setters>

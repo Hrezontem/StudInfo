@@ -34,7 +34,7 @@
                            FontSize="12" 
                            FontFamily="SF Pro Display" 
                            FontWeight="Bold"></Label>
-                    <TextBox Style="{DynamicResource LogInTextBox}" x:Name="BaseNameTB"/>
+                    <TextBox Style="{DynamicResource CostomTextBox}" x:Name="BaseNameTB"/>
 
                 </StackPanel>
                 <StackPanel Margin="75,338,75,448" HorizontalAlignment="Center">
@@ -43,7 +43,7 @@
                            FontSize="12" 
                            FontFamily="SF Pro Display" 
                            FontWeight="Bold"></Label>
-                    <TextBox Style="{DynamicResource LogInTextBox}" x:Name="IPTB"/>
+                    <TextBox Style="{DynamicResource CostomTextBox}" x:Name="IPTB"/>
                 </StackPanel>
                 <StackPanel Margin="75,401,75,385" HorizontalAlignment="Center">
                     <Label Content="Порт" 
@@ -51,7 +51,7 @@
                         FontSize="12" 
                         FontFamily="SF Pro Display" 
                         FontWeight="Bold"/>
-                    <TextBox Style="{DynamicResource LogInTextBox}" x:Name="PortTB"/>
+                    <TextBox Style="{DynamicResource CostomTextBox}" x:Name="PortTB"/>
                 </StackPanel>
                 <StackPanel Margin="75,464,75,0" Height="58" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Label Content="Логин" 
@@ -59,7 +59,7 @@
                         FontSize="12" 
                         FontFamily="SF Pro Display" 
                         FontWeight="Bold"/>
-                    <TextBox Style="{DynamicResource LogInTextBox}" x:Name="LoginTB"/>
+                    <TextBox Style="{DynamicResource CostomTextBox}" x:Name="LoginTB"/>
                 </StackPanel>
                 <StackPanel Margin="75,527,75,0" Height="59" VerticalAlignment="Top" HorizontalAlignment="Center">
                     <Label Content="Пароль" 
@@ -67,7 +67,7 @@
                         FontSize="12" 
                         FontFamily="SF Pro Display" 
                         FontWeight="Bold"/>
-                    <TextBox Style="{DynamicResource LogInTextBox}" x:Name="PasswordTB"/>
+                    <TextBox Style="{DynamicResource CostomTextBox}" x:Name="PasswordTB"/>
                 </StackPanel>
                 <Grid MouseDown="Window_MouseDown">
                     <Button Style="{DynamicResource CostomBtn}" x:Name="LogIn" Content="Подключиться"  

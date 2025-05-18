@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace StudentSystem
 {
-    internal class Groups : INotifyPropertyChanged
+    internal class Spec : INotifyPropertyChanged
     {
         private int id;
         private string title;
         private string fullTitle;
-        private string dateStuding;
+        private string specCode;
 
         public int Id
         {
@@ -21,7 +21,7 @@ namespace StudentSystem
             set
             {
                 id = value;
-                OnPropertyChanged("id");
+                OnPropertyChanged("Id");
             }
         }
         public string Title
@@ -42,13 +42,13 @@ namespace StudentSystem
                 OnPropertyChanged("fullTitle");
             }
         }
-        public string DateStuding
+        public string SpecCode
         {
-            get { return dateStuding; }
+            get { return specCode; }
             set
             {
-                dateStuding = value;
-                OnPropertyChanged("DateStuding");
+                specCode = value;
+                OnPropertyChanged("SpecCode");
             }
         }
 

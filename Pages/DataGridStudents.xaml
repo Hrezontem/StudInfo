@@ -11,12 +11,7 @@
       Loaded="dgvStudents_Loaded">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="203*"/>
-        </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="searchTextBox" KeyUp="searchTextBox_KeyUp" TextChanged="searchTextBox_TextChanged" />
-        <DataGrid Grid.Row="1" RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataRowStudent}"  x:Name="dgvStudents" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" SelectionMode="Single"  BorderBrush="#00688CAF" Grid.RowSpan="2">
+        <DataGrid RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataRowStudent}"  x:Name="dgvStudents" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" SelectionMode="Single"  BorderBrush="#00688CAF" Grid.RowSpan="2">
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="14"/>

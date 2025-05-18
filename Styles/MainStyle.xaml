@@ -201,7 +201,7 @@
 
     
     
-    <Style x:Key="LogInTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+    <Style x:Key="CostomTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
         <Style.Setters>
             <Setter Property="FontFamily" Value="SF Pro Display"/>
             <Setter Property="Foreground" Value="#44546F"/>
@@ -228,6 +228,36 @@
                 </Setter.Value>
             </Setter>
             
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="SearchTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="SF Pro Display"/>
+            <Setter Property="Foreground" Value="#44546F"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderThickness="1" 
+                                CornerRadius="3" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                Width="275" Height="26"
+                                SnapsToDevicePixels="True"
+                                Padding="4 6 0 4">
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Focusable="True"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
         </Style.Setters>
     </Style>
 

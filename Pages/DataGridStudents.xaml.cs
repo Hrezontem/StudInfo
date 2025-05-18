@@ -28,11 +28,14 @@ namespace StudentSystem.Pages
 
             InitializeComponent();
             dgvStudents.ItemsSource = students;
+            
 
         }
 
         private void dgvStudents_Loaded(object sender, RoutedEventArgs e)
         {
+            dgvStudents.Columns[0].Visibility = Visibility.Hidden;
+            dgvStudents.Columns[5].Visibility = Visibility.Hidden;
         }
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
