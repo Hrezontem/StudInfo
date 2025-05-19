@@ -11,10 +11,22 @@ namespace StudentSystem
 {
     public class Student : INotifyPropertyChanged
     {
+        private int id;
         private string name;
         private string card;
         private string group;
+        private string dateBirth;
+        private string description;
 
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("id");
+            }
+        }
         public string Name
         {
             get { return name; }
@@ -40,6 +52,24 @@ namespace StudentSystem
             {
                 group = value;
                 OnPropertyChanged("Group");
+            }
+        }
+        public string DateBirth
+        {
+            get { return dateBirth; }
+            set
+            {
+                dateBirth = value;
+                OnPropertyChanged("DateBirth");
+            }
+        }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnPropertyChanged("DateBirth");
             }
         }
 

@@ -1,4 +1,6 @@
 ﻿
+using StudentSystem.Pages;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -16,38 +18,56 @@ namespace StudentSystem
         public SystemWindow()
         {
             InitializeComponent();
-        // button.BeginAnimation(Button.WidthProperty, buttonAnimation);
-            
-
-
-    }
+            // button.BeginAnimation(Button.WidthProperty, buttonAnimation);
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
+        }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                ((SystemWindow)System.Windows.Application.Current.MainWindow).DragMove();
+                this.DragMove();
+        }
 
+        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            /**DataView dv = DefaultView;
+            dv.RowFilter = $" LIKE '" + searchTextBox.Text + "%'";
+            dgvStudents.DataSource = dv;**/
         }
 
         private void btnMenu1_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewStudents.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnMenu2_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewGroups.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Visible;
+            searchTextBox.Visibility = Visibility.Visible;
+            FilterComboBox.Visibility = Visibility.Visible;
         }
         private void btnMenu3_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewStudents.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Visible;
+            searchTextBox.Visibility = Visibility.Visible;
+            FilterComboBox.Visibility = Visibility.Visible;
         }
         private void btnMenu4_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/ListViewSpec.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Visible;
+            searchTextBox.Visibility = Visibility.Visible;
+            FilterComboBox.Visibility = Visibility.Visible;
         }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {

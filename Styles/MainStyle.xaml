@@ -169,4 +169,96 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="CostomBtn" TargetType="Button">
+        <Style.Setters >
+            <Setter  Property="BorderBrush" Value="Transparent" />
+            <Setter  Property="Background" Value="#0055CC" />
+            <Setter  Property="Foreground" Value="White" />
+            <Setter  Property="Content" Value="Подключиться"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="3" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Foreground}">
+                            <Grid>
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="{TemplateBinding Content}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="AliceBlue"/>
+                <Setter Property="Foreground" Value="#0055CC"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="SkyBlue"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    
+    
+    <Style x:Key="CostomTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="SF Pro Display"/>
+            <Setter Property="Foreground" Value="#44546F"/>
+            <Setter Property="BorderBrush" Value="#FF7F7F7F"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderThickness="1" 
+                                CornerRadius="3" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding Foreground}" 
+                                Width="275" Height="32"
+                                SnapsToDevicePixels="True"
+                                Padding="4 6 0 4">
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Focusable="True"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="SearchTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="SF Pro Display"/>
+            <Setter Property="Foreground" Value="#44546F"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderThickness="1" 
+                                CornerRadius="3" 
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                Width="275" Height="26"
+                                SnapsToDevicePixels="True"
+                                Padding="4 6 0 4">
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Focusable="True"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+    </Style>
+
 </ResourceDictionary>

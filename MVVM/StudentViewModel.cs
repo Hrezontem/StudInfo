@@ -10,13 +10,18 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
+using StudInfo.Properties;
+using System.Configuration;
 
 namespace StudentSystem
 {
     public class StudentViewModel : INotifyPropertyChanged
     {
-        private string conn = "Server=localhost;Port=5432;User Id=postgres;Password=123; Database=postgres";
-        private string sql = @"select * from students order by students_name ";
+        private string conn = String.Format("Server={0};Port={1};" +
+            "User Id={2};Password={3};Database={4}",
+            $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+            $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
+        private string sql = @"select * from students_select() "; /**_select(1) order by students_name**/
         public ObservableCollection<Student> Students { get; set; }
         public DataTable DataTableStudents;
         Stopwatch stopwatch = new Stopwatch();
@@ -36,11 +41,14 @@ namespace StudentSystem
                     {
                         while (reader.Read()) 
                         {
+                            int id = reader.GetInt16(0);
                             string name = reader.GetValue(1).ToString();
-                            string card = reader.GetValue(2).ToString();
-                            string group = reader.GetValue(3).ToString();
+                            string group = reader.GetValue(2).ToString();
+                            string card = reader.GetValue(3).ToString();
+                            string dateBirth = reader.GetValue(4).ToString();
+                            string description = reader.GetValue(5).ToString();
 
-                            Students.Add(new Student { Name = name, Card = card, Group = group });
+                            Students.Add(new Student { Id = id, Name = name, Card = card, Group = group, DateBirth = dateBirth, Description = description});
                         }
                     }
                 }
@@ -49,6 +57,8 @@ namespace StudentSystem
             }
 
         }
+
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
