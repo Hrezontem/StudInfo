@@ -22,6 +22,7 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Hidden;
         }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -44,6 +45,7 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu2_Click(object sender, RoutedEventArgs e)
         {
@@ -52,6 +54,7 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Visible;
             searchTextBox.Visibility = Visibility.Visible;
             FilterComboBox.Visibility = Visibility.Visible;
+            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu3_Click(object sender, RoutedEventArgs e)
         {
@@ -60,6 +63,7 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Visible;
             searchTextBox.Visibility = Visibility.Visible;
             FilterComboBox.Visibility = Visibility.Visible;
+            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu4_Click(object sender, RoutedEventArgs e)
         {
@@ -68,6 +72,52 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Visible;
             searchTextBox.Visibility = Visibility.Visible;
             FilterComboBox.Visibility = Visibility.Visible;
+            NewStudentLabel.Visibility = Visibility.Hidden;
+        }
+        private void btnMenu5_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Visible;
+        }
+        private void btnMenu6_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Visible;
+        }
+        private void btnMenu7_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Visible;
+        }
+        private void btnMenu8_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Visible;
+        }
+        private void btnMenu9_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
+            SearchLabel.Visibility = Visibility.Hidden;
+            searchTextBox.Visibility = Visibility.Hidden;
+            FilterComboBox.Visibility = Visibility.Hidden;
+            NewStudentLabel.Visibility = Visibility.Visible;
         }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
@@ -109,6 +159,11 @@ namespace StudentSystem
         }
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
         }

@@ -69,7 +69,7 @@ namespace StudentSystem
             set
             {
                 description = value;
-                OnPropertyChanged("DateBirth");
+                OnPropertyChanged("Description");
             }
         }
 
