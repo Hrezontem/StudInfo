@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StudInfo": {
+      "commandName": "Project",
+      "hotReloadEnabled": true
+    }
+  }
+}

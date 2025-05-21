@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 namespace StudentSystem
 {
     /// <summary>
@@ -162,7 +163,7 @@ namespace StudentSystem
         private void CreateNewStudentBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ListViewNewStudent NS = new ListViewNewStudent();
-            NS.ShowDialog();
+            NS.Show();
         }
     }
 }

@@ -9,8 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\CreateGroup.png" />
+    <None Remove="Resources\Images\DateImg.png" />
+    <None Remove="Resources\Images\DelST.png" />
     <None Remove="Resources\Images\Logo.png" />
     <None Remove="Resources\Images\LogoMainWindow.png" />
+    <None Remove="Resources\Images\NewGroup.png" />
+    <None Remove="Resources\Images\NewST.png" />
+    <None Remove="Resources\Images\PostgreSQLlogo.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,8 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\CreateGroup.png" />
+    <Resource Include="Resources\Images\DateImg.png" />
+    <Resource Include="Resources\Images\DelST.png" />
     <Resource Include="Resources\Images\Logo.png" />
     <Resource Include="Resources\Images\LogoMainWindow.png" />
+    <Resource Include="Resources\Images\NewGroup.png" />
+    <Resource Include="Resources\Images\NewST.png" />
+    <Resource Include="Resources\Images\PostgreSQLlogo.svg">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -46,9 +60,6 @@
     <None Update="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Update="Resources\Images\PostgreSQLlogo.svg">
-      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
 

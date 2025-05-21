@@ -329,17 +329,17 @@
                         />
                     <RadioButton 
                         GroupName="Btn"
-                        Content="Группы" 
-                        Style="{StaticResource MenuButton}" 
-                        Height="35"
-                        Click="btnMenu2_Click" FontFamily="SF Pro Display" 
-                        />
-                    <RadioButton 
-                        GroupName="Btn"
                         Content="Студенты" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
                         Click="btnMenu3_Click" FontFamily="SF Pro Display" 
+                        />
+                    <RadioButton 
+                        GroupName="Btn"
+                        Content="Группы" 
+                        Style="{StaticResource MenuButton}" 
+                        Height="35"
+                        Click="btnMenu2_Click" FontFamily="SF Pro Display" 
                         />
                     <RadioButton 
                         GroupName="Btn"
@@ -386,12 +386,11 @@
                 </StackPanel>
                 <Rectangle Margin="46 0 0 0" Fill="#28091E42"  Width="2" Grid.Row="2"/>
             </StackPanel>
-            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" >
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 37">
-                    <Image x:Name="CreateNewStudentBtn" MouseDown="CreateNewStudentBtn_MouseDown" Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\NewST.png" Height="20" Width="30" Margin="14 0 7 0"/>
-
-                    <Image Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\DelST.png" Height="20"  Width="30" Margin="0 0 7 0"/>
-                    <Image Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\CreateGroup.png" Height="20"  Width="30"  Margin="0 0 7 0"/>
+                    <Image x:Name="CreateNewStudentBtn" MouseDown="CreateNewStudentBtn_MouseDown" Source="/Resources/Images/NewST.png" Height="20" Width="30" Margin="14 0 7 0"/>
+                    <Image Source="/Resources/Images/DelST.png" Height="20"  Width="30" Margin="0 0 7 0"/>
+                    <Image Source="/Resources/Images/CreateGroup.png" Height="20"  Width="30"  Margin="0 0 7 0"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">
