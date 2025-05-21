@@ -1,14 +1,15 @@
-﻿<Page x:Class="StudInfo.Pages.ListViewNewStudent"
+﻿<Window x:Class="StudInfo.Pages.ListViewNewStudent"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:StudInfo.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ListViewNewStudent" Background="Transparent"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-    <Page.Resources>
+      d:DesignHeight="430" d:DesignWidth="300"
+      Title="ListViewNewStudent" Background="White" 
+      WindowStyle="None"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -86,7 +87,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border x:Name="templateRoot" Background="{StaticResource ComboBox.Static.Background}" BorderBrush="{StaticResource ComboBox.Static.Border}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                        <Border x:Name="templateRoot" CornerRadius="3" Background="{StaticResource ComboBox.Static.Background}" BorderBrush="{StaticResource ComboBox.Static.Border}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
                             <Border x:Name="splitBorder" BorderBrush="Transparent" BorderThickness="1" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
                                 <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{StaticResource ComboBox.Static.Glyph}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
                             </Border>
@@ -289,12 +290,91 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-    </Page.Resources>
+        <Style x:Key="DatePickerStyle" TargetType="{x:Type DatePicker}">
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="IsTodayHighlighted" Value="True"/>
+            <Setter Property="SelectedDateFormat" Value="Short"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint=".5,0" StartPoint=".5,1">
+                        <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                        <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                        <GradientStop Color="#FF718597" Offset="0.375"/>
+                        <GradientStop Color="#FF617584" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DatePicker}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3" Padding="{TemplateBinding Padding}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="PART_DisabledVisual" To="1" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid.Resources>
+                                    <SolidColorBrush x:Key="DisabledBrush" Color="#A5FFFFFF"/>
+                                    <ControlTemplate x:Key="DropDownButtonTemplate" TargetType="{x:Type Button}">
+                                        <Grid>
+
+                                            <Grid Background="#11FFFFFF" FlowDirection="LeftToRight" HorizontalAlignment="Center" Height="18" Margin="0" VerticalAlignment="Center" Width="19">
+
+
+                                                <Image Width="17" Height="17" Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\DateImg.png"/>
+
+                                            </Grid>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Grid.Resources>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="PART_Button" Grid.Column="1" Foreground="{TemplateBinding Foreground}" Focusable="False" HorizontalAlignment="Left" Margin="3,0,3,0" Grid.Row="0" Template="{StaticResource DropDownButtonTemplate}" VerticalAlignment="Top" Width="20"/>
+                                <DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0" Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch" Grid.Row="0" VerticalContentAlignment="Stretch"/>
+                                <Grid x:Name="PART_DisabledVisual" Grid.Column="0" Grid.ColumnSpan="2" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border CornerRadius="3">
+                                        <Rectangle Grid.Column="0" Fill="LightGray" Grid.Row="0" RadiusX="1" RadiusY="1"/>
+                                    </Border>
+                                    <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0" Grid.Row="0" RadiusX="1" RadiusY="1" Width="19"/>
+                                    <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="false">
+                                <Setter Property="Foreground" TargetName="PART_TextBox" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
-        <Border Background="White">
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical" Margin="10 0 0 0">
+        <Grid.Effect>
+            <DropShadowEffect Color="Gray"/>
+        </Grid.Effect>
+        <Border Background="AntiqueWhite"  HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="10">
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Vertical" >
+                    <Label Content="Добавление студента" FontFamily="SF Pro Display" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 10" Foreground="#44546F"/>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="ФИО студента" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
@@ -305,29 +385,25 @@
                             <Label Content="Дата рождения" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
                             <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
                         </StackPanel>
-                        <DatePicker BorderBrush="LightGray" Height="32" Width="275" Padding="5 5 0 0" />
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="50 0 0 0">
-                    <StackPanel Orientation="Vertical">
+                        <DatePicker Style="{DynamicResource DatePickerStyle}" BorderBrush="LightGray" Height="32" Width="275" Padding="5 5 0 0" />
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Группа" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
                             <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
                         </StackPanel>
-                        <ComboBox Style="{DynamicResource CostomComboBoxStyle}" Height="32" Width="275"/>
+                        <ComboBox Style="{DynamicResource CostomComboBoxStyle}" Height="32" Width="275" SelectionChanged="ComboBox_SelectionChanged"/>
                         <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                             <Label Content="Номер студенческого билета" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
                             <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
                         </StackPanel>
-                        <TextBox Style="{DynamicResource CostomTextBox}"/>
                     </StackPanel>
+                    <TextBox Style="{DynamicResource CostomTextBox}"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Style="{DynamicResource GrayCostomBtn}" Margin="0 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Отчистить" Width="75" Height="26" Background="#0F091E42"/>
-                        <Button Style="{DynamicResource CostomBtn}" Margin="125 30 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26"/>
+                        <Button Style="{DynamicResource GrayCostomBtn}" Margin="10 30 0 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Отмена" Width="75" Height="26" Background="#0F091E42" Click="Button_Click"/>
+                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 0 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Border>
     </Grid>
 
-</Page>
+</Window>

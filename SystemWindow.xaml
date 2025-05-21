@@ -386,13 +386,19 @@
                 </StackPanel>
                 <Rectangle Margin="46 0 0 0" Fill="#28091E42"  Width="2" Grid.Row="2"/>
             </StackPanel>
-
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 37">
+                    <Image x:Name="CreateNewStudentBtn" MouseDown="CreateNewStudentBtn_MouseDown" Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\NewST.png" Height="20" Width="30" Margin="14 0 7 0"/>
+
+                    <Image Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\DelST.png" Height="20"  Width="30" Margin="0 0 7 0"/>
+                    <Image Source="C:\Users\214-\source\repos\Hrezontem\StudInfo\Resources\Images\CreateGroup.png" Height="20"  Width="30"  Margin="0 0 7 0"/>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="1">
                 <!--<Grid.ColumnDefinitions>
                     <ColumnDefinition Width="529*"/>
                     <ColumnDefinition Width="84*"/>
-                </Grid.ColumnDefinitions>-->
-                <Label Content="Добавление студента" x:Name="NewStudentLabel" Foreground="#44546F" Margin="20 0 0 0" VerticalAlignment="Center" FontSize="24" FontFamily="SF Pro Display"/>
+                </Grid.ColumnDefinitions>-->           
                 <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
                     <Label x:Name="SearchLabel" Content="Поиск:" Foreground="#44546F" Margin="10 0 0 0" FontSize="13" FontFamily="SF Pro Display"/>
                     <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="300" Height="32" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />

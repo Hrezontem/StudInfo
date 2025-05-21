@@ -19,12 +19,22 @@ namespace StudInfo.Pages
     /// <summary>
     /// Interaction logic for ListViewNewStudent.xaml
     /// </summary>
-    public partial class ListViewNewStudent : Page
+    public partial class ListViewNewStudent : Window
     {
         public ListViewNewStudent()
         {
             InitializeComponent();
             DataContext = new NewStudentViewModel();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

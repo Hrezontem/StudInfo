@@ -255,8 +255,19 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            
         </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="DarkGray"/>
+                <Setter Property="BorderThickness" Value="3"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="#0055CC"/>
+                <Setter Property="BorderThickness" Value="3"/>
+                
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="SearchTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">

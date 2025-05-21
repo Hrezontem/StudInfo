@@ -1,5 +1,6 @@
 ﻿
 using StudentSystem.Pages;
+using StudInfo.Pages;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Hidden;
         }
 
     private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -45,7 +45,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu2_Click(object sender, RoutedEventArgs e)
         {
@@ -54,7 +53,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Visible;
             searchTextBox.Visibility = Visibility.Visible;
             FilterComboBox.Visibility = Visibility.Visible;
-            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu3_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +61,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Visible;
             searchTextBox.Visibility = Visibility.Visible;
             FilterComboBox.Visibility = Visibility.Visible;
-            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu4_Click(object sender, RoutedEventArgs e)
         {
@@ -72,7 +69,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Visible;
             searchTextBox.Visibility = Visibility.Visible;
             FilterComboBox.Visibility = Visibility.Visible;
-            NewStudentLabel.Visibility = Visibility.Hidden;
         }
         private void btnMenu5_Click(object sender, RoutedEventArgs e)
         {
@@ -81,7 +77,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Visible;
         }
         private void btnMenu6_Click(object sender, RoutedEventArgs e)
         {
@@ -90,7 +85,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Visible;
         }
         private void btnMenu7_Click(object sender, RoutedEventArgs e)
         {
@@ -99,7 +93,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Visible;
         }
         private void btnMenu8_Click(object sender, RoutedEventArgs e)
         {
@@ -108,7 +101,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Visible;
         }
         private void btnMenu9_Click(object sender, RoutedEventArgs e)
         {
@@ -117,7 +109,6 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
-            NewStudentLabel.Visibility = Visibility.Visible;
         }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
@@ -166,6 +157,12 @@ namespace StudentSystem
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void CreateNewStudentBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ListViewNewStudent NS = new ListViewNewStudent();
+            NS.ShowDialog();
         }
     }
 }
