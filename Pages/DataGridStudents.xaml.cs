@@ -1,10 +1,14 @@
 ﻿
+using Npgsql;
+using StudInfo.Pages;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Navigation;
 
 namespace StudentSystem.Pages
 {
@@ -18,9 +22,19 @@ namespace StudentSystem.Pages
         //"User Id={2};Password={3};Database={4}",
         //$"{Properties.Settings.Default.address_base}", $"{Properties.Settings.Default.port_base}", $"{Properties.Settings.Default.login_base}",
         //$"{Properties.Settings.Default.password_base}", $"{Properties.Settings.Default.name_base}");
-
-
-
+        private string conn = String.Format("Server={0};Port={1};" +
+"User Id={2};Password={3};Database={4}",
+$"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+$"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
+        private DataTable dt;
+        private Student selectedStudent;
+        private NpgsqlConnection sqlConn;
+        private string sql;
+        NpgsqlCommand cmd = new NpgsqlCommand();
+        SystemWindow window;
+        ListViewUpdateStudent updateWindow;
+        ListViewNewStudent NewStWindow;
+        private int rowIndex = -1;
         private ObservableCollection<Student> students;
         public DataGridStudents()
         {
@@ -32,10 +46,18 @@ namespace StudentSystem.Pages
 
         }
 
+        public void LoadTable()
+        {
+            students = new StudentViewModel().Students;
+            dgvStudents.ItemsSource = students;
+            dgvStudents.Columns[0].Visibility = Visibility.Hidden;
+            dgvStudents.Columns[5].Visibility = Visibility.Hidden;
+        }
         private void dgvStudents_Loaded(object sender, RoutedEventArgs e)
         {
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
+            window = Application.Current.MainWindow as SystemWindow;
         }
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -47,6 +69,136 @@ namespace StudentSystem.Pages
         private void searchTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
 
+        }
+
+        private void CMUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void InformationLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+            selectedStudent = dgvStudents.SelectedItem as Student;
+            updateWindow = new ListViewUpdateStudent(selectedStudent);
+            updateWindow.SaveNewStudentBtn.Visibility = Visibility.Hidden;
+            updateWindow.SaveNewStudentBtn.IsEnabled = false;
+            updateWindow.BackBtn.HorizontalAlignment = HorizontalAlignment.Center;
+            updateWindow.BackBtn.VerticalAlignment = VerticalAlignment.Center;
+            updateWindow.BackBtn.Margin = new Thickness(0);
+            updateWindow.GroupComboBox.IsEnabled = false;
+            updateWindow.NoteStudTextBox.IsEnabled = false;
+            updateWindow.NumberStudBiletTextBox.IsEnabled = false;
+            updateWindow.StudNameTextBox.IsEnabled = false;
+            updateWindow.Closing += ListViewUpdateStudent_Closing;
+            if (selectedStudent != null)
+            {
+                
+                updateWindow.NS = this;
+                updateWindow.Show();
+                
+            }
+            else
+            {
+                MessageBox.Show("Выберите студента!.");
+            }
+            
+        }
+
+        public void ListViewUpdateStudent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            LoadTable();
+        }
+        public void ListViewNewStudent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            LoadTable();
+        }
+
+        private void UpdateLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            selectedStudent = dgvStudents.SelectedItem as Student;
+            updateWindow = new ListViewUpdateStudent(selectedStudent);
+            updateWindow.Closing += ListViewUpdateStudent_Closing;
+            if (selectedStudent != null)
+            {
+                updateWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Выберите студента для редактирования.");
+            }
+        }
+
+        private void DismissStudentLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void DeleteStudentLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var result = MessageBox.Show(
+            "Вы уверены, что хотите удалить студента?",
+            "ВНИМАНИЕ",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                foreach (Student student in dgvStudents.SelectedItems.Cast<Student>().ToList())
+                {
+                    try
+                    {
+                        if (student != null && student.Id > 0) // Проверяем ID
+                        {
+                            using (var sqlConn = new NpgsqlConnection(conn))
+                            {
+                                sqlConn.Open();
+                                var cmd = new NpgsqlCommand($"call delete_student({student.Id})", sqlConn);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            MessageBox.Show("Удалено успешно", "Успех",
+                                          MessageBoxButton.OK, MessageBoxImage.Information);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", "Ошибка",
+                                      MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+                LoadTable();
+            }
+        }
+
+        private void dgvStudents_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void dgvStudents_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            selectedStudent = dgvStudents.SelectedItem as Student;
+            updateWindow = new ListViewUpdateStudent(selectedStudent);
+            updateWindow.SaveNewStudentBtn.Visibility = Visibility.Hidden;
+            updateWindow.SaveNewStudentBtn.IsEnabled = false;
+            updateWindow.BackBtn.HorizontalAlignment = HorizontalAlignment.Center;
+            updateWindow.BackBtn.VerticalAlignment = VerticalAlignment.Center;
+            updateWindow.BackBtn.Margin = new Thickness(0);
+            updateWindow.GroupComboBox.IsEnabled = false;
+            updateWindow.NoteStudTextBox.IsEnabled = false;
+            updateWindow.NumberStudBiletTextBox.IsEnabled = false;
+            updateWindow.StudNameTextBox.IsEnabled = false;
+            updateWindow.Closing += ListViewUpdateStudent_Closing;
+            if (selectedStudent != null)
+            {
+                updateWindow.Show();
+                
+            }
+            else
+            {
+                MessageBox.Show("Выберите студента!.");
+            }
         }
     }
 }

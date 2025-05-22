@@ -11,7 +11,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate   TargetType="{x:Type DataGridCell}">
-                    <ContentPresenter Margin="0"  HorizontalAlignment="Left"  UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                    <Border Padding="0 15 0 0">
+                        <ContentPresenter Margin="0"  HorizontalAlignment="Left"  UseLayoutRounding="True" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -30,7 +32,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate x:Name="StudentRow" TargetType="DataGridRow">
-                        <DataGridCellsPresenter  Margin="0 15 0 0 " Padding="0" />
+                        <DataGridCellsPresenter  Margin="0 0 0 0 " Padding="0" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

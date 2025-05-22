@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using StudentSystem;
+using StudentSystem.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -32,6 +33,7 @@ $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Setting
 $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private string sql = @"select * from groups_select()";
         private DataTable dt;
+        
 
         public ListViewNewStudent()
         {
@@ -39,6 +41,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             DataContext = new NewStudentViewModel();
             fill_combo();
         }
+
 
         
 
@@ -144,6 +147,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                             }
 
                             MessageBox.Show("Добавлено");
+                            this.Close();
                         }
                         catch (Exception ex)
                         {

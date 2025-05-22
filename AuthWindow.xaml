@@ -67,7 +67,7 @@
                         FontSize="12" 
                         FontFamily="SF Pro Display" 
                         FontWeight="Bold"/>
-                    <TextBox Style="{DynamicResource CostomTextBox}" x:Name="PasswordTB"/>
+                    <PasswordBox Style="{DynamicResource CostomPassB}" x:Name="PasswordTB"/>
                 </StackPanel>
                 <Grid MouseDown="Window_MouseDown">
                     <Button Style="{DynamicResource CostomBtn}" x:Name="LogIn" Content="Подключиться"  

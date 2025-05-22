@@ -26,7 +26,8 @@ namespace StudentSystem
             FilterComboBox.Visibility = Visibility.Hidden;
         }
 
-    private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
@@ -42,7 +43,7 @@ namespace StudentSystem
         private void btnMenu1_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute), this);
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;

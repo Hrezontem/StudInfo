@@ -270,6 +270,48 @@
         </Style.Triggers>
     </Style>
 
+    <Style x:Key="CostomPassB" BasedOn="{StaticResource {x:Type PasswordBox}}" TargetType="{x:Type PasswordBox}">
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="SF Pro Display"/>
+            <Setter Property="Foreground" Value="#44546F"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border BorderThickness="1" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Width="275" Height="32"
+                            SnapsToDevicePixels="True"
+                            Padding="4 8 0 4"
+                            VerticalAlignment="Center">
+                            <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="True"
+                            HorizontalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="DarkGray"/>
+                <Setter Property="BorderThickness" Value="3"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="#0055CC"/>
+                <Setter Property="BorderThickness" Value="3"/>
+
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="SearchTextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
         <Style.Setters>
             <Setter Property="FontFamily" Value="SF Pro Display"/>

@@ -37,7 +37,7 @@ namespace StudentSystem
             IPTB.Text = BaseIP;
             PortTB.Text = BasePort;
             LoginTB.Text = BaseLogIn;
-            PasswordTB.Text = BasePassword;
+            PasswordTB.Password = BasePassword;
         }
 
         
@@ -88,7 +88,7 @@ namespace StudentSystem
             StudInfo.Properties.Settings.Default["BaseIP"] = IPTB.Text;
             StudInfo.Properties.Settings.Default["BasePort"] = PortTB.Text;
             StudInfo.Properties.Settings.Default["BaseLogIn"] = LoginTB.Text;
-            StudInfo.Properties.Settings.Default["BasePassword"] = PasswordTB.Text;
+            StudInfo.Properties.Settings.Default["BasePassword"] = PasswordTB.Password;
             StudInfo.Properties.Settings.Default.Save();
             SystemWindow systemWindow = new SystemWindow();
             this.Hide();
