@@ -353,21 +353,21 @@
                         Content="Добавить студента" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu5_Click" FontFamily="SF Pro Display" Checked="RadioButton_Checked" 
+                        Click="btnMenu1_Click" FontFamily="SF Pro Display" Checked="RadioButton_Checked" 
                         />
                     <RadioButton 
                         GroupName="Btn"
                         Content="Добавить группу" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu6_Click" FontFamily="SF Pro Display" 
+                        Click="btnMenu1_Click" FontFamily="SF Pro Display" 
                         />
                     <RadioButton 
                         GroupName="Btn"
                         Content="Добавить специальность" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu7_Click" FontFamily="SF Pro Display" 
+                        Click="btnMenu1_Click" FontFamily="SF Pro Display" 
                         />
                     <RadioButton 
                         GroupName="Btn"
@@ -381,7 +381,7 @@
                         Content="Настройки" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu9_Click" FontFamily="SF Pro Display" 
+                        Click="btnMenu1_Click" FontFamily="SF Pro Display" 
                         />
                 </StackPanel>
                 <Rectangle Margin="46 0 0 0" Fill="#28091E42"  Width="2" Grid.Row="2"/>

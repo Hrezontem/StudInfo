@@ -43,14 +43,19 @@
 
             </Grid>
         </Border>
-        <DataGrid x:Name="dgvLoad" Visibility="Hidden" RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" 
+        <Grid x:Name="LoadData" Visibility="Hidden">
+            <DataGrid x:Name="dgvLoad"  RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" 
                   RowStyle="{DynamicResource DataRowStudent}"
+                  AutoGenerateColumns="True"
                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                   GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
                   FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
                   SelectionMode="Single"  BorderBrush="#00688CAF" >
 
-        </DataGrid>
+            </DataGrid>
+            <Button HorizontalAlignment="Right" Width="100" Height="20" x:Name="btn_LoadtoDb" Click="btn_LoadtoDb_Click" Content="Загрузить в базу"></Button>
+        </Grid>
+
     </Grid>
 
 
