@@ -102,7 +102,7 @@ namespace StudInfo.Pages
             if (_selectedStudent != null)
             {
                 StudNameTextBox.Text = _selectedStudent.Name;
-                DateOfBirthStud.Text = _selectedStudent.DateBirth; // Прямое присвоение
+                DateOfBirthStud.Text = _selectedStudent.DateBirth.ToString(); // Прямое присвоение
                 GroupComboBox.Text = _selectedStudent.Group;
                 NumberStudBiletTextBox.Text = _selectedStudent.Card;
                 NoteStudTextBox.Text = _selectedStudent.Description;
@@ -128,29 +128,50 @@ namespace StudInfo.Pages
         {
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
             {
-                try
+                bool StStudies = true;
+                dt.AsDataView();
+                if (StudNameTextBox.Text == "")
                 {
-                    sqlConn.Open();
-                    DataRowView selectedGroup = (DataRowView)GroupComboBox.SelectedItem;
-
-                    using (NpgsqlCommand cmd = new NpgsqlCommand(_updateSql, sqlConn))
-                    {
-                        cmd.Parameters.AddWithValue("@id", _selectedStudent.Id);
-                        cmd.Parameters.AddWithValue("@students_name", StudNameTextBox.Text);
-                        cmd.Parameters.AddWithValue("@group_id", selectedGroup["id"]);
-                        cmd.Parameters.AddWithValue("@students_card", NumberStudBiletTextBox.Text);
-                        cmd.Parameters.AddWithValue("@students_isStudies", true);
-                        cmd.Parameters.AddWithValue("@students_dateborn", NpgsqlDbType.Date, DateOfBirthStud.SelectedDate);
-                        cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text);
-
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Данные обновлены!");
-                        this.Close();
-                    }
+                    MessageBox.Show("Не заполненное поле!!! 'ФИО'");
                 }
-                catch (Exception ex)
+                else if (GroupComboBox.Text == "")
                 {
-                    MessageBox.Show($"Ошибка: {ex.Message}");
+                    MessageBox.Show("Не заполненное поле!!! 'Группа'");
+                }
+                else if (NumberStudBiletTextBox.Text == "")
+                {
+                    MessageBox.Show("Не заполненное поле!!!, 'Студенческий билет'");
+                }
+                else if (DateOfBirthStud.Text == "")
+                {
+                    MessageBox.Show("Не заполненное поле!!!, 'Дата рождения'");
+                }
+                else
+                {
+                    try
+                    {
+                        sqlConn.Open();
+                        DataRowView selectedGroup = (DataRowView)GroupComboBox.SelectedItem;
+
+                        using (NpgsqlCommand cmd = new NpgsqlCommand(_updateSql, sqlConn))
+                        {
+                            cmd.Parameters.AddWithValue("@id", _selectedStudent.Id);
+                            cmd.Parameters.AddWithValue("@students_name", StudNameTextBox.Text);
+                            cmd.Parameters.AddWithValue("@group_id", selectedGroup["id"]);
+                            cmd.Parameters.AddWithValue("@students_card", NumberStudBiletTextBox.Text);
+                            cmd.Parameters.AddWithValue("@students_isStudies", true);
+                            cmd.Parameters.AddWithValue("@students_dateborn", NpgsqlDbType.Date, DateOfBirthStud.SelectedDate);
+                            cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text);
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Данные обновлены!");
+                            this.Close();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка: {ex.Message}");
+                    }
                 }
             }
         }

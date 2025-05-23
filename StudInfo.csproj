@@ -15,6 +15,7 @@
     <None Remove="Resources\Images\Logo.png" />
     <None Remove="Resources\Images\LogoMainWindow.png" />
     <None Remove="Resources\Images\NewGroup.png" />
+    <None Remove="Resources\Images\NewSpec.png" />
     <None Remove="Resources\Images\NewST.png" />
     <None Remove="Resources\Images\PostgreSQLlogo.svg" />
   </ItemGroup>
@@ -30,6 +31,7 @@
     <Resource Include="Resources\Images\Logo.png" />
     <Resource Include="Resources\Images\LogoMainWindow.png" />
     <Resource Include="Resources\Images\NewGroup.png" />
+    <Resource Include="Resources\Images\NewSpec.png" />
     <Resource Include="Resources\Images\NewST.png" />
     <Resource Include="Resources\Images\PostgreSQLlogo.svg">
       <Generator>MSBuild:Compile</Generator>

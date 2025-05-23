@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Npgsql;
 using StudInfo.Properties;
 using System.Configuration;
+using System.Windows.Controls;
 
 namespace StudentSystem
 {
@@ -46,6 +47,8 @@ namespace StudentSystem
                             string group = reader.GetValue(2).ToString();
                             string card = reader.GetValue(3).ToString();
                             string dateBirth = reader.GetValue(4).ToString();
+                            string[] date = dateBirth.Split(" ");
+                            dateBirth = date[0];
                             string description = reader.GetValue(5).ToString();
 
                             Students.Add(new Student { Id = id, Name = name, Card = card, Group = group, DateBirth = dateBirth, Description = description});

@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="AuthWindow" Height="844" Width="1280"
         WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
-        Background="Transparent" WindowStyle="None" AllowsTransparency="True" >
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True"
+        SnapsToDevicePixels="True">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition  Height="30"/>

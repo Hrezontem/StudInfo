@@ -52,6 +52,8 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             dgvStudents.ItemsSource = students;
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
+          
+            
         }
         private void dgvStudents_Loaded(object sender, RoutedEventArgs e)
         {

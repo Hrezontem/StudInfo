@@ -18,7 +18,10 @@
                   GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
                   FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
                   SelectionMode="Single"  BorderBrush="#00688CAF" Grid.RowSpan="2"
-                  DataGridCell.Selected="dgvStudents_Selected" MouseDoubleClick="dgvStudents_MouseDoubleClick">
+                  DataGridCell.Selected="dgvStudents_Selected" MouseDoubleClick="dgvStudents_MouseDoubleClick"
+                  >
+            <DataGrid.Columns>
+            </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu Background="White" BorderThickness="2" BorderBrush="LightGray" >
                     <Label Content="Просмотр" x:Name="InformationLabel" MouseDown="InformationLabel_MouseDown"/>

@@ -24,6 +24,20 @@ namespace StudentSystem
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
+            //if (SystemWindow.ShowActivatedProperty.Properties.Settings.Default.login_base == "client_students")
+            //{
+            //    UserIndicator.Text = "Клиент";
+            //    BTNInsertST.Visible = false;
+            //    jToolStripMenuItem.Visible = false;
+            //    contextMenuStrip1.Enabled = false;
+            //    contextMenuStrip2.Enabled = false;
+            //    CMSChangeGroup.Enabled = false;
+            //}
+            //else
+            //{
+            //    UserIndicator.Text = "Админ";
+
+            //}
         }
 
 
@@ -165,6 +179,17 @@ namespace StudentSystem
         {
             ListViewNewStudent NS = new ListViewNewStudent();
             NS.Show();
+        }
+
+        private void NewSpecBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ListViewNewSpec NSpec = new ListViewNewSpec();
+            NSpec.Show();
+        }
+
+        private void NewGroupBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

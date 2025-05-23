@@ -20,9 +20,9 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel   Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F"/>
-                        <TextBlock Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F" />
-                        <TextBlock Text="{Binding Path=SpecCode}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock FontSize="18" Text="{Binding Path=SpecCode}" FontFamily="SF Pro Display" Foreground="#44546F"/>
+                        <TextBlock FontSize="14" Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
