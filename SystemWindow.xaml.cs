@@ -43,8 +43,15 @@ namespace StudentSystem
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-                this.DragMove();
+            if (e.ChangedButton == MouseButton.Left) 
+            {
+                try 
+                {
+                    this.DragMove();
+                }
+                catch { }
+            }
+
         }
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
@@ -113,7 +120,7 @@ namespace StudentSystem
         private void btnMenu8_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(new System.Uri("Pages/LoadExcelPage.xaml", UriKind.RelativeOrAbsolute));
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;
