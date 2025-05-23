@@ -22,12 +22,29 @@ namespace StudInfo.Pages
     /// <summary>
     /// Логика взаимодействия для LoadExcelPage.xaml
     /// </summary>
+    /// 
+
+    class TablesCB
+    {
+        public string text { get; set; }
+        public string value { get; set; }
+    }
+
     public partial class LoadExcelPage : Page
     {
         private DataTable dt;
         public LoadExcelPage()
         {
             InitializeComponent();
+            var list = new List<TablesCB> 
+            {
+                new TablesCB{text="Студенты", value="students"},
+                new TablesCB{text="Специальности", value="spec"},
+                new TablesCB{text="Группы", value="groups"},
+            };
+            comboboxGroups.ItemsSource = list;
+            comboboxGroups.DisplayMemberPath = "text";
+            comboboxGroups.SelectedValuePath = "value";
         }
 
         private string conn = String.Format("Server={0};Port={1};" +
@@ -95,13 +112,19 @@ namespace StudInfo.Pages
             return dataTable;
         }
 
+        private void addGroup() { }
+        private void addStudent() 
+        {
+        
+        }
+        private void addSpec() { }
+
         private void btn_LoadtoDb_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 DataTable dataTable = dt;
                 InsertDataIntoPostgres(dataTable);
-                MessageBox.Show("Данные успешно сохранены в PostgreSQL!");
             }
             catch (Exception ex)
             {
@@ -126,23 +149,42 @@ namespace StudInfo.Pages
                             {
                                 cmd.Connection = connection;
                                 cmd.Transaction = transaction;
-                                cmd.CommandText = @"
-                                INSERT INTO test.students (students_name, group_id, students_card, ""students_isStudies"", students_dateborn, students_desc)
-                                VALUES (@s_name, @group_id, @s_card, @isStudies, cast(@dateborn as date), @s_desc)";
-                                //s_name, group_id, s_card, isStudies, dateborn, s_desc
-                                // Параметры (типы данных должны совпадать с PostgreSQL)
-                                cmd.Parameters.AddWithValue("@s_name", row["students_name"].ToString());
-                                cmd.Parameters.AddWithValue("@group_id", int.Parse(row["group_id"].ToString()));
-                                cmd.Parameters.AddWithValue("@s_card", row["students_card"].ToString());
-                                cmd.Parameters.AddWithValue("@isStudies", Boolean.Parse(row["students_isStudies"].ToString()));
-                                cmd.Parameters.AddWithValue("@dateborn",  row["students_dateborn"].ToString());
-                                cmd.Parameters.AddWithValue("@s_desc", row["students_desc"].ToString());
-
+                                switch (comboboxGroups.SelectedValue) 
+                                {
+                                    case "students":
+                                        cmd.CommandText = @"call add_student(@s_name, @group_id, @s_card, @isStudies, cast(@dateborn as date), @s_desc)";
+                                        cmd.Parameters.AddWithValue("@s_name", row["students_name"].ToString());
+                                        cmd.Parameters.AddWithValue("@group_id", int.Parse(row["group_id"].ToString()));
+                                        cmd.Parameters.AddWithValue("@s_card", row["students_card"].ToString());
+                                        cmd.Parameters.AddWithValue("@isStudies", Boolean.Parse(row["students_isStudies"].ToString()));
+                                        cmd.Parameters.AddWithValue("@dateborn", row["students_dateborn"].ToString());
+                                        cmd.Parameters.AddWithValue("@s_desc", row["students_desc"].ToString());
+                                        break;
+                                    case "groups":
+                                        //g_spec_id, g_num, g_years
+                                        cmd.CommandText = @"call add_group(@g_spec_id, @g_num, @g_years)";
+                                        cmd.Parameters.AddWithValue("@g_spec_id", int.Parse(row["specializations_id"].ToString()));
+                                        cmd.Parameters.AddWithValue("@g_num", int.Parse(row["group_num"].ToString()));
+                                        cmd.Parameters.AddWithValue("@g_years", row["group_years"].ToString());
+                                        break;
+                                    case "spec":
+                                        //spec_title, spec_fulltitle, spec_code
+                                        cmd.CommandText = @"call add_spec(@spec_title, @spec_fulltitle, @spec_code)";
+                                        cmd.Parameters.AddWithValue("@spec_title", row["specializations_title"].ToString());
+                                        cmd.Parameters.AddWithValue("@spec_fulltitle", int.Parse(row["specializations_fulltitle"].ToString()));
+                                        cmd.Parameters.AddWithValue("@spec_code", row["specializations_code"].ToString());
+                                        break;
+                                    default:
+                                        MessageBox.Show("Нужно выбрать таблицу для загрузки");
+                                        return;
+                                }
                                 cmd.ExecuteNonQuery();
                             }
                         }
 
                         transaction.Commit();
+                        MessageBox.Show("Данные успешно сохранены в PostgreSQL!");
+
                     }
                     catch
                     {

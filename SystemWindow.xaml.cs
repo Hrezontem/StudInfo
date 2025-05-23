@@ -1,6 +1,7 @@
 ﻿
 using StudentSystem.Pages;
 using StudInfo.Pages;
+using System.ComponentModel;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,9 +17,11 @@ namespace StudentSystem
     public partial class SystemWindow : Window
     {
         private double windowHeight = 0;
-
+        public DataTable dt;
+        private ICollectionView _collectionView;
         public SystemWindow()
         {
+
             InitializeComponent();
             // button.BeginAnimation(Button.WidthProperty, buttonAnimation);
             SearchLabel.Visibility = Visibility.Hidden;
@@ -56,6 +59,7 @@ namespace StudentSystem
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
+
             /**DataView dv = DefaultView;
             dv.RowFilter = $" LIKE '" + searchTextBox.Text + "%'";
             dgvStudents.DataSource = dv;**/

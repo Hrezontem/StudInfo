@@ -1,12 +1,15 @@
 ﻿
 using Npgsql;
 using StudInfo.Pages;
+using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Navigation;
 
@@ -35,21 +38,26 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         ListViewUpdateStudent updateWindow;
         ListViewNewStudent NewStWindow;
         private int rowIndex = -1;
-        private ObservableCollection<Student> students;
+        private ObservableCollection<Student> _students;
+        private ICollectionView _collectionView;
         public DataGridStudents()
         {
-            students = new StudentViewModel().Students;
-
             InitializeComponent();
-            dgvStudents.ItemsSource = students;
-            
+            _students = new StudentViewModel().Students;
+            InitializeCollectionView();
+
+
 
         }
-
+        private void InitializeCollectionView()
+        {
+            _collectionView = CollectionViewSource.GetDefaultView(_students);
+            dgvStudents.ItemsSource = _collectionView;
+        }
         public void LoadTable()
         {
-            students = new StudentViewModel().Students;
-            dgvStudents.ItemsSource = students;
+            _students = new StudentViewModel().Students;
+            dgvStudents.ItemsSource = _students;
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
           
@@ -65,7 +73,25 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+            var searchText = searchTextBox.Text.ToLower();
 
+            _collectionView.Filter = item =>
+            {
+                if (string.IsNullOrWhiteSpace(searchText)) return true;
+
+                var type = item.GetType();
+                var properties = type.GetProperties();
+
+                foreach (var prop in properties)
+                {
+                    var value = prop.GetValue(item)?.ToString();
+                    if (value?.ToLower().Contains(searchText) == true)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            };
         }
 
         private void searchTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
