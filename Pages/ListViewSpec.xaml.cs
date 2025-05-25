@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Linq;
+using StudInfo.Pages;
 
 namespace StudentSystem.Pages
 {
@@ -21,6 +22,9 @@ namespace StudentSystem.Pages
     /// </summary>
     public partial class ListViewSpec : Page
     {
+        private Spec selectedSpec;
+        ListViewUpdateSpec updateWindow;
+
         public ListViewSpec()
         {
             InitializeComponent();
@@ -35,6 +39,20 @@ namespace StudentSystem.Pages
         private void searchTextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void SpecInfoBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //selectedSpec = ListBoxSpec.SelectedItem as Spec;
+            //updateWindow = new ListViewUpdateSpec(selectedSpec);
+            //updateWindow.SaveNewSpecBtn.Visibility = Visibility.Hidden;
+            //updateWindow.SaveNewSpecBtn.IsEnabled = false;
+            //updateWindow.BackBtn.HorizontalAlignment = HorizontalAlignment.Center;
+            //updateWindow.BackBtn.VerticalAlignment = VerticalAlignment.Center;
+            //updateWindow.BackBtn.Margin = new Thickness(0);
+            //updateWindow.SpecCodeTextBox.IsEnabled = false;
+            //updateWindow.SpecFullTitleTextBox.IsEnabled = false;
+            //updateWindow.SpecTitleTextBox.IsEnabled = false;
         }
     }
 }

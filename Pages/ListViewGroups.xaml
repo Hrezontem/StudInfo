@@ -36,12 +36,14 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel   Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock FontSize="18" Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F"/>
                         <TextBlock FontSize="13" Text="{Binding Path=DateStuding}" FontFamily="SF Pro Display" Foreground="#44546F" />
                         <TextBlock Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
                     </StackPanel>
+                    
                 </DataTemplate>
             </ListBox.ItemTemplate>
+            
         </ListBox>
         <Rectangle HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 1" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
     </Grid>

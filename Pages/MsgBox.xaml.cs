@@ -30,7 +30,7 @@ namespace StudInfo
         {
             InitializeComponent();
             SetMessageType(type);
-            Title = string.IsNullOrEmpty(title) ? GetDefaultTitle(type) : title;
+            TitleText.Text = string.IsNullOrEmpty(title) ? GetDefaultTitle(type) : title;
             MessageText.Text = message;
             ConfigureButtons(buttons);
         }
@@ -48,12 +48,12 @@ namespace StudInfo
                 case MessageBoxType.Warning:
                     MainBorder.Style = (Style)FindResource("WarningStyle");
                     IconPath.Data = (Geometry)FindResource("WarningIcon");
-                    IconPath.Fill = Brushes.Orange;
+                    IconPath.Fill = (Brush)(new BrushConverter().ConvertFrom("#0055CC"));
                     break;
                 case MessageBoxType.Info:
                     MainBorder.Style = (Style)FindResource("InfoStyle");
                     IconPath.Data = (Geometry)FindResource("InfoIcon");
-                    IconPath.Fill = Brushes.Blue;
+                    IconPath.Fill = (Brush)(new BrushConverter().ConvertFrom("#0055CC"));
                     break;
                 case MessageBoxType.Success:
                     MainBorder.Style = (Style)FindResource("SuccessStyle");

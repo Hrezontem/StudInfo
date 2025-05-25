@@ -8,33 +8,35 @@
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
-        WindowStyle="None">
+        WindowStyle="None" Background="Transparent" Height="500" Width="500"
+        AllowsTransparency="True">
+
     <Window.Resources>
         <!-- Стили для разных типов сообщений -->
         <Style x:Key="ErrorStyle" TargetType="Border">
-            <Setter Property="Background" Value="#FFF5F5"/>
-            <Setter Property="BorderBrush" Value="#FFEBEBEB"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
 
         </Style>
         <Style x:Key="WarningStyle" TargetType="Border">
-            <Setter Property="Background" Value="#FFFEF7E5"/>
-            <Setter Property="BorderBrush" Value="#FFF8E6C5"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
         </Style>
         <Style x:Key="InfoStyle" TargetType="Border">
-            <Setter Property="Background" Value="#F0F8FF"/>
-            <Setter Property="BorderBrush" Value="#B0C4DE"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
         </Style>
         <Style x:Key="SuccessStyle" TargetType="Border">
-            <Setter Property="Background" Value="#F0FFF0"/>
-            <Setter Property="BorderBrush" Value="#98FB98"/>
+            <Setter Property="Background" Value="White"/>
         </Style>
     </Window.Resources>
 
-    <Border x:Name="MainBorder" Padding="20" CornerRadius="5"
-            BorderThickness="2" >
+    <Border x:Name="MainBorder" Padding="10" CornerRadius="5" Height="185" Width="400"  Background="White">
+
+
         <StackPanel>
             <!-- Заголовок и иконка -->
-            <DockPanel Margin="0,0,0,15">
+            <DockPanel Margin="12,12,0,15">
                 <Viewbox DockPanel.Dock="Left" 
                          Width="32" Height="32" 
                          Margin="0,0,15,0">
@@ -44,26 +46,33 @@
                 </Viewbox>
                 <TextBlock x:Name="TitleText" 
                            Text="Title" 
-                           FontSize="18"
-                           FontWeight="Bold"/>
+                           VerticalAlignment="Center"
+                           FontSize="23"
+                           FontWeight="Bold"
+                           FontFamily="SF Pro Display"
+                           Foreground="#44546F"/>
             </DockPanel>
 
             <!-- Сообщение -->
             <TextBlock x:Name="MessageText" 
                      TextWrapping="Wrap"
-                     Margin="0,0,0,20"/>
+                     Margin="15,0,0,20"
+                     FontFamily="SF Pro Display"
+                     Foreground="#44546F"
+                     FontSize="13"/>
 
             <!-- Кнопки -->
-            <StackPanel x:Name="ButtonsPanel" 
-                      Orientation="Horizontal" 
-                      HorizontalAlignment="Right">
-                <Button Click="OkButton_Click" x:Name="OkButton" Content="OK" Style="{DynamicResource CostomBtn}"
-                      Width="80" Margin="5,0"
-                      />
+            <StackPanel x:Name="ButtonsPanel"
+          Orientation="Horizontal" 
+          HorizontalAlignment="Right" Margin="0 10 0 0"
+                        VerticalAlignment="Bottom">
+                <Button Click="OkButton_Click" x:Name="OkButton" Content="Подтвердить" Style="{DynamicResource CostomBtn}"
+          Width="120" Height="30" Margin="2 0 15 0"
+          />
                 <Button Click="CancelButton_Click" x:Name="CancelButton" Content="Cancel" Style="{DynamicResource GrayCostomBtn}" 
-                      Width="80" Margin="5,0"
-                      Visibility="Collapsed"
-                      />
+          Width="55" Height="20"
+          Visibility="Collapsed"
+          />
             </StackPanel>
         </StackPanel>
     </Border>

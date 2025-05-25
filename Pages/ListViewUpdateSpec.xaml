@@ -1,13 +1,13 @@
-﻿<Window x:Class="StudInfo.Pages.ListViewNewSpec"
+﻿<Window x:Class="StudInfo.Pages.ListViewUpdateSpec"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentSystem"
         mc:Ignorable="d"
-        Height="400" Width="400"
+        Height="350" Width="410"
         Title="ListViewNewStudent" Background="Transparent" 
-        WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"  AllowsTransparency="True" 
+        WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="CanResizeWithGrip"  AllowsTransparency="True" 
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" WindowStartupLocation="CenterScreen">
     <Border Background="White"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="310" Height="300" CornerRadius="10" >
         <Border.Effect>
@@ -36,7 +36,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button Style="{DynamicResource GrayCostomBtn}" Margin="10 30 0 15" HorizontalAlignment="Left"  Name="BackBtn" VerticalAlignment="Bottom" Content="Отмена" Width="75" Height="26" Background="#0F091E42" Click="BackBtn_Click"/>
-                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 0 15" Name="SaveNewSpecBtn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26" Click="SaveNewSpecBtn_Click"/>
+                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 0 15" Name="SaveUpdateSpecBtn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26" Click="SaveUpdateSpecBtn_Click"/>
                     </StackPanel>
 
                 </StackPanel>

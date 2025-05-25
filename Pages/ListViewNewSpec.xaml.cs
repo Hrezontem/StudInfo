@@ -11,9 +11,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static StudInfo.MsgBox;
 
 namespace StudInfo.Pages
 {
@@ -50,9 +52,10 @@ namespace StudInfo.Pages
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            
         }
 
         public void ComboBox_Loaded(object sender, RoutedEventArgs e)
@@ -82,22 +85,22 @@ namespace StudInfo.Pages
 
         }
 
-        private void SaveNewStudentBtn_Click(object sender, RoutedEventArgs e)
+        private void SaveNewSpecBtn_Click(object sender, RoutedEventArgs e)
         {
             bool StStudies = true;
             NpgsqlConnection sqlConn = new NpgsqlConnection(conn);
             dt.AsDataView();
             if (SpecFullTitleTextBox.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!! 'Полное наименование специальности'");
+                MsgBox.Show("Не заполненное поле!!! 'Полное наименование специальности'", "ГОЙДА!!!!!!!!" , type: MessageBoxType.Warning);
             }
             else if (SpecTitleTextBox.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!! 'Наиманование группы'");
+                MsgBox.Show("Не заполненное поле!!! 'Наиманование группы'", type: MessageBoxType.Warning);
             }
             else if (SpecCodeTextBox.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!!, 'Код специальности'");
+                MsgBox.Show("Не заполненное поле!!!, 'Код специальности'", type: MessageBoxType.Warning);
             }
             else
             {       
@@ -117,12 +120,12 @@ namespace StudInfo.Pages
                                 sqlConn.Close();
 
                             }
-                            MessageBox.Show("Добавлено");
+                            MsgBox.Show("Добавлено",  type: MessageBoxType.Success);
                             this.Close();
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"ОШИБКА: {ex.Message}");
+                            MsgBox.Show($"ОШИБКА: {ex.Message}", type: MessageBoxType.Error);
                             sqlConn.Close();
                         }
             }
