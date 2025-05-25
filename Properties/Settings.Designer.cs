@@ -82,5 +82,17 @@ namespace StudInfo.Properties {
                 this["BasePassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string APIurl {
+            get {
+                return ((string)(this["APIurl"]));
+            }
+            set {
+                this["APIurl"] = value;
+            }
+        }
     }
 }

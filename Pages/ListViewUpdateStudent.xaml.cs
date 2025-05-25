@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static StudInfo.MsgBox;
 
 namespace StudInfo.Pages
 {
@@ -132,19 +133,19 @@ namespace StudInfo.Pages
                 dt.AsDataView();
                 if (StudNameTextBox.Text == "")
                 {
-                    MessageBox.Show("Не заполненное поле!!! 'ФИО'");
+                    MsgBox.Show("Не заполненное поле!!! 'ФИО'", type: MessageBoxType.Warning);
                 }
                 else if (GroupComboBox.Text == "")
                 {
-                    MessageBox.Show("Не заполненное поле!!! 'Группа'");
+                    MsgBox.Show("Не заполненное поле!!! 'Группа'", type: MessageBoxType.Warning);
                 }
                 else if (NumberStudBiletTextBox.Text == "")
                 {
-                    MessageBox.Show("Не заполненное поле!!!, 'Студенческий билет'");
+                    MsgBox.Show("Не заполненное поле!!!, 'Студенческий билет'", type: MessageBoxType.Warning);
                 }
                 else if (DateOfBirthStud.Text == "")
                 {
-                    MessageBox.Show("Не заполненное поле!!!, 'Дата рождения'");
+                    MsgBox.Show("Не заполненное поле!!!, 'Дата рождения'", type: MessageBoxType.Warning);
                 }
                 else
                 {
@@ -164,13 +165,13 @@ namespace StudInfo.Pages
                             cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text);
 
                             cmd.ExecuteNonQuery();
-                            MessageBox.Show("Данные обновлены!");
+                            MsgBox.Show("Данные обновлены!", type: MessageBoxType.Success);
                             this.Close();
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Ошибка: {ex.Message}");
+                        MsgBox.Show($"Ошибка: {ex.Message}", type: MessageBoxType.Error);
                     }
                 }
             }

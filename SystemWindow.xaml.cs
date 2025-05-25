@@ -38,6 +38,11 @@ namespace StudentSystem
             //    UserIndicator.Text = "Админ";
 
             //}
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            NewGroupBtn.Visibility = Visibility.Hidden;
+            NewSpecBtn.Visibility = Visibility.Hidden;
+            SettingsLabel.Visibility = Visibility.Hidden;
+            
         }
 
 
@@ -62,51 +67,8 @@ namespace StudentSystem
             dgvStudents.DataSource = dv;**/
         }
 
-        private void btnMenu1_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute), this);
-        }
-        private void btnMenu2_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewGroups.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu3_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu4_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewSpec.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu5_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu6_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu7_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu8_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/LoadExcelPage.xaml", UriKind.RelativeOrAbsolute));
-        }
-        private void btnMenu9_Click(object sender, RoutedEventArgs e)
-        {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-        }
+
+
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
@@ -171,6 +133,64 @@ namespace StudentSystem
         private void NewGroupBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void SettingsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewSettings.xaml", UriKind.RelativeOrAbsolute));
+            SettingsLabel.Visibility = Visibility.Visible;
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            NewGroupBtn.Visibility = Visibility.Hidden;
+            NewSpecBtn.Visibility = Visibility.Hidden;
+        }
+
+        private void ExcelLoadMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/LoadExcelPage.xaml", UriKind.RelativeOrAbsolute));
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            NewGroupBtn.Visibility = Visibility.Hidden;
+            NewSpecBtn.Visibility = Visibility.Hidden;
+            SettingsLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void SpecMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewSpec.xaml", UriKind.RelativeOrAbsolute));
+            CreateNewStudentBtn.Visibility = Visibility.Visible;
+            NewGroupBtn.Visibility = Visibility.Visible;
+            NewSpecBtn.Visibility = Visibility.Visible;
+            SettingsLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void GroupMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/ListViewGroups.xaml", UriKind.RelativeOrAbsolute));
+            CreateNewStudentBtn.Visibility = Visibility.Visible;
+            NewGroupBtn.Visibility = Visibility.Visible;
+            NewSpecBtn.Visibility = Visibility.Visible;
+            SettingsLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void StudentsMenuBtn_Click(object sender, RoutedEventArgs e)
+        {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute), this);
+            CreateNewStudentBtn.Visibility = Visibility.Visible;
+            NewGroupBtn.Visibility = Visibility.Visible;
+            NewSpecBtn.Visibility = Visibility.Visible;
+            SettingsLabel.Visibility = Visibility.Hidden;
+        }
+
+        private void MainPage_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            NewGroupBtn.Visibility = Visibility.Hidden;
+            NewSpecBtn.Visibility = Visibility.Hidden;
+            SettingsLabel.Visibility = Visibility.Hidden;
         }
     }
 }

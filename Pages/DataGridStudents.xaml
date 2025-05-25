@@ -11,22 +11,33 @@
       Loaded="dgvStudents_Loaded"
       xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    <StackPanel Orientation="Vertical">
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0 43 0 10">
-            <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
-            <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="20 0 0 0" Width="150" Height="32" x:Name="FilterComboBox" Background="#00000000">
-                <ComboBoxItem>Option 1</ComboBoxItem>
-                <ComboBoxItem>Option 2</ComboBoxItem>
-            </ComboBox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Grid >
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0">
+                    <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="20 0 0 0" Width="150" Height="32" x:Name="FilterComboBox" Background="#00000000">
+                        <ComboBoxItem>Option 1</ComboBoxItem>
+                        <ComboBoxItem>Option 2</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+            <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
         </StackPanel>
+
+
         <DataGrid RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" 
                   RowStyle="{DynamicResource DataRowStudent}"  x:Name="dgvStudents" 
                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                   GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
                   FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
-                  SelectionMode="Single"  BorderBrush="#00688CAF" Grid.RowSpan="2"
+                  SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1"
                   DataGridCell.Selected="dgvStudents_Selected" MouseDoubleClick="dgvStudents_MouseDoubleClick"
-                  Margin="0 13 0 0">
+                  Margin="0 7 0 13">
             <DataGrid.Columns>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
@@ -46,5 +57,6 @@
                 </Style>
             </DataGrid.ColumnHeaderStyle>
         </DataGrid>
-    </StackPanel>
+        <Rectangle HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 1" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
+    </Grid>
 </Page>

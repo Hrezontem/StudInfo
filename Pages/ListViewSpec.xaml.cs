@@ -26,5 +26,15 @@ namespace StudentSystem.Pages
             InitializeComponent();
             DataContext = new SpecViewModel();
         }
+
+        private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void searchTextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

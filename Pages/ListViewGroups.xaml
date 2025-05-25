@@ -16,7 +16,23 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ListBox x:Name="ListBoxStudent" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Grid >
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0">
+                    <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
+                    <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="20 0 0 0" Width="150" Height="32" x:Name="FilterComboBox" Background="#00000000">
+                        <ComboBoxItem>Option 1</ComboBoxItem>
+                        <ComboBoxItem>Option 2</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+            <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
+        </StackPanel>
+        <ListBox x:Name="ListBoxStudent" Grid.Row="1" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent" Margin="0 5 0 4">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel   Margin="5">
@@ -27,6 +43,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Rectangle HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 1" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
     </Grid>
 
 </Page>

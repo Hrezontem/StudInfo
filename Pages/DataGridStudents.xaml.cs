@@ -1,5 +1,7 @@
 ﻿
+using Microsoft.VisualBasic;
 using Npgsql;
+using StudInfo;
 using StudInfo.Pages;
 using System;
 using System.Collections.ObjectModel;
@@ -12,6 +14,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using static StudInfo.MsgBox;
 
 namespace StudentSystem.Pages
 {
@@ -128,7 +131,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             }
             else
             {
-                MessageBox.Show("Выберите студента!.");
+                MsgBox.Show("Выберите студента!.");
             }
             
         }
@@ -168,7 +171,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             "Вы уверены, что хотите удалить студента?",
             "ВНИМАНИЕ",
             MessageBoxButton.YesNo,
-            MessageBoxImage.Warning);
+            MessageBoxImage.Question);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -185,14 +188,13 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                                 cmd.ExecuteNonQuery();
                             }
 
-                            MessageBox.Show("Удалено успешно", "Успех",
-                                          MessageBoxButton.OK, MessageBoxImage.Information);
+                            MsgBox.Show("Удалено успешно", "Успех",
+                                          type: MessageBoxType.Success);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", "Ошибка",
-                                      MessageBoxButton.OK, MessageBoxImage.Error);
+                        MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", type: MessageBoxType.Error);
                     }
                 }
                 LoadTable();
@@ -225,7 +227,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             }
             else
             {
-                MessageBox.Show("Выберите студента!.");
+                MsgBox.Show("Выберите студента!.");
             }
         }
     }

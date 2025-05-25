@@ -203,7 +203,7 @@
     <Style x:Key="GrayCostomBtn" TargetType="Button">
         <Style.Setters >
             <Setter  Property="BorderBrush" Value="Transparent" />
-            <Setter  Property="Background" Value="#091E42" />
+            <Setter  Property="Background" Value="#0F091E42" />
             <Setter  Property="Foreground" Value="#172B4D" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -342,6 +342,56 @@
             </Setter>
 
         </Style.Setters>
+    </Style>
+
+    <Style x:Key="APITextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
+        <Style.Setters>
+            <Setter Property="FontFamily" Value="SF Pro Display"/>
+            <Setter Property="Foreground" Value="#44546F"/>
+            <Setter Property="BorderBrush" Value="LightGray"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border BorderThickness="1" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            Width="275" Height="32"
+                            SnapsToDevicePixels="True"
+                            Padding="4 6 0 4">
+                            <ScrollViewer
+                            x:Name="PART_ContentHost"
+                            Focusable="True"
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="BorderBrush" Value="DarkGray"/>
+                <Setter Property="BorderThickness" Value="3"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="BorderBrush" Value="#0055CC"/>
+                <Setter Property="BorderThickness" Value="3"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter Property="Foreground" Value="#44546F"/>
+                <Setter Property="BorderBrush" Value="LightGray"/>
+                <Setter Property="BorderThickness" Value="3"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="LightGray"/>
+                <Setter Property="BorderBrush" Value="LightGray"/>
+                <Setter Property="BorderThickness" Value="3"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>
