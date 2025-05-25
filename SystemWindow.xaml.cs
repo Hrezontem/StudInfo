@@ -1,5 +1,6 @@
 ﻿
 using StudentSystem.Pages;
+using StudInfo;
 using StudInfo.Pages;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using static StudInfo.MsgBox;
 namespace StudentSystem
 {
     /// <summary>
@@ -68,7 +70,13 @@ namespace StudentSystem
         private void btnMenu1_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute), this);
+            var result = MsgBox.Show(
+                "Удалить запись?",
+                "Подтверждение",
+                MessageBoxType.Warning,
+                MessageBoxButton.OKCancel
+            );
+            fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute), this);
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
             FilterComboBox.Visibility = Visibility.Hidden;

@@ -292,7 +292,7 @@
             </Style.Triggers>
         </Style>
     </Page.Resources>
-    <StackPanel>
+    <StackPanel >
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
             <Label x:Name="SearchLabel" Content="Поиск:" Foreground="#44546F" Margin="10 0 0 0" FontSize="13" FontFamily="SF Pro Display"/>
             <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="300" Height="32" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />

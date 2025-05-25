@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <PackageReference Include="IronXL.Excel" Version="2025.5.4" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Npgsql" Version="9.0.3" />
   </ItemGroup>
 
