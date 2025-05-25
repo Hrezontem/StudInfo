@@ -367,7 +367,7 @@
         </Style>
     </Page.Resources>
     <Grid >
-        <Border x:Name="ExcelLoadElement" Margin="10"  BorderThickness="4,4,4,4" CornerRadius="10,10,10,10">
+        <Border MouseDown="ExcelLoadElement_MouseDown" x:Name="ExcelLoadElement" Margin="10" Background="#F7F8F9" BorderThickness="4,4,4,4" CornerRadius="10,10,10,10">
             <Border.BorderBrush>
                 <DrawingBrush Viewport="0,0,20,20" ViewportUnits="Absolute" TileMode="Tile">
                     <DrawingBrush.Drawing>
@@ -392,7 +392,7 @@
                         <ColumnDefinition Width="115*"/>
                         <ColumnDefinition Width="128*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel MouseDown="ExcelLoadElement_MouseDown" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <StackPanel  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <Image Width="180" Height="180" Source="/Resources/Images/_UploadIcon_.png" />
                         <TextBlock TextAlignment="Center" TextWrapping="Wrap" Width="100" Height="59" Foreground="#42526E" Text="Кликните, чтобы загрузить .xlsx файл" />
                     </StackPanel>

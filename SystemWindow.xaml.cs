@@ -24,9 +24,6 @@ namespace StudentSystem
 
             InitializeComponent();
             // button.BeginAnimation(Button.WidthProperty, buttonAnimation);
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
             //if (SystemWindow.ShowActivatedProperty.Properties.Settings.Default.login_base == "client_students")
             //{
             //    UserIndicator.Text = "Клиент";
@@ -69,73 +66,46 @@ namespace StudentSystem
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute), this);
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnMenu2_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewGroups.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Visible;
-            searchTextBox.Visibility = Visibility.Visible;
-            FilterComboBox.Visibility = Visibility.Visible;
         }
         private void btnMenu3_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Visible;
-            searchTextBox.Visibility = Visibility.Visible;
-            FilterComboBox.Visibility = Visibility.Visible;
         }
         private void btnMenu4_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewSpec.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Visible;
-            searchTextBox.Visibility = Visibility.Visible;
-            FilterComboBox.Visibility = Visibility.Visible;
         }
         private void btnMenu5_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnMenu6_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnMenu7_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnMenu8_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/LoadExcelPage.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnMenu9_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(new System.Uri("Pages/ListViewNewStudent.xaml", UriKind.RelativeOrAbsolute));
-            SearchLabel.Visibility = Visibility.Hidden;
-            searchTextBox.Visibility = Visibility.Hidden;
-            FilterComboBox.Visibility = Visibility.Hidden;
         }
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
