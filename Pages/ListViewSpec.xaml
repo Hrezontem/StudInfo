@@ -24,10 +24,6 @@
             <Grid >
                 <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0" >
                     <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
-                    <ComboBox Style="{DynamicResource ComboBoxStyle}" Margin="20 0 0 0" Width="150" Height="32" x:Name="FilterComboBox" Background="#00000000">
-                        <ComboBoxItem>Option 1</ComboBoxItem>
-                        <ComboBoxItem>Option 2</ComboBoxItem>
-                    </ComboBox>
                 </StackPanel>
             </Grid>
             <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>

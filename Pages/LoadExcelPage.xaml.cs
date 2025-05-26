@@ -66,6 +66,13 @@ namespace StudInfo.Pages
                 {
                     DataTable dataTable = LoadExcelToDataTable(OPF.FileName);
                     dgvLoad.ItemsSource = dataTable.DefaultView;
+                    foreach (DataGridColumn col in dgvLoad.Columns)
+                    {
+                       if(col.Header.ToString().Contains("Column"))
+                       {
+                            col.Visibility = Visibility.Hidden;
+                       }
+                    }
                     LoadData.Visibility = Visibility.Visible;
                     ExcelLoadElement.Visibility = Visibility.Hidden;
                 }

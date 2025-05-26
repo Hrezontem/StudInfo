@@ -26,14 +26,14 @@ namespace StudentSystem.Pages
         public ListViewGroup()
         {
             InitializeComponent();
-            DataContext = new GroupsViewModel();
-            //InitializeCollectionView();
+            Groups = new GroupsViewModel().Groups;
+            InitializeCollectionView();
         }
 
         private void InitializeCollectionView()
         {
-            //_collectionView = CollectionViewSource.GetDefaultView(Groups);
-            //ListBoxStudent.ItemsSource = _collectionView;
+            _collectionView = CollectionViewSource.GetDefaultView(Groups);
+            ListBoxStudent.ItemsSource = _collectionView;
         }
         public void LoadTable()
         {
@@ -47,26 +47,35 @@ namespace StudentSystem.Pages
 
         private void searchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //var searchText = searchTextBox.Text.ToLower();
+            var searchText = searchTextBox.Text.ToLower();
 
-            //_collectionView.Filter = item =>
-            //{
-            //    if (string.IsNullOrWhiteSpace(searchText)) return true;
+            if (searchText != "поиск..." && ListBoxStudent.ItemsSource != null)
+            {
+                _collectionView.Filter = item =>
+                {
+                    if (string.IsNullOrWhiteSpace(searchText)) return true;
 
-            //    var type = item.GetType();
-            //    var properties = type.GetProperties();
+                    var type = item.GetType();
+                    var properties = type.GetProperties();
 
-            //    foreach (var prop in properties)
-            //    {
-            //        var value = prop.GetValue(item)?.ToString();
-            //        if (value?.ToLower().Contains(searchText) == true)
-            //        {
-            //            return true;
-            //        }
-            //    }
-            //    return false;
-            //};
+                    foreach (var prop in properties)
+                    {
+                        var value = prop.GetValue(item)?.ToString();
+                        if (value?.ToLower().Contains(searchText) == true)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+            }
         }
 
+
+
+        private void DeleteGroupBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -78,23 +78,27 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
 
             var searchText = searchTextBox.Text.ToLower();
 
-            _collectionView.Filter = item =>
+            if (searchText != "поиск..." && dgvStudents.ItemsSource != null) 
             {
-                if (string.IsNullOrWhiteSpace(searchText)) return true;
-
-                var type = item.GetType();
-                var properties = type.GetProperties();
-
-                foreach (var prop in properties)
+                _collectionView.Filter = item =>
                 {
-                    var value = prop.GetValue(item)?.ToString();
-                    if (value?.ToLower().Contains(searchText) == true)
+                    if (string.IsNullOrWhiteSpace(searchText)) return true;
+
+                    var type = item.GetType();
+                    var properties = type.GetProperties();
+
+                    foreach (var prop in properties)
                     {
-                        return true;
+                        var value = prop.GetValue(item)?.ToString();
+                        if (value?.ToLower().Contains(searchText) == true)
+                        {
+                            return true;
+                        }
                     }
-                }
-                return false;
-            };
+                    return false;
+                };
+            }
+
         }
 
         private void searchTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)

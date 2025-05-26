@@ -342,6 +342,16 @@
             </Setter>
 
         </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsFocused" Value="False">
+                <Setter Property="Text" Value="Поиск..."/>
+                <Setter Property="Foreground" Value="DarkGray"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Text" Value=""/>
+                <Setter Property="Foreground" Value="#44546F"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="APITextBox" BasedOn="{StaticResource {x:Type TextBox}}" TargetType="{x:Type TextBox}">
