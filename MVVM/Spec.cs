@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentSystem
 {
-    internal class Spec : INotifyPropertyChanged
+    public class Spec : INotifyPropertyChanged
     {
         private int id;
         private string title;

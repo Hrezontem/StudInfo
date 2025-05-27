@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Height="340" Width="300"
         Title="ListViewNewStudent" Background="Transparent" BorderThickness="0"
-        WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"  AllowsTransparency="True" 
+        WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"  AllowsTransparency="True" Closing="Window_Closing"
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
@@ -38,10 +38,10 @@
                         </StackPanel>
                         <TextBox Style="{DynamicResource CostomTextBox}" x:Name="dateTextBox" PreviewTextInput="dateTextBox_PreviewTextInput" TextChanged="dateTextBox_TextChanged"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{DynamicResource GrayCostomBtn}" Margin="10 30 0 15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Отмена" Width="75" Height="26" Background="#0F091E42" Click="Button_Click"/>
-                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 0 15" Name="SaveNewStudentBtn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26" Click="SaveGroupBtn_Click"/>
-                    </StackPanel>
+                    <Grid>
+                        <Button Style="{DynamicResource GrayCostomBtn}" Margin="10 30 0 15" Name="BackBtn" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Отмена" Width="75" Height="26" Background="#0F091E42" Click="Button_Click"/>
+                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 10 15" Name="SaveNewStudentBtn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26" Click="SaveGroupBtn_Click"/>
+                    </Grid>
 
                 </StackPanel>
             </StackPanel>

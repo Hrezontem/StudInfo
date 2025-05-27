@@ -29,6 +29,8 @@ $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Setting
 $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private ICollectionView _collectionView;
         private ObservableCollection<Groups> Groups;
+        private Groups selectedGroup;
+        ListViewUpdateGroup updateWindow;
         public ListViewGroup()
         {
             InitializeComponent();
@@ -82,7 +84,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         public void DeleteBtn_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show(
-           "Вы уверены, что хотите удалить студента?",
+           "Вы уверены, что хотите удалить группу?",
            "ВНИМАНИЕ",
            MessageBoxButton.YesNo,
            MessageBoxImage.Question);
@@ -115,14 +117,43 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             }
         }
 
+        public void ListViewUpdateGroup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            LoadTable();
+        }
+        public void ListViewNewGroup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            LoadTable();
+        }
         private void ViewBtn_Click(object sender, RoutedEventArgs e)
         {
+            selectedGroup = ListBoxGroup.SelectedItem as Groups;
+            updateWindow = new ListViewUpdateGroup(selectedGroup);
+            updateWindow.SaveNewStudentBtn.Visibility = Visibility.Hidden;
+            updateWindow.SaveNewStudentBtn.IsEnabled = false;
+            updateWindow.BackBtn.HorizontalAlignment = HorizontalAlignment.Center;
+            updateWindow.BackBtn.VerticalAlignment = VerticalAlignment.Center;
+            updateWindow.BackBtn.Margin = new Thickness(0);
+            updateWindow.SpecComboBox.IsEnabled = false;
+            updateWindow.NumGroupTextBox.IsEnabled = false;
+            updateWindow.dateTextBox.IsEnabled = false;
+            updateWindow.Closing += ListViewUpdateGroup_Closing;
+            if (selectedGroup != null)
+            {
 
+                updateWindow.Show();
+
+            }
+            else
+            {
+                MsgBox.Show("Выберите группу!.");
+            }
         }
 
         private void UpdateBtn_Click(object sender, RoutedEventArgs e)
         {
             ListViewUpdateGroup listViewUpdateGroup = new ListViewUpdateGroup(ListBoxGroup.SelectedItem as Groups);
+            listViewUpdateGroup.Closing += ListViewUpdateGroup_Closing;
             listViewUpdateGroup.Show();
         }
     }
