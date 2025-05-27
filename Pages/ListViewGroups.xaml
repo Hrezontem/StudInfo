@@ -28,12 +28,14 @@
             </Grid>
             <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
         </StackPanel>
-        <ListBox x:Name="ListBoxStudent" Grid.Row="1" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent" Margin="0 5 0 4">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="ContextMenu" Value="{StaticResource listViewGroupContextMenu}"/>
-                </Style>
-            </ListBox.ItemContainerStyle>
+        <ListBox x:Name="ListBoxGroup" Grid.Row="1" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent" Margin="0 5 0 4">
+            <ListBox.ContextMenu>
+                <ContextMenu Background="White" BorderThickness="2" BorderBrush="LightGray">
+                    <MenuItem Header="Просмотр" x:Name="ViewBtn" Click="ViewBtn_Click"/>
+                    <MenuItem Header="Изменить" x:Name="UpdateBtn" Click="UpdateBtn_Click"/>
+                    <MenuItem Header="Удалить" x:Name="DeleteBtn" Click="DeleteBtn_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel   Margin="5">

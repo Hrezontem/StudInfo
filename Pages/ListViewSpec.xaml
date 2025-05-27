@@ -29,6 +29,12 @@
             <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
         </StackPanel>
         <ListBox x:Name="ListBoxSpec" Grid.Row="1" ItemsSource="{Binding Spec}" BorderBrush="Transparent" Background="Transparent"  Margin="0 5 0 4">
+            <ListBox.ContextMenu>
+                <ContextMenu Background="White" BorderThickness="2" BorderBrush="LightGray">
+                    <MenuItem Header="Просмотр" x:Name="ViewBtn" Click="ViewBtn_Click"/>
+                    <MenuItem Header="Удалить" x:Name="DeleteBtn" Click="DeleteBtn_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel   Margin="5"  x:Name="SpecInfoBtn" MouseDown="SpecInfoBtn_MouseDown">

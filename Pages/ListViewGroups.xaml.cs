@@ -12,6 +12,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Text.RegularExpressions;
+using static StudInfo.MsgBox;
+using StudInfo;
 
 namespace StudentSystem.Pages
 {
@@ -21,6 +23,10 @@ namespace StudentSystem.Pages
 
     public partial class ListViewGroup : Page
     {
+        private string conn = String.Format("Server={0};Port={1};" +
+"User Id={2};Password={3};Database={4}",
+$"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+$"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private ICollectionView _collectionView;
         private ObservableCollection<Groups> Groups;
         public ListViewGroup()
@@ -33,12 +39,12 @@ namespace StudentSystem.Pages
         private void InitializeCollectionView()
         {
             _collectionView = CollectionViewSource.GetDefaultView(Groups);
-            ListBoxStudent.ItemsSource = _collectionView;
+            ListBoxGroup.ItemsSource = _collectionView;
         }
         public void LoadTable()
         {
             Groups = new GroupsViewModel().Groups;
-            ListBoxStudent.ItemsSource = Groups;
+            ListBoxGroup.ItemsSource = Groups;
         }
 
 
@@ -49,7 +55,7 @@ namespace StudentSystem.Pages
         {
             var searchText = searchTextBox.Text.ToLower();
 
-            if (searchText != "поиск..." && ListBoxStudent.ItemsSource != null)
+            if (searchText != "поиск..." && ListBoxGroup.ItemsSource != null)
             {
                 _collectionView.Filter = item =>
                 {
@@ -73,9 +79,51 @@ namespace StudentSystem.Pages
 
 
 
-        private void DeleteGroupBtn_Click(object sender, RoutedEventArgs e)
+        public void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show(
+           "Вы уверены, что хотите удалить студента?",
+           "ВНИМАНИЕ",
+           MessageBoxButton.YesNo,
+           MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                foreach (Groups groups in ListBoxGroup.SelectedItems.Cast<Groups>().ToList())
+                {
+                    try
+                    {
+                        if (groups != null && groups.Id > 0) // Проверяем ID
+                        {
+                            using (var sqlConn = new NpgsqlConnection(conn))
+                            {
+                                sqlConn.Open();
+                                var cmd = new NpgsqlCommand($"call delete_group({groups.Id})", sqlConn);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            MsgBox.Show("Удалено успешно", "Успех",
+                                          type: MessageBoxType.Success);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", "Упс...", type: MessageBoxType.Error);
+                    }
+                }
+                LoadTable();
+            }
+        }
+
+        private void ViewBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewUpdateGroup listViewUpdateGroup = new ListViewUpdateGroup(ListBoxGroup.SelectedItem as Groups);
+            listViewUpdateGroup.Show();
         }
     }
 }

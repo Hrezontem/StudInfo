@@ -92,15 +92,15 @@ namespace StudInfo.Pages
             dt.AsDataView();
             if (SpecFullTitleTextBox.Text == "")
             {
-                MsgBox.Show("Не заполненное поле!!! 'Полное наименование специальности'", "ГОЙДА!!!!!!!!" , type: MessageBoxType.Warning);
+                MsgBox.Show("Не заполненное поле!!! 'Полное наименование специальности'", "Внимание" , type: MessageBoxType.Info);
             }
             else if (SpecTitleTextBox.Text == "")
             {
-                MsgBox.Show("Не заполненное поле!!! 'Наиманование группы'", type: MessageBoxType.Warning);
+                MsgBox.Show("Не заполненное поле!!! 'Наиманование группы'", "Внимание", type: MessageBoxType.Info);
             }
             else if (SpecCodeTextBox.Text == "")
             {
-                MsgBox.Show("Не заполненное поле!!!, 'Код специальности'", type: MessageBoxType.Warning);
+                MsgBox.Show("Не заполненное поле!!!, 'Код специальности'", "Внимание", type: MessageBoxType.Info);
             }
             else
             {       

@@ -132,7 +132,8 @@ namespace StudentSystem
 
         private void NewGroupBtn_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            ListViewNewGroup NGroup = new ListViewNewGroup();
+            NGroup.Show();
         }
 
         private void SettingsBtn_Click(object sender, RoutedEventArgs e)

@@ -28,8 +28,6 @@ namespace StudentSystem.Pages
         private ObservableCollection<Spec> _spec;
         private ICollectionView _collectionView;
 
-        ListViewUpdateSpec updateWindow;
-
         public ListViewSpec()
         {
             InitializeComponent();
@@ -85,6 +83,16 @@ namespace StudentSystem.Pages
             //updateWindow.SpecCodeTextBox.IsEnabled = false;
             //updateWindow.SpecFullTitleTextBox.IsEnabled = false;
             //updateWindow.SpecTitleTextBox.IsEnabled = false;
+        }
+
+        private void ViewBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

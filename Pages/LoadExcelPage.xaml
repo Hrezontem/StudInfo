@@ -45,17 +45,25 @@
 
             </Grid>
         </Border>
-        <StackPanel  x:Name="LoadData" Visibility="Hidden">
-            <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="comboboxGroups"  Width="150" Height="26"  Background="#00000000" HorizontalAlignment="Left">
+        <StackPanel  x:Name="LoadData" Visibility="Hidden" Margin="0 45 0 0">
+            <ComboBox Style="{DynamicResource ComboBoxStyle}" x:Name="comboboxGroups"  Width="150" Height="26"  Background="#00000000" HorizontalAlignment="Left" Margin="0 0 0 18">
             </ComboBox>
+            
             <DataGrid Height="430" x:Name="dgvLoad"  RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" 
                   RowStyle="{DynamicResource DataRowStudent}"
                   AutoGenerateColumns="True"
                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
                   GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
                   FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
-                  SelectionMode="Single"  BorderBrush="#00688CAF" >
+                  SelectionMode="Single"  BorderBrush="#00688CAF" Margin="0 2 0 13">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="FontWeight" Value="SemiBold"/>
 
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
             </DataGrid>
             <Button Style="{DynamicResource CostomBtn}" Width="150" Height="26" HorizontalAlignment="Right" x:Name="btn_LoadtoDb" Click="btn_LoadtoDb_Click" Content="Загрузить в базу"></Button>
         </StackPanel>

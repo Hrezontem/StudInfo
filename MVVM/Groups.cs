@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StudentSystem
 {
-    internal class Groups : INotifyPropertyChanged
+    public class Groups : INotifyPropertyChanged
     {
         private int id;
         private string title;

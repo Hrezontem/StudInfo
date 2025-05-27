@@ -1,0 +1,51 @@
+﻿<Window x:Class="StudInfo.Pages.ListViewUpdateGroup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentSystem"
+        mc:Ignorable="d"
+        Height="340" Width="300"
+        Title="ListViewNewStudent" Background="Transparent" BorderThickness="0"
+        WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"  AllowsTransparency="True" 
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+
+    </Window.Resources>
+    <Border Background="White"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Height="310" CornerRadius="10" >
+        <Border.Effect>
+            <DropShadowEffect Color="Gray" RenderingBias="Performance" BlurRadius="10" Direction="267"/>
+        </Border.Effect>
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="Изменение группы" FontFamily="SF Pro Display" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 10" Foreground="#44546F"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Номер группы" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <TextBox Style="{DynamicResource CostomTextBox}" x:Name="NumGroupTextBox"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0" >
+                            <Label Content="Специальность" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <ComboBox Style="{DynamicResource ComboBoxStyle}" Foreground="#44546F" ItemsSource="{Binding}" Padding="7 8 0 0" x:Name="SpecComboBox" Loaded="SpecComboBox_Loaded" MouseDown="SpecComboBox_MouseDown" Height="32" Width="275" SelectionChanged="SpecComboBox_SelectionChanged"/>
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                            <Label Content="Года обучения" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <TextBox Style="{DynamicResource CostomTextBox}" x:Name="dateTextBox" PreviewTextInput="dateTextBox_PreviewTextInput" TextChanged="dateTextBox_TextChanged"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{DynamicResource GrayCostomBtn}" Margin="10 30 0 15" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="Отмена" Width="75" Height="26" Background="#0F091E42" Click="Button_Click"/>
+                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 0 15" Name="SaveNewStudentBtn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26" Click="SaveGroupBtn_Click"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

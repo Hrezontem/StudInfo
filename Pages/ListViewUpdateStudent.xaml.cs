@@ -37,14 +37,6 @@ namespace StudInfo.Pages
         private DataTable dt;
         public DataGridStudents NS;
 
-        public ListViewUpdateStudent()
-        {
-            InitializeComponent();
-            DataContext = new NewStudentViewModel();
-            fill_combo();
-            LoadStudentData();
-            
-        }
 
         public ListViewUpdateStudent(Student student)
         {
@@ -64,6 +56,7 @@ namespace StudInfo.Pages
         {
 
         }
+
 
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {
