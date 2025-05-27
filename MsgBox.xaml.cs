@@ -30,7 +30,7 @@ namespace StudInfo
         {
             InitializeComponent();
             SetMessageType(type);
-            Title = string.IsNullOrEmpty(title) ? GetDefaultTitle(type) : title;
+            TitleText = string.IsNullOrEmpty(title) ? GetDefaultTitle(type) : title;
             MessageText.Text = message;
             ConfigureButtons(buttons);
         }

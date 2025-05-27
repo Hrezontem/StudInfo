@@ -76,6 +76,7 @@ namespace StudentSystem
                 MessageBoxType.Warning,
                 MessageBoxButton.OKCancel
             );
+     
             fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute), this);
             SearchLabel.Visibility = Visibility.Hidden;
             searchTextBox.Visibility = Visibility.Hidden;
