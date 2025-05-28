@@ -22,7 +22,7 @@ namespace StudentSystem
             "User Id={2};Password={3};Database={4}",
             $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
             $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from students_select() "; /**_select(1) order by students_name**/
+        private string sql = @"select * from test.students_display"; /**_select(1) order by students_name**/
         public ObservableCollection<Student> Students { get; set; }
         public DataTable DataTableStudents;
         Stopwatch stopwatch = new Stopwatch();
@@ -50,8 +50,11 @@ namespace StudentSystem
                             string[] date = dateBirth.Split(" ");
                             dateBirth = date[0];
                             string description = reader.GetValue(5).ToString();
+                            string enrollmentdate = reader.GetValue(6).ToString();
+                            string[] enroll = enrollmentdate.Split(" ");
+                            enrollmentdate = enroll[0];
 
-                            Students.Add(new Student { Id = id, Name = name, Card = card, Group = group, DateBirth = dateBirth, Description = description});
+                            Students.Add(new Student { Id = id, Name = name, Card = card, Group = group, DateBirth = dateBirth, Description = description, EntrollmentDate = enrollmentdate});
                         }
                     }
                 }

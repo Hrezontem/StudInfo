@@ -51,7 +51,7 @@ namespace StudInfo.Pages
                     {
                         NumGroupTextBox.Text = _selectedGroup.Title;
                         SpecComboBox.Text = _selectedGroup.FullTitle; // Прямое присвоение
-                        dateTextBox.Text = _selectedGroup.DateStuding;
+                        dateTextBox.Text = _selectedGroup.StartYear;
 
                         // Установка выбранной группы в ComboBox
                         foreach (DataRowView item in SpecComboBox.Items)

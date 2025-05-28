@@ -18,7 +18,7 @@ namespace StudentSystem
             "User Id={2};Password={3};Database={4}",
             $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
             $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from groups_select()";
+        private string sql = @"select * from test.group_display";
         public ObservableCollection<Groups> Groups { get; set; }
 
         public GroupsViewModel()
@@ -39,9 +39,12 @@ namespace StudentSystem
                             int id = reader.GetInt16(0);
                             string title = reader.GetValue(1).ToString();
                             string fullTitle = reader.GetValue(2).ToString();
-                            string dateStuding = reader.GetValue(3).ToString();
+                            int buildingId = reader.GetInt16(3);
+                            string currentYear = reader.GetValue(4).ToString();
+                            string startYear = reader.GetValue(5).ToString();
+                            string endYear = reader.GetValue(6).ToString();
 
-                            Groups.Add(new Groups { Id = id, Title = title, FullTitle = fullTitle, DateStuding = dateStuding }); 
+                            Groups.Add(new Groups { Id = id, Title = title, FullTitle = fullTitle, BuildingId = buildingId, CurrentYear = currentYear, StartYear = startYear, EndYear = endYear }); 
                         }
                     }
                 }
