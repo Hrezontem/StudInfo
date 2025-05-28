@@ -38,7 +38,13 @@ namespace StudentSystem
             //    UserIndicator.Text = "Админ";
 
             //}
+            fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute));
+            SettingsLabel.Visibility = Visibility.Visible;
             CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            NewGroupBtn.Visibility = Visibility.Hidden;
+            NewSpecBtn.Visibility = Visibility.Hidden; 
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
+
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;
             SettingsLabel.Visibility = Visibility.Hidden;

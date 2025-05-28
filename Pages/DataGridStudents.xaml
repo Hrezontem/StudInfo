@@ -20,7 +20,7 @@
             <Grid >
                 <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0">
                     <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
-                    <ComboBox  SelectionChanged="ComboBox_SelectionChanged" Width="100">
+                    <ComboBox  SelectionChanged="ComboBox_SelectionChanged" Margin="13 0 0 0" Style="{StaticResource ComboBoxStyle}" Width="100">
                         <ComboBoxItem>Актуальные</ComboBoxItem>
                         <ComboBoxItem>Архив</ComboBoxItem>
                     </ComboBox>

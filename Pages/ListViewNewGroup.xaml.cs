@@ -1,4 +1,4 @@
-﻿using Npgsql;
+﻿    using Npgsql;
 using StudentSystem;
 using StudentSystem.Pages;
 using System;
@@ -79,7 +79,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
 
             // Обновляем текст в TextBox
             dateTextBox.Text = text;
-
+            var date = dateTextBox.Text.Split("-");
             // Перемещаем курсор в конец
             dateTextBox.SelectionStart = text.Length;
         }
@@ -131,21 +131,25 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                             // Проверяем наличие столбца "group_id" в DataRowView
                             if (!dataRow.Row.Table.Columns.Contains("specializations_id"))
                             {
-                                MsgBox.Show("Столбец 'g_spec_id' не найден в источнике данных.");
+                                MsgBox.Show("Столбец 'specializations_id' не найден в источнике данных.");
                                 return;
                             }
 
                             var specId = dataRow.DataView[0]["specializations_id"].ToString();
 
                             // Используем параметризованный запрос для безопасности
-                            var sql = "call add_group(cast(@specializations_id as int), cast(@group_num as int), cast(@group_years as varchar))";
+                            var sql = "call add_group(cast(@p_buildings_id as int), cast(@specializations_id as int), cast(@group_num as int), cast(@start_year as varchar), cast(@end_year as varchar), cast(@current_year as varchar))";
 
                             using (var npgsqlConnection = new NpgsqlConnection(conn))
                             using (var cmd = new NpgsqlCommand(sql, sqlConn))
                             {
+                                var date = dateTextBox.Text.Split("-");
+                                cmd.Parameters.AddWithValue("@p_buildings_id", CorpusTextBox.Text);
                                 cmd.Parameters.AddWithValue("@specializations_id", specId);
                                 cmd.Parameters.AddWithValue("@group_num", NumGroupTextBox.Text); // Исправлено: добавлен .Text
-                                cmd.Parameters.AddWithValue("@group_years", dateTextBox.Text);
+                                cmd.Parameters.AddWithValue("@start_year", date[0]);
+                                cmd.Parameters.AddWithValue("@end_year", date[1]);
+                                cmd.Parameters.AddWithValue("@current_year", 1);
 
                                 cmd.ExecuteNonQuery();
                                 sqlConn.Close();

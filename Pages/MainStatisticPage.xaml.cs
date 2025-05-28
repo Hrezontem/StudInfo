@@ -82,7 +82,7 @@ namespace StudInfo.Pages
                 {
                     conn.Open();
                     using (var cmd = new NpgsqlCommand(
-                        "SELECT year, active, expelled, graduated FROM test.student_statistics ORDER BY year",
+                        "SELECT year, active, expelled, graduated FROM student_statistics ORDER BY year",
                         conn))
                     using (var reader = cmd.ExecuteReader())
                     {

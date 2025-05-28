@@ -22,7 +22,7 @@ namespace StudentSystem
             "User Id={2};Password={3};Database={4}",
             $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
             $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from test.students_display"; /**_select(1) order by students_name**/
+        private string sql = @"select * from students_display"; /**_select(1) order by students_name**/
         public ObservableCollection<Student> Students { get; set; }
         public DataTable DataTableStudents;
         Stopwatch stopwatch = new Stopwatch();

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudentSystem"
         mc:Ignorable="d"
-        Height="340" Width="300"
+        Height="380" Width="300"
         Title="ListViewNewStudent" Background="Transparent" BorderThickness="0"
         WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"  AllowsTransparency="True" 
         xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" WindowStartupLocation="CenterScreen">
@@ -13,7 +13,7 @@
 
 
     </Window.Resources>
-    <Border Background="White"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="285" Height="310" CornerRadius="10" >
+    <Border Background="White"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="295" Height="365" CornerRadius="10" >
         <Border.Effect>
             <DropShadowEffect Color="Gray" RenderingBias="Performance" BlurRadius="10" Direction="267"/>
         </Border.Effect>
@@ -22,6 +22,11 @@
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Label Content="Добавление группы" FontFamily="SF Pro Display" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 10" Foreground="#44546F"/>
                     <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                            <Label Content="Корпус" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <TextBox Style="{DynamicResource CostomTextBox}" x:Name="CorpusTextBox"/>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Номер группы" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
                             <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>

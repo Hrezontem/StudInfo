@@ -168,13 +168,29 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                     var cmd = new NpgsqlCommand($"select * from test.student_history_view", sqlConn);
                     var dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
-                    dgvHistoryGroups.ItemsSource = dt.DefaultView;
+                    //dgvHistoryGroups.ItemsSource = dt.DefaultView;
                 }
 
             }
             catch (Exception ex)
             {
                 MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", type: MessageBoxType.Error);
+            }
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var cb = sender as ComboBox;
+            if (cb.SelectedItem == cb.Items[0])
+            {
+                ListBoxGroup.Visibility = Visibility.Visible;
+                ListBoxHistoryGroup.Visibility = Visibility.Hidden;
+            }
+            else if (cb.SelectedItem == cb.Items[1])
+            {
+                ListBoxGroup.Visibility = Visibility.Hidden;
+                ListBoxHistoryGroup.Visibility = Visibility.Visible;
+                LoadStudentsHistory();
             }
         }
     }
