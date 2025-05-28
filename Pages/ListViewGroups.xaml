@@ -40,7 +40,14 @@
                 <DataTemplate>
                     <StackPanel   Margin="5">
                         <TextBlock FontSize="18" Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F"/>
-                        <TextBlock FontSize="13" Text="{Binding Path=DateStuding}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock FontSize="13"  FontFamily="SF Pro Display" Foreground="#44546F">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartYear"/>
+                                    <Binding Path="EndYear"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                         <TextBlock Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
                     </StackPanel>
                     

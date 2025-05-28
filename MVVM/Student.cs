@@ -17,6 +17,7 @@ namespace StudentSystem
         private string group;
         private string dateBirth;
         private string description;
+        private string enrollment_date;
 
         public int Id
         {
@@ -70,6 +71,17 @@ namespace StudentSystem
             {
                 description = value;
                 OnPropertyChanged("Description");
+            }
+        }
+
+
+        public string EntrollmentDate
+        {
+            get { return enrollment_date; }
+            set
+            {
+                enrollment_date = value;
+                OnPropertyChanged("enrollment_date");
             }
         }
 

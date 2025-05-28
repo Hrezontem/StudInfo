@@ -11,9 +11,13 @@ namespace StudentSystem
     public class Groups : INotifyPropertyChanged
     {
         private int id;
+        private int buildingId;
         private string title;
         private string fullTitle;
-        private string dateStuding;
+        private string startYear;
+        private string endYear;
+        private string currentYear;
+
 
         public int Id
         {
@@ -24,6 +28,17 @@ namespace StudentSystem
                 OnPropertyChanged("id");
             }
         }
+
+        public int BuildingId
+        {
+            get { return buildingId; }
+            set
+            {
+                buildingId = value;
+                OnPropertyChanged("buildingId");
+            }
+        }
+
         public string Title
         {
             get { return title; }
@@ -42,16 +57,36 @@ namespace StudentSystem
                 OnPropertyChanged("fullTitle");
             }
         }
-        public string DateStuding
+        public string StartYear
         {
-            get { return dateStuding; }
+            get { return startYear; }
             set
             {
-                dateStuding = value;
-                OnPropertyChanged("DateStuding");
+                startYear = value;
+                OnPropertyChanged("startYear");
             }
         }
 
+        public string EndYear
+        {
+            get { return endYear; }
+            set
+            {
+                endYear = value;
+                OnPropertyChanged("endYear");
+            }
+        }
+
+        public string CurrentYear
+        {
+            get { return currentYear; }
+            set
+            {
+                currentYear = value;
+                OnPropertyChanged("currentYear");
+            }
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
