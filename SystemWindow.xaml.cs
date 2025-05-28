@@ -188,6 +188,8 @@ namespace StudentSystem
 
         private void MainPage_Click(object sender, RoutedEventArgs e)
         {
+            btnMenuAnimation(sender as RadioButton);
+            fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute), this);
             CreateNewStudentBtn.Visibility = Visibility.Hidden;
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;

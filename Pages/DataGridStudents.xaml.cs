@@ -234,5 +234,41 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                 MsgBox.Show("Выберите студента!.");
             }
         }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var cb = sender as ComboBox; 
+            if (cb.SelectedItem == cb.Items[0])
+            {
+                dgvStudents.Visibility = Visibility.Visible;
+                dgvHistoryStudents.Visibility = Visibility.Hidden;
+            }
+            else if (cb.SelectedItem == cb.Items[1])
+            {
+                dgvStudents.Visibility = Visibility.Hidden;
+                dgvHistoryStudents.Visibility = Visibility.Visible;
+                LoadStudentsHistory();
+            }
+        }
+
+        private void LoadStudentsHistory()
+        {
+            try
+            {
+                using (var sqlConn = new NpgsqlConnection(conn))
+                {
+                    sqlConn.Open();
+                    var cmd = new NpgsqlCommand($"select * from test.student_history_view", sqlConn);
+                    var dt = new DataTable();
+                    dt.Load(cmd.ExecuteReader());
+                    dgvHistoryStudents.ItemsSource = dt.DefaultView;
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", type: MessageBoxType.Error);
+            }
+        }
     }
 }

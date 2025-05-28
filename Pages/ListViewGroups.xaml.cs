@@ -156,5 +156,26 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             listViewUpdateGroup.Closing += ListViewUpdateGroup_Closing;
             listViewUpdateGroup.Show();
         }
+
+
+        private void LoadStudentsHistory()
+        {
+            try
+            {
+                using (var sqlConn = new NpgsqlConnection(conn))
+                {
+                    sqlConn.Open();
+                    var cmd = new NpgsqlCommand($"select * from test.student_history_view", sqlConn);
+                    var dt = new DataTable();
+                    dt.Load(cmd.ExecuteReader());
+                    dgvHistoryGroups.ItemsSource = dt.DefaultView;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", type: MessageBoxType.Error);
+            }
+        }
     }
 }
