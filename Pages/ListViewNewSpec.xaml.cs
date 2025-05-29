@@ -28,7 +28,6 @@ namespace StudInfo.Pages
        "User Id={2};Password={3};Database={4}",
        $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
        $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from test.groups_display";
         private DataTable dt;
 
 
@@ -70,7 +69,7 @@ namespace StudInfo.Pages
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
             {
                 sqlConn.Open();
-                NpgsqlCommand sqlCmd = new NpgsqlCommand(sql, sqlConn);
+                NpgsqlCommand sqlCmd = new NpgsqlCommand("select * from group_display", sqlConn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqlCmd);
                 dt = new DataTable();
                 da.Fill(dt);
@@ -107,7 +106,7 @@ namespace StudInfo.Pages
                         try
                         {
                             // Используем параметризованный запрос для безопасности
-                            var sql = "call test.add_spec(cast(@specilizations_title as varchar), cast(@specilizations_fulltitle as varchar), cast(@specilizations_code as varchar))";
+                            var sql = "call add_spec(cast(@specilizations_title as varchar), cast(@specilizations_fulltitle as varchar), cast(@specilizations_code as varchar))";
 
                             using (var npgsqlConnection = new NpgsqlConnection(conn))
                             using (var cmd = new NpgsqlCommand(sql, sqlConn))

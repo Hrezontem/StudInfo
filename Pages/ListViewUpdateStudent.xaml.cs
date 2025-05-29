@@ -33,7 +33,6 @@ namespace StudInfo.Pages
         "User Id={2};Password={3};Database={4}",
         $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
         $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from groups_select()";
         private DataTable dt;
         public DataGridStudents NS;
 
@@ -77,12 +76,13 @@ namespace StudInfo.Pages
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
             {
                 sqlConn.Open();
-                NpgsqlCommand sqlCmd = new NpgsqlCommand(sql, sqlConn);
+                NpgsqlCommand sqlCmd = new NpgsqlCommand("select group_id, group_name from group_display", sqlConn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqlCmd);
                 dt = new DataTable();
                 da.Fill(dt);
                 GroupComboBox.ItemsSource = dt.DefaultView;
-                GroupComboBox.DisplayMemberPath = "title";
+                GroupComboBox.DisplayMemberPath = "group_name";
+                GroupComboBox.SelectedValuePath = "group_id";
             }
         }
 
@@ -104,7 +104,7 @@ namespace StudInfo.Pages
                 // Установка выбранной группы в ComboBox
                 foreach (DataRowView item in GroupComboBox.Items)
                 {
-                    if (item["id"].ToString() == _selectedStudent.Id.ToString())
+                    if (item["group_id"].ToString() == _selectedStudent.Id.ToString())
                     {
                         GroupComboBox.SelectedItem = item;
                         break;

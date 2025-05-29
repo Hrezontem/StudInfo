@@ -201,5 +201,10 @@ namespace StudentSystem
             NewSpecBtn.Visibility = Visibility.Hidden;
             SettingsLabel.Visibility = Visibility.Hidden;
         }
+
+        private void fContainer_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
     }
 }

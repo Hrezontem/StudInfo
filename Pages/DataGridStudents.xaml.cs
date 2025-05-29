@@ -258,7 +258,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                 using (var sqlConn = new NpgsqlConnection(conn))
                 {
                     sqlConn.Open();
-                    var cmd = new NpgsqlCommand($"select * from student_history_view", sqlConn);
+                    var cmd = new NpgsqlCommand($"select * from student_history_view where status = 'active'", sqlConn);
                     var dt = new DataTable();
                     dt.Load(cmd.ExecuteReader());
                     dgvHistoryStudents.ItemsSource = dt.DefaultView;

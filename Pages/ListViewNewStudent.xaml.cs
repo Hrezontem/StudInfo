@@ -31,7 +31,7 @@ namespace StudInfo.Pages
 "User Id={2};Password={3};Database={4}",
 $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
 $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from groups_select()";
+        
         private DataTable dt;
         
 
@@ -72,12 +72,13 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
             {
                 sqlConn.Open();
-                NpgsqlCommand sqlCmd = new NpgsqlCommand(sql, sqlConn);
+                NpgsqlCommand sqlCmd = new NpgsqlCommand("select group_id, group_name from group_display", sqlConn);
                 NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqlCmd);
                 dt = new DataTable();
                 da.Fill(dt);
                 GroupComboBox.ItemsSource = dt.DefaultView;
-                GroupComboBox.DisplayMemberPath = "title";
+                GroupComboBox.DisplayMemberPath = "group_name";
+                GroupComboBox.SelectedValuePath = "group_id";
             }
         }
 
@@ -111,7 +112,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             {
                 sqlConn.Open();
                 DataView dv = dt.DefaultView;
-                dv.RowFilter = $"title = '{GroupComboBox.Text.ToString()}'";
+                dv.RowFilter = $"group_name = '{GroupComboBox.Text.ToString()}'";
 
 
                 foreach (var rowView in dv)
@@ -121,27 +122,26 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                         try
                         {
                             // Проверяем наличие столбца "group_id" в DataRowView
-                            if (!dataRow.Row.Table.Columns.Contains("id"))
+                            if (!dataRow.Row.Table.Columns.Contains("group_id"))
                             {
                                 MessageBox.Show("Столбец 'group_id' не найден в источнике данных.");
                                 return;
                             }
                             
-                            var groupId = dataRow["id"].ToString();
+                            var groupId = dataRow["group_id"].ToString();
 
                             // Используем параметризованный запрос для безопасности
-                            var sql = "call add_student(cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar), @students_isStudies, cast(@students_dateborn as date), cast(@students_desc as varchar))";
+                            var sql = "call add_student(cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar),cast(@students_dateborn as date), cast(@students_desc as varchar), cast('2004-01-01' as date))";
 
                             using (var npgsqlConnection = new NpgsqlConnection(conn))
                             using (var cmd = new NpgsqlCommand(sql, sqlConn))
                             {
-                                cmd.Parameters.AddWithValue("@students_name", StudNameTextBox.Text.ToCharArray()); // Исправлено: добавлен .Text
+                                cmd.Parameters.AddWithValue("@students_name", StudNameTextBox.Text); // Исправлено: добавлен .Text
                                 cmd.Parameters.AddWithValue("@group_id", groupId);
-                                cmd.Parameters.AddWithValue("@students_card", NumberStudBiletTextBox.Text.ToCharArray());
+                                cmd.Parameters.AddWithValue("@students_card", NumberStudBiletTextBox.Text);
                                 cmd.Parameters.AddWithValue("@students_isStudies", StStudies);
                                 cmd.Parameters.AddWithValue("@students_dateborn", DateOfBirthStud.Text);
-                                cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text.ToCharArray());
-
+                                cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text);
                                 cmd.ExecuteNonQuery();
                                 sqlConn.Close();
                             }
