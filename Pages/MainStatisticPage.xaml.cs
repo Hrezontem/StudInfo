@@ -16,6 +16,7 @@ using LiveCharts.Wpf;
 using LiveCharts;
 using Npgsql;
 using StudInfo.MVVM;
+using System.Data;
 
 namespace StudInfo.Pages
 {
@@ -51,8 +52,8 @@ namespace StudInfo.Pages
         {
             new LineSeries
             {
-                Title = "Активные",
-                Values = new ChartValues<int>(statistics.Select(s => s.Active))
+                Title = "Всего",
+                Values = new ChartValues<int>(statistics.Select(s => s.AllStudents))
             },
             new LineSeries
             {
@@ -82,7 +83,7 @@ namespace StudInfo.Pages
                 {
                     conn.Open();
                     using (var cmd = new NpgsqlCommand(
-                        "SELECT year, active, expelled, graduated FROM student_statistics ORDER BY year",
+                        "SELECT start_year, expelled, graduated, all_students FROM student_statistics ORDER BY start_year",
                         conn))
                     using (var reader = cmd.ExecuteReader())
                     {
@@ -90,11 +91,40 @@ namespace StudInfo.Pages
                         {
                             statistics.Add(new YearlyStatistics
                             {
-                                Year = reader.GetInt32(0),
-                                Active = reader.GetInt32(1),
-                                Expelled = reader.GetInt32(2),
-                                Graduated = reader.GetInt32(3)
+                                Year = int.Parse(reader.GetString(0)),
+                                Expelled = reader.GetInt32(1),
+                                Graduated = reader.GetInt32(2),
+                                AllStudents = reader.GetInt32(3)
                             });
+                        }
+                    }
+                }
+                using(var conn = new NpgsqlConnection(connectionString)) 
+                { 
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand(
+                        "SELECT count(*) FILTER (WHERE status::text = 'active'::text) AS active FROM students s join groups g on g.group_id = s.group_id where start_year = cast(extract(year from CURRENT_DATE::date) as varchar) GROUP BY g.start_year ORDER BY g.start_year;",
+                        conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                          StudentsLabel.Content = reader.GetValue(0).ToString();
+                        }
+                    }
+                }
+
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    conn.Open();
+                    using (var cmd = new NpgsqlCommand(
+                        "select count(group_id) from groups where start_year = cast(extract(year from CURRENT_DATE::date) as varchar) GROUP BY start_year ORDER BY start_year;",
+                        conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            GroupsLabel.Content = reader.GetValue(0).ToString();
                         }
                     }
                 }

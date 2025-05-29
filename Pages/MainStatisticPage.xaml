@@ -11,13 +11,29 @@
       >
 
     <Grid>
-        <lvc:CartesianChart LegendLocation="Right" Series="{Binding SeriesCollection}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <StackPanel  Orientation="Horizontal" Margin="45 0 0 0" Grid.Row="0">
+            <StackPanel>
+                <Label x:Name="StudentsLabel" FontWeight="SemiBold" Foreground="#44546F" Content="" FontSize="20"></Label>
+                <Label Foreground="#0C66E4" FontSize="20" Content="Всего студентов"/>
+            </StackPanel>
+            <StackPanel>
+                <Label x:Name="GroupsLabel" FontWeight="SemiBold"  Foreground="#44546F" Content="" FontSize="20"></Label>
+                <Label Foreground="#0C66E4" FontSize="20" Content="Всего групп"/>
+            </StackPanel>
+        </StackPanel>
+
+        <lvc:CartesianChart LegendLocation="Right" Series="{Binding SeriesCollection}" Grid.Row="1" Grid.RowSpan="2">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Год" Labels="{Binding Years}"/>
+                <lvc:Axis Title="Год" Labels="{Binding Years}" FontSize="16"/>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Количество студентов"/>
+                <lvc:Axis Title="Количество студентов" FontSize="16"/>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
+
     </Grid>
 </Page>

@@ -12,5 +12,7 @@ namespace StudInfo.MVVM
         public int Active { get; set; }
         public int Expelled { get; set; }
         public int Graduated { get; set; }
+        
+        public int AllStudents { get; set; }
     }
 }
