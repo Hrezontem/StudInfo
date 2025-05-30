@@ -199,7 +199,11 @@ namespace StudentSystem
 
         private void MainPage_Click(object sender, RoutedEventArgs e)
         {
-
+            fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute));
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            NewGroupBtn.Visibility = Visibility.Hidden;
+            NewSpecBtn.Visibility = Visibility.Hidden;
+            CreateNewStudentBtn.Visibility = Visibility.Hidden;
         }
     }
 }

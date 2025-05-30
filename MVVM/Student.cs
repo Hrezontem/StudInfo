@@ -28,7 +28,7 @@ namespace StudentSystem
                 OnPropertyChanged("id");
             }
         }
-        public string ФИО
+        public string Name
         {
             get { return name; }
             set
@@ -37,7 +37,7 @@ namespace StudentSystem
                 OnPropertyChanged("ФИО");
             }
         }
-        public string Студенческий_билет
+        public string Card
         {
             get { return card; }
             set
@@ -46,7 +46,7 @@ namespace StudentSystem
                 OnPropertyChanged("Студенческий билет");
             }
         }
-        public string Группа
+        public string Group
         {
             get { return group; }
             set
@@ -55,7 +55,7 @@ namespace StudentSystem
                 OnPropertyChanged("Группа");
             }
         }
-        public string Дата_рождения
+        public string DateBirth
         {
             get { return dateBirth; }
             set
@@ -64,7 +64,7 @@ namespace StudentSystem
                 OnPropertyChanged("Дата рождения");
             }
         }
-        public string Описание
+        public string Description
         {
             get { return description; }
             set
@@ -75,7 +75,7 @@ namespace StudentSystem
         }
 
 
-        public string Дата_поступления
+        public string EnrollmentDate
         {
             get { return enrollment_date; }
             set

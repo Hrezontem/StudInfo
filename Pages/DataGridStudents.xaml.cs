@@ -46,9 +46,6 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         public DataGridStudents()
         {
             InitializeComponent();
-            _students = new StudentViewModel().Students;
-            InitializeCollectionView();
-
 
 
         }
@@ -60,16 +57,21 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         public void LoadTable()
         {
             _students = new StudentViewModel().Students;
+            InitializeCollectionView();
             dgvStudents.ItemsSource = _students;
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
-          
-            
+            dgvStudents.Columns[1].Header = "ФИО";
+            dgvStudents.Columns[2].Header = "Номер билета";
+            dgvStudents.Columns[3].Header = "Группа";
+            dgvStudents.Columns[4].Header = "Дата рождения";
+            dgvStudents.Columns[6].Header = "Дата поступления";
+
+
         }
         private void dgvStudents_Loaded(object sender, RoutedEventArgs e)
         {
-            dgvStudents.Columns[0].Visibility = Visibility.Hidden;
-            dgvStudents.Columns[5].Visibility = Visibility.Hidden;
+            LoadTable();
             window = Application.Current.MainWindow as SystemWindow;
         }
 

@@ -103,7 +103,7 @@ namespace StudInfo.Pages
                 { 
                     conn.Open();
                     using (var cmd = new NpgsqlCommand(
-                        "SELECT count(*) FILTER (WHERE status::text = 'active'::text) AS active FROM students s join groups g on g.group_id = s.group_id where start_year = cast(extract(year from CURRENT_DATE::date) as varchar) GROUP BY g.start_year ORDER BY g.start_year;",
+                        "SELECT count(*) FILTER (WHERE status::text = 'active'::text) AS active FROM students s",
                         conn))
                     using (var reader = cmd.ExecuteReader())
                     {
