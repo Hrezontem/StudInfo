@@ -95,11 +95,11 @@ namespace StudInfo.Pages
         {
             if (_selectedStudent != null)
             {
-                StudNameTextBox.Text = _selectedStudent.Name;
-                DateOfBirthStud.Text = _selectedStudent.DateBirth.ToString(); // Прямое присвоение
-                GroupComboBox.Text = _selectedStudent.Group;
-                NumberStudBiletTextBox.Text = _selectedStudent.Card;
-                NoteStudTextBox.Text = _selectedStudent.Description;
+                StudNameTextBox.Text = _selectedStudent.ФИО;
+                DateOfBirthStud.Text = _selectedStudent.Дата_рождения.ToString(); // Прямое присвоение
+                GroupComboBox.Text = _selectedStudent.Группа;
+                NumberStudBiletTextBox.Text = _selectedStudent.Студенческий_билет;
+                NoteStudTextBox.Text = _selectedStudent.Описание;
 
                 // Установка выбранной группы в ComboBox
                 foreach (DataRowView item in GroupComboBox.Items)

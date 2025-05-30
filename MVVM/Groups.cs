@@ -12,6 +12,7 @@ namespace StudentSystem
     {
         private int id;
         private int buildingId;
+        private string groupNum;
         private string title;
         private string fullTitle;
         private string startYear;
@@ -36,6 +37,16 @@ namespace StudentSystem
             {
                 buildingId = value;
                 OnPropertyChanged("buildingId");
+            }
+        }
+
+        public string GroupNum
+        {
+            get { return groupNum; }
+            set
+            {
+                groupNum = value;
+                OnPropertyChanged("groupNum");
             }
         }
 

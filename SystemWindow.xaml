@@ -83,15 +83,6 @@
                         Click="ExcelLoadMenuBtn_Click" FontFamily="SF Pro Display" 
                         Margin="0 0 0 0"
                         />
-                    <RadioButton 
-                        GroupName="Btn"
-                        Content="Настройки" 
-                        x:Name="SettingsBtn"
-                        Style="{StaticResource MenuButton}" 
-                        Height="35"
-                        Click="SettingsBtn_Click" FontFamily="SF Pro Display" 
-                        
-                        />
 
 
                 </StackPanel>

@@ -54,7 +54,7 @@ namespace StudentSystem
                             string[] enroll = enrollmentdate.Split(" ");
                             enrollmentdate = enroll[0];
 
-                            Students.Add(new Student { Id = id, Name = name, Card = card, Group = group, DateBirth = dateBirth, Description = description, EntrollmentDate = enrollmentdate});
+                            Students.Add(new Student { Id = id, ФИО = name, Студенческий_билет = card, Группа = group, Дата_рождения = dateBirth, Описание = description, Дата_поступления = enrollmentdate});
                         }
                     }
                 }

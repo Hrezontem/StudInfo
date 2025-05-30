@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Npgsql;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Npgsql;
 
 namespace StudentSystem
 {
@@ -36,15 +29,18 @@ namespace StudentSystem
                     {
                         while (reader.Read())
                         {
-                            int id = reader.GetInt16(0);
-                            string title = reader.GetValue(1).ToString();
-                            string fullTitle = reader.GetValue(2).ToString();
-                            int buildingId = reader.GetInt16(3);
-                            string currentYear = reader.GetValue(4).ToString();
-                            string startYear = reader.GetValue(5).ToString();
-                            string endYear = reader.GetValue(6).ToString();
+                            Groups.Add(new Groups
+                            {
+                                Id = reader.GetInt16(0),
+                                Title = reader.GetValue(1).ToString(),
+                                GroupNum = reader.GetValue(2).ToString(),
+                                FullTitle = reader.GetValue(3).ToString(),
+                                BuildingId = reader.GetInt16(4),
+                                CurrentYear = reader.GetValue(5).ToString(),
+                                StartYear = reader.GetValue(6).ToString(),
+                                EndYear = reader.GetValue(7).ToString()
+                            });
 
-                            Groups.Add(new Groups { Id = id, Title = title, FullTitle = fullTitle, BuildingId = buildingId, CurrentYear = currentYear, StartYear = startYear, EndYear = endYear }); 
                         }
                     }
                 }

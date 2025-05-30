@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Logo_2_.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
     <None Remove="Resources\Images\NewST.png" />
     <None Remove="Resources\Images\PostgreSQLlogo.svg" />
     <None Remove="Resources\Images\_UploadIcon_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Logo_2_.ico" />
   </ItemGroup>
 
   <ItemGroup>

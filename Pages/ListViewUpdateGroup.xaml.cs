@@ -38,7 +38,7 @@ namespace StudInfo.Pages
             if (_selectedGroup != null)
             {
                 var num  = _selectedGroup.Title.Split("-");
-                NumGroupTextBox.Text = _selectedGroup.Title;
+                NumGroupTextBox.Text = _selectedGroup.GroupNum;
                 SpecComboBox.Text = _selectedGroup.FullTitle; // Прямое присвоение
                 dateTextBox.Text = _selectedGroup.StartYear + _selectedGroup.EndYear;
                 currentYearTextBox.Text = _selectedGroup.CurrentYear;

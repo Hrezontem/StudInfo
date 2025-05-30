@@ -192,17 +192,12 @@ namespace StudentSystem
             SettingsLabel.Visibility = Visibility.Hidden;
         }
 
-        private void MainPage_Click(object sender, RoutedEventArgs e)
+        private void fContainer_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
-            btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute), this);
-            CreateNewStudentBtn.Visibility = Visibility.Hidden;
-            NewGroupBtn.Visibility = Visibility.Hidden;
-            NewSpecBtn.Visibility = Visibility.Hidden;
-            SettingsLabel.Visibility = Visibility.Hidden;
+
         }
 
-        private void fContainer_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void MainPage_Click(object sender, RoutedEventArgs e)
         {
 
         }

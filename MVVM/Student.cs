@@ -28,54 +28,54 @@ namespace StudentSystem
                 OnPropertyChanged("id");
             }
         }
-        public string Name
+        public string ФИО
         {
             get { return name; }
             set
             {
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged("ФИО");
             }
         }
-        public string Card
+        public string Студенческий_билет
         {
             get { return card; }
             set
             {
                 card = value;
-                OnPropertyChanged("Card");
+                OnPropertyChanged("Студенческий билет");
             }
         }
-        public string Group
+        public string Группа
         {
             get { return group; }
             set
             {
                 group = value;
-                OnPropertyChanged("Group");
+                OnPropertyChanged("Группа");
             }
         }
-        public string DateBirth
+        public string Дата_рождения
         {
             get { return dateBirth; }
             set
             {
                 dateBirth = value;
-                OnPropertyChanged("DateBirth");
+                OnPropertyChanged("Дата рождения");
             }
         }
-        public string Description
+        public string Описание
         {
             get { return description; }
             set
             {
                 description = value;
-                OnPropertyChanged("Description");
+                OnPropertyChanged("Описание");
             }
         }
 
 
-        public string EntrollmentDate
+        public string Дата_поступления
         {
             get { return enrollment_date; }
             set
