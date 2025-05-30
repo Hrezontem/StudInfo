@@ -13,9 +13,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using IronXL;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Win32;
 using Npgsql;
+
 
 namespace StudInfo.Pages
 {
@@ -30,7 +32,7 @@ namespace StudInfo.Pages
         public string value { get; set; }
     }
 
-    public partial class LoadExcelPage : Page
+    public partial class LoadExcelPage : System.Windows.Controls.Page
     {
         private DataTable dt;
         public LoadExcelPage()
@@ -86,45 +88,42 @@ namespace StudInfo.Pages
 
         private DataTable LoadExcelToDataTable(string filePath)
         {
-            var workBook = WorkBook.Load(filePath);
-            var workSheet = workBook.DefaultWorkSheet;
+            var dataTable = new DataTable();
 
-            // Создаем DataTable вручную
-            DataTable dataTable = new DataTable();
-
-            // Читаем заголовки из первой строки
-            var headers = workSheet.Rows[0].Columns
-                           .Select(c => c.StringValue)
-                           .ToArray();
-
-            foreach (var header in headers)
+            using (SpreadsheetDocument doc = SpreadsheetDocument.Open(filePath, false))
             {
-                dataTable.Columns.Add(header);
-            }
+                WorkbookPart workbookPart = doc.WorkbookPart;
+                WorksheetPart worksheetPart = workbookPart.WorksheetParts.First();
+                SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+                SharedStringTablePart stringTable = workbookPart.SharedStringTablePart;
 
-            // Читаем данные, начиная со второй строки
-            for (int i = 1; i < workSheet.Rows.Count(); i++)
-            {
-                var row = workSheet.Rows[i];
-                DataRow dataRow = dataTable.NewRow();
-
-                for (int j = 0; j < headers.Length; j++)
+                // Создаем колонки на основе первой строки
+                Row headerRow = sheetData.Elements<Row>().First();
+                foreach (Cell cell in headerRow.Elements<Cell>())
                 {
-                    dataRow[j] = row.Columns[j].StringValue;
+                    string columnName = GetCellValue(cell, stringTable);
+                    dataTable.Columns.Add(columnName);
                 }
 
-                dataTable.Rows.Add(dataRow);
+                // Читаем остальные строки (данные)
+                foreach (Row row in sheetData.Elements<Row>().Skip(1))
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    int columnIndex = 0;
+
+                    foreach (Cell cell in row.Elements<Cell>())
+                    {
+                        string cellValue = GetCellValue(cell, stringTable);
+                        dataRow[columnIndex] = cellValue;
+                        columnIndex++;
+                    }
+                    dataTable.Rows.Add(dataRow);
+                }
             }
-            dt = dataTable;
+
             return dataTable;
         }
 
-        private void addGroup() { }
-        private void addStudent() 
-        {
-        
-        }
-        private void addSpec() { }
 
         private void btn_LoadtoDb_Click(object sender, RoutedEventArgs e)
         {
@@ -137,6 +136,16 @@ namespace StudInfo.Pages
             {
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
+        }
+
+        private string GetCellValue(Cell cell, SharedStringTablePart stringTable)
+        {
+            if (cell.DataType == null || cell.DataType.Value != CellValues.SharedString)
+                return cell.CellValue?.Text ?? "";
+
+            // Для значений из Shared String Table
+            int index = int.Parse(cell.CellValue.Text);
+            return stringTable.SharedStringTable.Elements<SharedStringItem>().ElementAt(index).InnerText;
         }
 
         private void InsertDataIntoPostgres(DataTable dataTable)
