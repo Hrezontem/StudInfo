@@ -1,14 +1,24 @@
 ﻿
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml;
+using Microsoft.Win32;
 using StudentSystem.Pages;
+using StudInfo;
 using StudInfo.Pages;
 using System.ComponentModel;
 using System.Data;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
+using System.Collections;
 namespace StudentSystem
 {
     /// <summary>
@@ -19,6 +29,9 @@ namespace StudentSystem
         private double windowHeight = 0;
         public DataTable dt;
         private ICollectionView _collectionView;
+        private DataGridStudents StudentsPage;
+        private ListViewGroup GroupsPage;
+        private ListViewSpec SpecsPage;
         public SystemWindow()
         {
 
@@ -38,6 +51,9 @@ namespace StudentSystem
             //    UserIndicator.Text = "Админ";
 
             //}
+            StudentsPage = new DataGridStudents();
+            GroupsPage = new ListViewGroup();
+            SpecsPage = new ListViewSpec();
             fContainer.Navigate(new System.Uri("Pages/MainStatisticPage.xaml", UriKind.RelativeOrAbsolute));
             SettingsLabel.Visibility = Visibility.Visible;
             CreateNewStudentBtn.Visibility = Visibility.Hidden;
@@ -165,7 +181,7 @@ namespace StudentSystem
         private void SpecMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewSpec.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(SpecsPage);
             CreateNewStudentBtn.Visibility = Visibility.Visible;
             NewGroupBtn.Visibility = Visibility.Visible;
             NewSpecBtn.Visibility = Visibility.Visible;
@@ -175,7 +191,7 @@ namespace StudentSystem
         private void GroupMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/ListViewGroups.xaml", UriKind.RelativeOrAbsolute));
+            fContainer.Navigate(GroupsPage);
             CreateNewStudentBtn.Visibility = Visibility.Visible;
             NewGroupBtn.Visibility = Visibility.Visible;
             NewSpecBtn.Visibility = Visibility.Visible;
@@ -185,7 +201,7 @@ namespace StudentSystem
         private void StudentsMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
-            fContainer.Navigate(new System.Uri("Pages/DataGridStudents.xaml", UriKind.RelativeOrAbsolute), this);
+            fContainer.Navigate(StudentsPage, this);
             CreateNewStudentBtn.Visibility = Visibility.Visible;
             NewGroupBtn.Visibility = Visibility.Visible;
             NewSpecBtn.Visibility = Visibility.Visible;
@@ -204,6 +220,112 @@ namespace StudentSystem
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;
             CreateNewStudentBtn.Visibility = Visibility.Hidden;
+        }
+
+        public static DataTable ItemsSourceToDataTable(IEnumerable items)
+        {
+            if (items == null) return new DataTable();
+
+            var table = new DataTable();
+            var enumerable = items as object[] ?? items.Cast<object>().ToArray();
+
+            // Создаем колонки на основе свойств первого элемента
+            if (enumerable.Any())
+            {
+                Type itemType = enumerable.First().GetType();
+                foreach (PropertyInfo prop in itemType.GetProperties())
+                {
+                    table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+                }
+            }
+
+            // Добавляем строки
+            foreach (var item in enumerable)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyInfo prop in item.GetType().GetProperties())
+                {
+                    row[prop.Name] = prop.GetValue(item, null) ?? DBNull.Value;
+                }
+                table.Rows.Add(row);
+            }
+            return table;
+        }
+        public static void ExportToXlsx(DataTable dataTable, string filePath)
+        {
+            using (var spreadsheet = SpreadsheetDocument.Create(filePath, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = spreadsheet.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                Sheets sheets = workbookPart.Workbook.AppendChild(new Sheets());
+                Sheet sheet = new Sheet()
+                {
+                    Id = workbookPart.GetIdOfPart(worksheetPart),
+                    SheetId = 1,
+                    Name = "Sheet1"
+                };
+                sheets.Append(sheet);
+
+                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+
+                // Заголовки
+                Row headerRow = new Row();
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    Cell cell = new Cell()
+                    {
+                        DataType = CellValues.String,
+                        CellValue = new CellValue(column.ColumnName)
+                    };
+                    headerRow.Append(cell);
+                }
+                sheetData.Append(headerRow);
+
+                // Данные
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    Row row = new Row();
+                    foreach (var item in dr.ItemArray)
+                    {
+                        Cell cell = new Cell()
+                        {
+                            DataType = CellValues.String,
+                            CellValue = new CellValue(item?.ToString() ?? "")
+                        };
+                        row.Append(cell);
+                    }
+                    sheetData.Append(row);
+                }
+
+                workbookPart.Workbook.Save();
+            }
+        }
+        private void LoadXlsxBtn_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DataTable dataTable = new DataTable();
+            if (GroupsPage.IsVisible == true)
+            {
+
+            }
+            else if (StudentsPage.IsVisible == true)
+            {
+                dataTable = ItemsSourceToDataTable(StudentsPage.dgvStudents.ItemsSource as IEnumerable);
+            }
+            else if (SpecsPage.IsVisible == true)
+            {
+
+            }
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            if (saveDialog.ShowDialog() == true)
+            {
+                ExportToXlsx(dataTable, saveDialog.FileName);
+                MessageBox.Show("Экспорт завершен!");
+            }
         }
     }
 }

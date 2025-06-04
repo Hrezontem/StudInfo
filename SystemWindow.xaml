@@ -97,6 +97,7 @@
                     <Image x:Name="CreateNewStudentBtn" MouseDown="CreateNewStudentBtn_MouseDown" Source="/Resources/Images/NewST.png" Height="17" Width="24" Margin="14 0 7 0"/>
                     <Image x:Name="NewGroupBtn" MouseDown="NewGroupBtn_MouseDown" Source="/Resources/Images/NewGroup.png"  Height="19"  Width="19"  Margin="0 0 7 0"/>
                     <Image x:Name="NewSpecBtn" MouseDown="NewSpecBtn_MouseDown" Source="/Resources/Images/NewSpec.png" Height="22"  Width="22"  Margin="0 0 10 0"/>
+                    <Image x:Name="LoadXlsxBtn" MouseDown="LoadXlsxBtn_MouseDown" Source="/Resources/Images/Xlsx.png" Height="22"  Width="22"  Margin="0 0 10 0"/>
                 </StackPanel>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1">

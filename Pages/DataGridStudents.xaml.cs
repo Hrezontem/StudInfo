@@ -42,11 +42,10 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         ListViewNewStudent NewStWindow;
         private int rowIndex = -1;
         private ObservableCollection<Student> _students;
-        private ICollectionView _collectionView;
+        public ICollectionView _collectionView;
         public DataGridStudents()
         {
             InitializeComponent();
-
 
         }
         private void InitializeCollectionView()
@@ -57,8 +56,8 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         public void LoadTable()
         {
             _students = new StudentViewModel().Students;
-            InitializeCollectionView();
             dgvStudents.ItemsSource = _students;
+            InitializeCollectionView();
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
             dgvStudents.Columns[1].Header = "ФИО";
