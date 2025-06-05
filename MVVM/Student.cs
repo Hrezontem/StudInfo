@@ -18,6 +18,7 @@ namespace StudentSystem
         private string dateBirth;
         private string description;
         private string enrollment_date;
+        private string status;
 
         public int Id
         {
@@ -82,6 +83,16 @@ namespace StudentSystem
             {
                 enrollment_date = value;
                 OnPropertyChanged("enrollment_date");
+            }
+        }
+
+        public string Status
+        {
+            get { return status; }
+            set
+            {
+                status = value;
+                OnPropertyChanged("status");
             }
         }
 

@@ -309,7 +309,7 @@ namespace StudentSystem
             DataTable dataTable = new DataTable();
             if (GroupsPage.IsVisible == true)
             {
-
+                dataTable = ItemsSourceToDataTable(GroupsPage.ListBoxGroup.ItemsSource as IEnumerable);
             }
             else if (StudentsPage.IsVisible == true)
             {
@@ -317,6 +317,7 @@ namespace StudentSystem
             }
             else if (SpecsPage.IsVisible == true)
             {
+                dataTable = ItemsSourceToDataTable(SpecsPage.ListBoxSpec.ItemsSource as IEnumerable);
 
             }
             SaveFileDialog saveDialog = new SaveFileDialog();

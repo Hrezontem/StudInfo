@@ -39,11 +39,28 @@ namespace StudInfo.Pages
 
         public ListViewUpdateStudent(Student student)
         {
+            /*
+                                         <ComboBoxItem Content="Учится" Name="Учится"/>
+                            <ComboBoxItem Content="Отчислен"/>
+                            <ComboBoxItem Content="Выпущен" Name="Выпущен"/>
+             */
             InitializeComponent();
+            using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
+            {
+                sqlConn.Open();
+                NpgsqlCommand sqlCmd = new NpgsqlCommand("select * from status", sqlConn);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqlCmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                cboxStatus.ItemsSource = dt.DefaultView;
+                cboxStatus.DisplayMemberPath = "status_name";
+                cboxStatus.SelectedValuePath = "status_title";
+            }
             _selectedStudent = student; // Сохраняем выбранного студента
             DataContext = new NewStudentViewModel();
             fill_combo();
             LoadStudentData(); // Загружаем данные в форму
+
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -69,8 +86,17 @@ namespace StudInfo.Pages
         }
 
         private Student _selectedStudent;
-        private string _updateSql = @"call update_student(cast(@id as int),  cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar), @students_isStudies, cast(@students_dateborn as date), cast(@students_desc as varchar))";
-
+        private string _updateSql = @"call update_student(cast(@id as int),  cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar), cast(@students_dateborn as date),cast(@status as varchar) ,cast(@students_desc as varchar))";
+        /*
+                                                                                 IN p_student_id integer, 
+                                                                        IN p_name character varying, 
+                                                                        IN p_group_id integer, 
+                                                                        IN p_card character varying, 
+                                                                        IN p_dateborn date, 
+                                                                        IN p_desc text, 
+                                                                        IN p_status character varying, 
+                                                                        IN p_enrollment_date date)
+         */
         private void fill_combo()
         {
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
@@ -100,6 +126,7 @@ namespace StudInfo.Pages
                 GroupComboBox.Text = _selectedStudent.Group;
                 NumberStudBiletTextBox.Text = _selectedStudent.Card;
                 NoteStudTextBox.Text = _selectedStudent.Description;
+                cboxStatus.Text = _selectedStudent.Status;
 
                 // Установка выбранной группы в ComboBox
                 foreach (DataRowView item in GroupComboBox.Items)
@@ -107,6 +134,15 @@ namespace StudInfo.Pages
                     if (item["group_id"].ToString() == _selectedStudent.Id.ToString())
                     {
                         GroupComboBox.SelectedItem = item;
+                        break;
+                    }
+                }
+
+                foreach (DataRowView item in cboxStatus.Items)
+                {
+                    if (item["status_title"].ToString() == _selectedStudent.Status.ToString())
+                    {
+                        cboxStatus.SelectedItem = item;
                         break;
                     }
                 }
@@ -145,16 +181,16 @@ namespace StudInfo.Pages
                     try
                     {
                         sqlConn.Open();
-                        DataRowView selectedGroup = (DataRowView)GroupComboBox.SelectedItem;
+                        //DataRowView selectedGroup = (DataRowView);
 
                         using (NpgsqlCommand cmd = new NpgsqlCommand(_updateSql, sqlConn))
                         {
                             cmd.Parameters.AddWithValue("@id", _selectedStudent.Id);
                             cmd.Parameters.AddWithValue("@students_name", StudNameTextBox.Text);
-                            cmd.Parameters.AddWithValue("@group_id", selectedGroup["id"]);
+                            cmd.Parameters.AddWithValue("@group_id", GroupComboBox.SelectedValue);
                             cmd.Parameters.AddWithValue("@students_card", NumberStudBiletTextBox.Text);
-                            cmd.Parameters.AddWithValue("@students_isStudies", true);
                             cmd.Parameters.AddWithValue("@students_dateborn", NpgsqlDbType.Date, DateOfBirthStud.SelectedDate);
+                            cmd.Parameters.AddWithValue("@status", NpgsqlDbType.Varchar, cboxStatus.SelectedValue);
                             cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text);
 
                             cmd.ExecuteNonQuery();

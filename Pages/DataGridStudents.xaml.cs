@@ -65,6 +65,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             dgvStudents.Columns[3].Header = "Группа";
             dgvStudents.Columns[4].Header = "Дата рождения";
             dgvStudents.Columns[6].Header = "Дата поступления";
+            dgvStudents.Columns[7].Visibility = Visibility.Hidden;
 
 
         }

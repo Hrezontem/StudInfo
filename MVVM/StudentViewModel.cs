@@ -53,8 +53,17 @@ namespace StudentSystem
                             string enrollmentdate = reader.GetValue(6).ToString();
                             string[] enroll = enrollmentdate.Split(" ");
                             enrollmentdate = enroll[0];
+                            string status = reader.GetValue(7).ToString();
 
-                            Students.Add(new Student { Id = id, Name = name, Card = card, Group = group, DateBirth = dateBirth, Description = description, EnrollmentDate = enrollmentdate});
+                            Students.Add(new Student { 
+                                Id = id, 
+                                Name = name, 
+                                Card = card, 
+                                Group = group, 
+                                DateBirth = dateBirth, 
+                                Description = description, 
+                                EnrollmentDate = enrollmentdate,
+                                Status = status});
                         }
                     }
                 }
