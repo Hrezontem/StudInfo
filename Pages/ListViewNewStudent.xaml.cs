@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static StudInfo.MsgBox;
 
 namespace StudInfo.Pages
 {
@@ -94,19 +95,19 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             dt.AsDataView();
             if (StudNameTextBox.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!! 'ФИО'");
+                MsgBox.Show("Не заполненное поле!!! 'ФИО'", "Внимание", type: MessageBoxType.Info);
             }
             else if (GroupComboBox.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!! 'Группа'");
+                MsgBox.Show("Не заполненное поле!!! 'Группа'", "Внимание", type: MessageBoxType.Info);
             }
             else if (NumberStudBiletTextBox.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!!, 'Студенческий билет'");
+                MsgBox.Show("Не заполненное поле!!!, 'Студенческий билет'", "Внимание", type: MessageBoxType.Info);
             }
             else if(DateOfBirthStud.Text == "")
             {
-                MessageBox.Show("Не заполненное поле!!!, 'Дата рождения'");
+                MsgBox.Show("Не заполненное поле!!!, 'Дата рождения'", "Внимание", type: MessageBoxType.Info);
             }
             else
             {
@@ -146,12 +147,12 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                                 sqlConn.Close();
                             }
 
-                            MessageBox.Show("Добавлено");
+                            MsgBox.Show("Добавлено", "Успех!", type: MessageBoxType.Success);
                             this.Close();
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show($"ОШИБКА: {ex.Message}");
+                            MsgBox.Show($"ОШИБКА: {ex.Message}", "Ошибка", type: MessageBoxType.Error);
                             sqlConn.Close();
                         }
                     }

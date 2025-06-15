@@ -16,19 +16,19 @@ using System.Windows.Controls;
 
 namespace StudentSystem
 {
-    public class StudentViewModel : INotifyPropertyChanged
+    public class StudentHistoryViewModel : INotifyPropertyChanged
     {
         private string conn = String.Format("Server={0};Port={1};" +
             "User Id={2};Password={3};Database={4}",
             $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
             $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
-        private string sql = @"select * from students_display  where status = 'active'"; /**_select(1) order by students_name**/
-        public ObservableCollection<Student> Students { get; set; }
+        private string sql = @"select * from students_display  where status != 'active'"; /**_select(1) order by students_name**/
+        public ObservableCollection<StudentHistory> StudentsHistory { get; set; }
         public DataTable DataTableStudents;
         Stopwatch stopwatch = new Stopwatch();
-        public StudentViewModel() 
+        public StudentHistoryViewModel()
         {
-            Students = new ObservableCollection<Student>();
+            StudentsHistory = new ObservableCollection<StudentHistory>();
 
             using (NpgsqlConnection connection = new NpgsqlConnection(conn))
             {
@@ -38,9 +38,9 @@ namespace StudentSystem
                 NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                 using (NpgsqlDataReader reader = command.ExecuteReader())
                 {
-                    if (reader.HasRows) 
+                    if (reader.HasRows)
                     {
-                        while (reader.Read()) 
+                        while (reader.Read())
                         {
                             int id = reader.GetInt16(0);
                             string name = reader.GetValue(1).ToString();
@@ -55,15 +55,17 @@ namespace StudentSystem
                             enrollmentdate = enroll[0];
                             string status = reader.GetValue(7).ToString();
 
-                            Students.Add(new Student { 
-                                Id = id, 
-                                Name = name, 
-                                Card = card, 
-                                Group = group, 
-                                DateBirth = dateBirth, 
-                                Description = description, 
+                            StudentsHistory.Add(new StudentHistory
+                            {
+                                Id = id,
+                                Name = name,
+                                Card = card,
+                                Group = group,
+                                DateBirth = dateBirth,
+                                Description = description,
                                 EnrollmentDate = enrollmentdate,
-                                Status = status});
+                                Status = status
+                            });
                         }
                     }
                 }
@@ -73,7 +75,7 @@ namespace StudentSystem
 
         }
 
-        
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

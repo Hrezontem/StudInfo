@@ -19,6 +19,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Collections;
+using static StudInfo.MsgBox;
+using Npgsql;
 namespace StudentSystem
 {
     /// <summary>
@@ -26,6 +28,10 @@ namespace StudentSystem
     /// </summary>
     public partial class SystemWindow : Window
     {
+        private string conn = String.Format("Server={0};Port={1};" +
+"User Id={2};Password={3};Database={4}",
+$"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+$"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private double windowHeight = 0;
         public DataTable dt;
         private ICollectionView _collectionView;
@@ -63,6 +69,7 @@ namespace StudentSystem
 
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Hidden;
             SettingsLabel.Visibility = Visibility.Hidden;
             
         }
@@ -166,6 +173,8 @@ namespace StudentSystem
             CreateNewStudentBtn.Visibility = Visibility.Hidden;
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Hidden;
+            LoadXlsxBtn.Visibility = Visibility.Visible;
         }
 
         private void ExcelLoadMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -176,6 +185,8 @@ namespace StudentSystem
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;
             SettingsLabel.Visibility = Visibility.Hidden;
+            LoadXlsxBtn.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Hidden;
         }
 
         private void SpecMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -186,6 +197,8 @@ namespace StudentSystem
             NewGroupBtn.Visibility = Visibility.Visible;
             NewSpecBtn.Visibility = Visibility.Visible;
             SettingsLabel.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Visible;
+            LoadXlsxBtn.Visibility = Visibility.Visible;
         }
 
         private void GroupMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -196,6 +209,8 @@ namespace StudentSystem
             NewGroupBtn.Visibility = Visibility.Visible;
             NewSpecBtn.Visibility = Visibility.Visible;
             SettingsLabel.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Visible;
+            LoadXlsxBtn.Visibility = Visibility.Visible;
         }
 
         private void StudentsMenuBtn_Click(object sender, RoutedEventArgs e)
@@ -206,6 +221,8 @@ namespace StudentSystem
             NewGroupBtn.Visibility = Visibility.Visible;
             NewSpecBtn.Visibility = Visibility.Visible;
             SettingsLabel.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Visible;
+            LoadXlsxBtn.Visibility = Visibility.Visible;
         }
 
         private void fContainer_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
@@ -220,6 +237,8 @@ namespace StudentSystem
             NewGroupBtn.Visibility = Visibility.Hidden;
             NewSpecBtn.Visibility = Visibility.Hidden;
             CreateNewStudentBtn.Visibility = Visibility.Hidden;
+            Next_year.Visibility = Visibility.Hidden;
+            LoadXlsxBtn.Visibility = Visibility.Visible;
         }
 
         public static DataTable ItemsSourceToDataTable(IEnumerable items)
@@ -325,8 +344,35 @@ namespace StudentSystem
             if (saveDialog.ShowDialog() == true)
             {
                 ExportToXlsx(dataTable, saveDialog.FileName);
-                MessageBox.Show("Экспорт завершен!");
+                MsgBox.Show("Экспорт завершен!", "Успех!", type: MessageBoxType.Success);
             }
+        }
+
+        private void Next_year_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var result = MessageBox.Show(
+            "Эта функция переведёт всех студентов на следующий курс обучения",
+            "Внимание",
+            MessageBoxButton.YesNo,
+            MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes) 
+            {
+                var next_result = MessageBox.Show(
+                "Процесс не обратим, вы всё ещё уверены?",
+                "ВНИМАНИЕ",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
+                if (next_result == MessageBoxResult.Yes)
+                {
+                    using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
+                    {
+                        sqlConn.Open();
+                        NpgsqlCommand sqlCmd = new NpgsqlCommand("call promote_groups_buildings()", sqlConn);
+                    }
+                }
+            }
+
+
         }
     }
 }

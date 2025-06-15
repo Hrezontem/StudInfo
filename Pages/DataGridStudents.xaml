@@ -20,7 +20,7 @@
             <Grid >
                 <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0">
                     <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
-                    <ComboBox  SelectionChanged="ComboBox_SelectionChanged" Margin="13 0 0 0" Style="{StaticResource ComboBoxStyle}" Width="100">
+                    <ComboBox  SelectionChanged="ComboBox_SelectionChanged" Margin="0 0 0 0" Style="{StaticResource ComboBoxStyle}" Width="100">
                         <ComboBoxItem>Актуальные</ComboBoxItem>
                         <ComboBoxItem>Архив</ComboBoxItem>
                     </ComboBox>
@@ -62,7 +62,8 @@
           VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
           GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
           FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
-          SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1" Visibility="Hidden"
+          SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1" Visibility="Hidden" 
+          MouseDoubleClick="dgvHistoryStudents_MouseDoubleClick" Loaded="dgvHistoryStudents_Loaded"
           AutoGenerateColumns="True"
           Margin="0 7 0 13">
             <DataGrid.Columns>

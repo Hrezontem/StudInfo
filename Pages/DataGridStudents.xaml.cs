@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 
 using System.Windows;
@@ -34,6 +35,7 @@ $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Setting
 $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private DataTable dt;
         private Student selectedStudent;
+        private StudentHistory selectedStudentHistory;
         private NpgsqlConnection sqlConn;
         private string sql;
         NpgsqlCommand cmd = new NpgsqlCommand();
@@ -42,16 +44,23 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         ListViewNewStudent NewStWindow;
         private int rowIndex = -1;
         private ObservableCollection<Student> _students;
+        private ObservableCollection<StudentHistory> _history_students;
         public ICollectionView _collectionView;
+        public ICollectionView _history_collectionView;
+        public ObservableCollection<Student> Students { get; set; }
+        public ObservableCollection<StudentHistory> StudentsHistory { get; set; }
         public DataGridStudents()
         {
             InitializeComponent();
-
+            Students = new ObservableCollection<Student>();
+            StudentsHistory = new ObservableCollection<StudentHistory>();
         }
         private void InitializeCollectionView()
         {
+            _history_collectionView = CollectionViewSource.GetDefaultView(_history_students);
             _collectionView = CollectionViewSource.GetDefaultView(_students);
             dgvStudents.ItemsSource = _collectionView;
+            dgvHistoryStudents.ItemsSource = _history_collectionView;
         }
         public void LoadTable()
         {
@@ -61,11 +70,27 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
             dgvStudents.Columns[1].Header = "ФИО";
-            dgvStudents.Columns[2].Header = "Номер билета";
-            dgvStudents.Columns[3].Header = "Группа";
+            dgvStudents.Columns[2].Header = "Группа";
+            dgvStudents.Columns[3].Header = "Номер билета";
             dgvStudents.Columns[4].Header = "Дата рождения";
             dgvStudents.Columns[6].Header = "Дата поступления";
             dgvStudents.Columns[7].Visibility = Visibility.Hidden;
+        }
+
+        public void LoadHistoryTable()
+        {
+            _history_students = new StudentHistoryViewModel().StudentsHistory;
+            dgvHistoryStudents.ItemsSource = _history_students;
+            InitializeCollectionView();
+            dgvHistoryStudents.Columns[0].Visibility = Visibility.Hidden;
+            dgvHistoryStudents.Columns[5].Visibility = Visibility.Hidden;
+            dgvHistoryStudents.Columns[1].Header = "ФИО";
+            dgvHistoryStudents.Columns[2].Header = "Группа";
+            dgvHistoryStudents.Columns[3].Header = "Номер билета";
+            dgvHistoryStudents.Columns[4].Header = "Дата рождения";
+            dgvHistoryStudents.Columns[6].Header = "Дата поступления";
+            dgvHistoryStudents.Columns[7].Visibility = Visibility.Hidden;
+
 
 
         }
@@ -99,7 +124,28 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                     }
                     return false;
                 };
+            } else if (searchText != "поиск..." && dgvHistoryStudents.ItemsSource != null)
+            {
+                _history_collectionView.Filter = item =>
+                {
+                    if (string.IsNullOrWhiteSpace(searchText)) return true;
+
+                    var type = item.GetType();
+                    var properties = type.GetProperties();
+
+                    foreach (var prop in properties)
+                    {
+                        var value = prop.GetValue(item)?.ToString();
+                        if (value?.ToLower().Contains(searchText) == true)
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                };
             }
+
+
 
         }
 
@@ -225,11 +271,40 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             updateWindow.NoteStudTextBox.IsEnabled = false;
             updateWindow.NumberStudBiletTextBox.IsEnabled = false;
             updateWindow.StudNameTextBox.IsEnabled = false;
+            updateWindow.cboxStatus.IsEnabled = false;
+            updateWindow.ChangeStLabel.Content = "Просмотр";
             updateWindow.Closing += ListViewUpdateStudent_Closing;
             if (selectedStudent != null)
             {
                 updateWindow.Show();
                 
+            }
+            else
+            {
+                MsgBox.Show("Выберите студента!.");
+            }
+        }
+
+        private void dgvHistoryStudents_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            selectedStudentHistory = dgvHistoryStudents.SelectedItem as StudentHistory;
+            updateWindow = new ListViewUpdateStudent(selectedStudentHistory);
+            updateWindow.SaveNewStudentBtn.Visibility = Visibility.Hidden;
+            updateWindow.SaveNewStudentBtn.IsEnabled = false;
+            updateWindow.BackBtn.HorizontalAlignment = HorizontalAlignment.Center;
+            updateWindow.BackBtn.VerticalAlignment = VerticalAlignment.Center;
+            updateWindow.BackBtn.Margin = new Thickness(0);
+            updateWindow.GroupComboBox.IsEnabled = false;
+            updateWindow.NoteStudTextBox.IsEnabled = false;
+            updateWindow.NumberStudBiletTextBox.IsEnabled = false;
+            updateWindow.StudNameTextBox.IsEnabled = false;
+            updateWindow.cboxStatus.IsEnabled = false;
+            updateWindow.ChangeStLabel.Content = "Просмотр";
+            updateWindow.Closing += ListViewUpdateStudent_Closing;
+            if (selectedStudentHistory != null)
+            {
+                updateWindow.Show();
+
             }
             else
             {
@@ -249,28 +324,69 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             {
                 dgvStudents.Visibility = Visibility.Hidden;
                 dgvHistoryStudents.Visibility = Visibility.Visible;
-                LoadStudentsHistory();
+                //LoadStudentsHistory();
+
             }
         }
 
-        private void LoadStudentsHistory()
+        private void dgvHistoryStudents_Loaded(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                using (var sqlConn = new NpgsqlConnection(conn))
-                {
-                    sqlConn.Open();
-                    var cmd = new NpgsqlCommand($"select * from student_history_view where status = 'active'", sqlConn);
-                    var dt = new DataTable();
-                    dt.Load(cmd.ExecuteReader());
-                    dgvHistoryStudents.ItemsSource = dt.DefaultView;
-                }
-               
-            }
-            catch (Exception ex)
-            {
-                MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", type: MessageBoxType.Error);
-            }
+            LoadHistoryTable();
         }
+
+
+        //private void LoadStudentsHistory()
+        //{
+        //    try
+        //    {
+        //        using (var sqlConn = new NpgsqlConnection(conn))
+        //        {
+        //            Stopwatch.StartNew();
+        //            sqlConn.Open();
+        //            var cmd = new NpgsqlCommand($"select * from students_display where status != 'active'", sqlConn);
+        //            var dt = new DataTable();
+        //            using (NpgsqlDataReader reader = cmd.ExecuteReader())
+        //            {
+        //                if (reader.HasRows)
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        int id = reader.GetInt16(0);
+        //                        string name = reader.GetValue(1).ToString();
+        //                        string group = reader.GetValue(3).ToString();
+        //                        string card = reader.GetValue(2).ToString();
+        //                        string dateBirth = reader.GetValue(4).ToString();
+        //                        string[] date = dateBirth.Split(" ");
+        //                        dateBirth = date[0];
+        //                        string description = reader.GetValue(5).ToString();
+        //                        string enrollmentdate = reader.GetValue(6).ToString();
+        //                        string[] enroll = enrollmentdate.Split(" ");
+        //                        enrollmentdate = enroll[0];
+        //                        string status = reader.GetValue(7).ToString();
+
+        //                        Students.Add(new Student
+        //                        {
+        //                            Id = id,
+        //                            Name = name,
+        //                            Card = card,
+        //                            Group = group,
+        //                            DateBirth = dateBirth,
+        //                            Description = description,
+        //                            EnrollmentDate = enrollmentdate,
+        //                            Status = status
+        //                        });
+        //                    }
+        //                }
+        //            }
+        //            dt.Load(cmd.ExecuteReader());
+        //            dgvHistoryStudents.ItemsSource = dt.DefaultView;
+        //        }
+        //        LoadHistoryTable();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MsgBox.Show($"Ошибка доступа. Ошибка: {ex.Message}", type: MessageBoxType.Error);
+        //    }
+        //}
     }
 }

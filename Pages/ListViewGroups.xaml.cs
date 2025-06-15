@@ -137,6 +137,8 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             updateWindow.SpecComboBox.IsEnabled = false;
             updateWindow.NumGroupTextBox.IsEnabled = false;
             updateWindow.dateTextBox.IsEnabled = false;
+            updateWindow.currentYearTextBox.IsEnabled = false;
+            updateWindow.ChangeGroupLabel.Content = "Просмотр";
             updateWindow.Closing += ListViewUpdateGroup_Closing;
             if (selectedGroup != null)
             {

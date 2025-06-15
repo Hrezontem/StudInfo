@@ -18,6 +18,7 @@
     <None Remove="Resources\Images\NewGroup.png" />
     <None Remove="Resources\Images\NewSpec.png" />
     <None Remove="Resources\Images\NewST.png" />
+    <None Remove="Resources\Images\next_year.png" />
     <None Remove="Resources\Images\PostgreSQLlogo.svg" />
     <None Remove="Resources\Images\Xlsx.png" />
     <None Remove="Resources\Images\_UploadIcon_.png" />
@@ -43,6 +44,7 @@
     <Resource Include="Resources\Images\NewGroup.png" />
     <Resource Include="Resources\Images\NewSpec.png" />
     <Resource Include="Resources\Images\NewST.png" />
+    <Resource Include="Resources\Images\next_year.png" />
     <Resource Include="Resources\Images\PostgreSQLlogo.svg">
       <Generator>MSBuild:Compile</Generator>
     </Resource>

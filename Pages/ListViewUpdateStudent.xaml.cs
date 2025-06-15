@@ -63,6 +63,32 @@ namespace StudInfo.Pages
 
         }
 
+        public ListViewUpdateStudent(StudentHistory studentHistory)
+        {
+            /*
+                                         <ComboBoxItem Content="Учится" Name="Учится"/>
+                            <ComboBoxItem Content="Отчислен"/>
+                            <ComboBoxItem Content="Выпущен" Name="Выпущен"/>
+             */
+            InitializeComponent();
+            using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
+            {
+                sqlConn.Open();
+                NpgsqlCommand sqlCmd = new NpgsqlCommand("select * from status", sqlConn);
+                NpgsqlDataAdapter da = new NpgsqlDataAdapter(sqlCmd);
+                dt = new DataTable();
+                da.Fill(dt);
+                cboxStatus.ItemsSource = dt.DefaultView;
+                cboxStatus.DisplayMemberPath = "status_name";
+                cboxStatus.SelectedValuePath = "status_title";
+            }
+            _selectedStudentHistory = studentHistory; // Сохраняем выбранного студента
+            DataContext = new NewStudentViewModel();
+            fill_combo();
+            LoadStudentData(); // Загружаем данные в форму
+
+        }
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -85,6 +111,7 @@ namespace StudInfo.Pages
 
         }
 
+        private StudentHistory _selectedStudentHistory;
         private Student _selectedStudent;
         private string _updateSql = @"call update_student(cast(@id as int),  cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar), cast(@students_dateborn as date),cast(@status as varchar) ,cast(@students_desc as varchar))";
         /*

@@ -91,7 +91,7 @@ namespace StudInfo.Pages
                         {
                             statistics.Add(new YearlyStatistics
                             {
-                                Year = int.Parse(reader.GetString(0)),
+                                Year = reader.GetInt32(0),
                                 Expelled = reader.GetInt32(1),
                                 Graduated = reader.GetInt32(2),
                                 AllStudents = reader.GetInt32(3)

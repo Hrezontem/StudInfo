@@ -16,7 +16,7 @@
         <Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Label Content="Изменение специальности" FontFamily="SF Pro Display" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 10" Foreground="#44546F"/>
+                    <Label Content="Изменение специальности" x:Name="ChangeSpecLabel" FontFamily="SF Pro Display" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 10" Foreground="#44546F"/>
                     <StackPanel Orientation="Vertical">
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Полное наименование специальности" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>

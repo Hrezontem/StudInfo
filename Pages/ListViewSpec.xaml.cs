@@ -116,6 +116,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             updateWindow.SpecTitleTextBox.IsEnabled = false;
             updateWindow.SpecFullTitleTextBox.IsEnabled = false;
             updateWindow.SpecCodeTextBox.IsEnabled = false;
+            updateWindow.ChangeSpecLabel.Content = "Просмотр";
             updateWindow.Closing += ListViewUpdateGroup_Closing;
             if (selectedSpec != null)
             {
