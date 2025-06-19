@@ -1,4 +1,5 @@
 ﻿
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using Microsoft.VisualBasic;
 using Npgsql;
 using StudInfo;
@@ -9,7 +10,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -61,6 +61,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             _collectionView = CollectionViewSource.GetDefaultView(_students);
             dgvStudents.ItemsSource = _collectionView;
             dgvHistoryStudents.ItemsSource = _history_collectionView;
+
         }
         public void LoadTable()
         {
@@ -173,19 +174,19 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             updateWindow.NoteStudTextBox.IsEnabled = false;
             updateWindow.NumberStudBiletTextBox.IsEnabled = false;
             updateWindow.StudNameTextBox.IsEnabled = false;
+            updateWindow.cboxStatus.IsEnabled = false;
+            updateWindow.ChangeStLabel.Content = "Просмотр";
             updateWindow.Closing += ListViewUpdateStudent_Closing;
             if (selectedStudent != null)
             {
-                
-                updateWindow.NS = this;
                 updateWindow.Show();
-                
+
             }
             else
             {
                 MsgBox.Show("Выберите студента!.");
             }
-            
+
         }
 
         public void ListViewUpdateStudent_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -210,11 +211,6 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             {
                 MessageBox.Show("Выберите студента для редактирования.");
             }
-        }
-
-        private void DismissStudentLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-
         }
 
         private void DeleteStudentLabel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

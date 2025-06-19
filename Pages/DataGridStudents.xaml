@@ -37,14 +37,13 @@
                   FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
                   SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1"
                   DataGridCell.Selected="dgvStudents_Selected" MouseDoubleClick="dgvStudents_MouseDoubleClick"
-                  Margin="0 7 0 13">
+                  Margin="0 7 0 13"  ColumnWidth="*">
             <DataGrid.Columns>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu Background="White" BorderThickness="2" BorderBrush="LightGray" >
                     <Label Content="Просмотр" x:Name="InformationLabel" MouseDown="InformationLabel_MouseDown"/>
                     <Label Content="Изменить" x:Name="UpdateLabel" MouseDown="UpdateLabel_MouseDown"/>
-                    <Label Content="Отчислить" x:Name="DismissStudentLabel" MouseDown="DismissStudentLabel_MouseDown"/>
                     <Label Content="Удалить" x:Name="DeleteStudentLabel" MouseDown="DeleteStudentLabel_MouseDown"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
@@ -64,7 +63,7 @@
           FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
           SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1" Visibility="Hidden" 
           MouseDoubleClick="dgvHistoryStudents_MouseDoubleClick" Loaded="dgvHistoryStudents_Loaded"
-          AutoGenerateColumns="True"
+          AutoGenerateColumns="True" ColumnWidth="*"
           Margin="0 7 0 13">
             <DataGrid.Columns>
             </DataGrid.Columns>

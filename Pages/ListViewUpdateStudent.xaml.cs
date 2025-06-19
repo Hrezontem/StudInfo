@@ -85,7 +85,7 @@ namespace StudInfo.Pages
             _selectedStudentHistory = studentHistory; // Сохраняем выбранного студента
             DataContext = new NewStudentViewModel();
             fill_combo();
-            LoadStudentData(); // Загружаем данные в форму
+            LoadHistoryStudentData(); // Загружаем данные в форму
 
         }
 
@@ -181,6 +181,42 @@ namespace StudInfo.Pages
            
         }
 
+        private void LoadHistoryStudentData()
+        {
+            if (_selectedStudentHistory != null)
+            {
+                StudNameTextBox.Text = _selectedStudentHistory.Name;
+                DateOfBirthStud.Text = _selectedStudentHistory.DateBirth.ToString(); // Прямое присвоение
+                GroupComboBox.Text = _selectedStudentHistory.Group;
+                NumberStudBiletTextBox.Text = _selectedStudentHistory.Card;
+                NoteStudTextBox.Text = _selectedStudentHistory.Description;
+                cboxStatus.Text = _selectedStudentHistory.Status;
+
+                // Установка выбранной группы в ComboBox
+                foreach (DataRowView item in GroupComboBox.Items)
+                {
+                    if (item["group_id"].ToString() == _selectedStudentHistory.Id.ToString())
+                    {
+                        GroupComboBox.SelectedItem = item;
+                        break;
+                    }
+                }
+
+                foreach (DataRowView item in cboxStatus.Items)
+                {
+                    if (item["status_title"].ToString() == _selectedStudentHistory.Status.ToString())
+                    {
+                        cboxStatus.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+
+            }
+
+        }
         private void SaveNewStudentBtn_Click(object sender, RoutedEventArgs e)
         {
             using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
