@@ -118,7 +118,7 @@ namespace StudInfo.Pages
                 {
                     conn.Open();
                     using (var cmd = new NpgsqlCommand(
-                        "select count(group_id) from groups where start_year = cast(extract(year from CURRENT_DATE::date) as varchar) GROUP BY start_year ORDER BY start_year;",
+                        "select count(group_id) from groups where start_year = cast(extract(year from CURRENT_DATE::date) as int) GROUP BY start_year ORDER BY start_year;",
                         conn))
                     using (var reader = cmd.ExecuteReader())
                     {

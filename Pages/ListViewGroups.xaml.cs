@@ -28,13 +28,15 @@ namespace StudentSystem.Pages
 $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
 $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
         private ICollectionView _collectionView;
-        private ObservableCollection<Groups> Groups;
+
         private Groups selectedGroup;
         ListViewUpdateGroup updateWindow;
+        public ObservableCollection<Groups> Groups { get; set; }
         public ListViewGroup()
         {
             InitializeComponent();
-            Groups = new GroupsViewModel().Groups;
+            Groups = new ObservableCollection<Groups>();
+            LoadTable();
             InitializeCollectionView();
         }
 
@@ -42,11 +44,13 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         {
             _collectionView = CollectionViewSource.GetDefaultView(Groups);
             ListBoxGroup.ItemsSource = _collectionView;
+            TableComboBox.Visibility = Visibility.Hidden;
         }
         public void LoadTable()
         {
             Groups = new GroupsViewModel().Groups;
             ListBoxGroup.ItemsSource = Groups;
+            InitializeCollectionView();
         }
 
 

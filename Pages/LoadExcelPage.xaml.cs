@@ -66,8 +66,8 @@ namespace StudInfo.Pages
 
                 try
                 {
-                    DataTable dataTable = LoadExcelToDataTable(OPF.FileName);
-                    dgvLoad.ItemsSource = dataTable.DefaultView;
+                    dt = LoadExcelToDataTable(OPF.FileName);
+                    dgvLoad.ItemsSource = dt.DefaultView;
                     foreach (DataGridColumn col in dgvLoad.Columns)
                     {
                        if(col.Header.ToString().Contains("Column"))
@@ -113,9 +113,13 @@ namespace StudInfo.Pages
 
                     foreach (Cell cell in row.Elements<Cell>())
                     {
-                        string cellValue = GetCellValue(cell, stringTable);
-                        dataRow[columnIndex] = cellValue;
-                        columnIndex++;
+                        if (cell.CellValue != null)
+                        {
+                            string cellValue = GetCellValue(cell, stringTable);
+                            dataRow[columnIndex] = cellValue;
+                            columnIndex++;
+                        }
+
                     }
                     dataTable.Rows.Add(dataRow);
                 }
@@ -168,13 +172,13 @@ namespace StudInfo.Pages
                                 switch (comboboxGroups.SelectedValue) 
                                 {
                                     case "students":
-                                        cmd.CommandText = @"call add_student(@s_name, @group_id, @s_card, @isStudies, cast(@dateborn as date), @s_desc)";
+                                        cmd.CommandText = @"call add_student(cast(@s_name as varchar), @group_id, cast(@s_card as varchar), cast(@dateborn as date), @s_desc, cast(@p_enrollment_date as date))";
                                         cmd.Parameters.AddWithValue("@s_name", row["students_name"].ToString());
                                         cmd.Parameters.AddWithValue("@group_id", int.Parse(row["group_id"].ToString()));
                                         cmd.Parameters.AddWithValue("@s_card", row["students_card"].ToString());
-                                        cmd.Parameters.AddWithValue("@isStudies", Boolean.Parse(row["students_isStudies"].ToString()));
                                         cmd.Parameters.AddWithValue("@dateborn", row["students_dateborn"].ToString());
                                         cmd.Parameters.AddWithValue("@s_desc", row["students_desc"].ToString());
+                                        cmd.Parameters.AddWithValue("@p_enrollment_date", row["enrollment_date"].ToString());
                                         break;
                                     case "groups":
                                         //g_spec_id, g_num, g_years

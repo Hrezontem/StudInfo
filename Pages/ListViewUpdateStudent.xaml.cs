@@ -113,7 +113,7 @@ namespace StudInfo.Pages
 
         private StudentHistory _selectedStudentHistory;
         private Student _selectedStudent;
-        private string _updateSql = @"call update_student(cast(@id as int),  cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar), cast(@students_dateborn as date),cast(@status as varchar) ,cast(@students_desc as varchar))";
+        private string _updateSql = @"call update_student(cast(@id as int),  cast(@students_name as varchar), cast(@group_id as int), cast(@students_card as varchar), cast(@students_dateborn as date) ,cast(@students_desc as text), cast(@status as varchar), cast(@p_enrollment_date as date) )";
         /*
                                                                                  IN p_student_id integer, 
                                                                         IN p_name character varying, 
@@ -255,6 +255,7 @@ namespace StudInfo.Pages
                             cmd.Parameters.AddWithValue("@students_dateborn", NpgsqlDbType.Date, DateOfBirthStud.SelectedDate);
                             cmd.Parameters.AddWithValue("@status", NpgsqlDbType.Varchar, cboxStatus.SelectedValue);
                             cmd.Parameters.AddWithValue("@students_desc", NoteStudTextBox.Text);
+                            cmd.Parameters.AddWithValue("@p_enrollment_date", "12.12.2000");
 
                             cmd.ExecuteNonQuery();
                             MsgBox.Show("Данные обновлены!", type: MessageBoxType.Success);

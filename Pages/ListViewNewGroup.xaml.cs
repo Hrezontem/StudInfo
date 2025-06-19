@@ -138,7 +138,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                             var specId = dataRow.DataView[0]["specializations_id"].ToString();
 
                             // Используем параметризованный запрос для безопасности
-                            var sql = "call add_group(cast(@p_buildings_id as int), cast(@specializations_id as int), cast(@group_num as int), cast(@start_year as varchar), cast(@end_year as varchar), cast(@current_year as varchar))";
+                            var sql = "call add_group(cast(@p_buildings_id as int), cast(@specializations_id as int), cast(@group_num as int), cast(@start_year as int), cast(@end_year as int), cast(@current_year as int))";
 
                             using (var npgsqlConnection = new NpgsqlConnection(conn))
                             using (var cmd = new NpgsqlCommand(sql, sqlConn))
@@ -157,6 +157,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
 
                             MsgBox.Show("Добавлено", "Успешно", type: MessageBoxType.Success);
                             this.Close();
+
                         }
                         catch (Exception ex)
                         {

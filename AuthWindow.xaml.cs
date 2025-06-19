@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 using System.Configuration;
 using StudInfo.Properties;
 using System.ComponentModel;
+using Npgsql;
+using StudInfo;
+using static StudInfo.MsgBox;
 
 namespace StudentSystem
 {
@@ -33,11 +36,13 @@ namespace StudentSystem
             var BasePort = StudInfo.Properties.Settings.Default["BasePort"].ToString();
             var BaseLogIn = StudInfo.Properties.Settings.Default["BaseLogIn"].ToString();
             var BasePassword = StudInfo.Properties.Settings.Default["BasePassword"].ToString();
+            var UserLogIn = StudInfo.Properties.Settings.Default["UserLogIn"].ToString();
+            var UserPassword = StudInfo.Properties.Settings.Default["UserPassword"].ToString();
+            var UserStatus = StudInfo.Properties.Settings.Default["UserStatus"].ToString();
             BaseNameTB.Text = BaseName;
             IPTB.Text = BaseIP;
             PortTB.Text = BasePort;
-            LoginTB.Text = BaseLogIn;
-            PasswordTB.Password = BasePassword;
+            LoginTB.Text = UserLogIn;
         }
 
         
@@ -84,15 +89,62 @@ namespace StudentSystem
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
+            
             StudInfo.Properties.Settings.Default["BaseName"] = BaseNameTB.Text;
             StudInfo.Properties.Settings.Default["BaseIP"] = IPTB.Text;
             StudInfo.Properties.Settings.Default["BasePort"] = PortTB.Text;
-            StudInfo.Properties.Settings.Default["BaseLogIn"] = LoginTB.Text;
-            StudInfo.Properties.Settings.Default["BasePassword"] = PasswordTB.Password;
+            StudInfo.Properties.Settings.Default["BaseLogIn"] = "postgres";
+            StudInfo.Properties.Settings.Default["BasePassword"] = "123";
+            StudInfo.Properties.Settings.Default["UserLogIn"] = LoginTB.Text;
             StudInfo.Properties.Settings.Default.Save();
-            SystemWindow systemWindow = new SystemWindow();
-            this.Hide();
-            systemWindow.Show();
+            string conn = String.Format("Server={0};Port={1};" +
+"User Id={2};Password={3};Database={4}",
+$"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+$"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
+
+            string username = "";
+            string pass = "";
+
+
+
+            using (NpgsqlConnection sqlConn = new NpgsqlConnection(conn))
+            {
+                sqlConn.Open();
+                NpgsqlCommand sqlCmd = new NpgsqlCommand($"select * from users where users_name = '{LoginTB.Text}' and user_password = '{PasswordTB.Password}'", sqlConn);
+                try
+                {
+                    using (NpgsqlDataReader reader = sqlCmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                var user_role = reader.GetString(2);
+                                StudInfo.Properties.Settings.Default["UserStatus"] = user_role;
+                                StudInfo.Properties.Settings.Default.Save();
+                                username = reader.GetString(1);
+                                pass = reader.GetString(3);
+                            }
+                        }
+                    }
+                    
+                } catch (Exception ex)  
+                {
+                    MsgBox.Show($"ОШИБКА: {ex.Message}", "Ошибка", type: MessageBoxType.Error);
+                    sqlConn.Close();
+                }
+                
+                }
+            if (pass == PasswordTB.Password && username == LoginTB.Text)
+            {
+                SystemWindow systemWindow = new SystemWindow();
+                this.Hide();
+                systemWindow.Show();
+            } else 
+            {
+                MsgBox.Show("Не правильно введены данные", "Ошибка", type: MessageBoxType.Error);
+            }
+            
         }
     }
 

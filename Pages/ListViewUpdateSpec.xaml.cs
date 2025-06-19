@@ -34,7 +34,7 @@ namespace StudInfo.Pages
         private DataTable dt;
         public DataGridStudents NS;
         private Spec _selectedSpec;
-        private string _updateSql = @"call update_spec( cast(@specializations_id as int), cast(@specializations_title as varchar), cast(@specializations_fulltitle as varchar), cast(@specializations_code as varchar))";
+        private string _updateSql = @"call update_specialization( cast(@specializations_id as int), cast(@specializations_title as varchar), cast(@specializations_fulltitle as varchar), cast(@specializations_code as varchar))";
 
         public ListViewUpdateSpec(Spec spec)
         {

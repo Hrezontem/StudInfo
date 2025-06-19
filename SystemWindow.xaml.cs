@@ -193,36 +193,72 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(SpecsPage);
-            CreateNewStudentBtn.Visibility = Visibility.Visible;
-            NewGroupBtn.Visibility = Visibility.Visible;
-            NewSpecBtn.Visibility = Visibility.Visible;
-            SettingsLabel.Visibility = Visibility.Hidden;
-            Next_year.Visibility = Visibility.Visible;
-            LoadXlsxBtn.Visibility = Visibility.Visible;
+            if (StudInfo.Properties.Settings.Default.UserLogIn == "admin")
+            {
+                CreateNewStudentBtn.Visibility = Visibility.Visible;
+                NewGroupBtn.Visibility = Visibility.Visible;
+                NewSpecBtn.Visibility = Visibility.Visible;
+                SettingsLabel.Visibility = Visibility.Hidden;
+                Next_year.Visibility = Visibility.Visible;
+                LoadXlsxBtn.Visibility = Visibility.Visible;
+            }
+            else 
+            {
+                CreateNewStudentBtn.Visibility = Visibility.Hidden;
+                NewGroupBtn.Visibility = Visibility.Hidden;
+                NewSpecBtn.Visibility = Visibility.Hidden;
+                SettingsLabel.Visibility = Visibility.Hidden;
+                Next_year.Visibility = Visibility.Hidden;
+                LoadXlsxBtn.Visibility = Visibility.Visible;
+            }
         }
 
         private void GroupMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(GroupsPage);
-            CreateNewStudentBtn.Visibility = Visibility.Visible;
-            NewGroupBtn.Visibility = Visibility.Visible;
-            NewSpecBtn.Visibility = Visibility.Visible;
-            SettingsLabel.Visibility = Visibility.Hidden;
-            Next_year.Visibility = Visibility.Visible;
-            LoadXlsxBtn.Visibility = Visibility.Visible;
+            if (StudInfo.Properties.Settings.Default.UserLogIn == "admin")
+            {
+                CreateNewStudentBtn.Visibility = Visibility.Visible;
+                NewGroupBtn.Visibility = Visibility.Visible;
+                NewSpecBtn.Visibility = Visibility.Visible;
+                SettingsLabel.Visibility = Visibility.Hidden;
+                Next_year.Visibility = Visibility.Visible;
+                LoadXlsxBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CreateNewStudentBtn.Visibility = Visibility.Hidden;
+                NewGroupBtn.Visibility = Visibility.Hidden;
+                NewSpecBtn.Visibility = Visibility.Hidden;
+                SettingsLabel.Visibility = Visibility.Hidden;
+                Next_year.Visibility = Visibility.Hidden;
+                LoadXlsxBtn.Visibility = Visibility.Visible;
+            }
         }
 
         private void StudentsMenuBtn_Click(object sender, RoutedEventArgs e)
         {
             btnMenuAnimation(sender as RadioButton);
             fContainer.Navigate(StudentsPage, this);
-            CreateNewStudentBtn.Visibility = Visibility.Visible;
-            NewGroupBtn.Visibility = Visibility.Visible;
-            NewSpecBtn.Visibility = Visibility.Visible;
-            SettingsLabel.Visibility = Visibility.Hidden;
-            Next_year.Visibility = Visibility.Visible;
-            LoadXlsxBtn.Visibility = Visibility.Visible;
+            if (StudInfo.Properties.Settings.Default.UserLogIn == "admin")
+            {
+                CreateNewStudentBtn.Visibility = Visibility.Visible;
+                NewGroupBtn.Visibility = Visibility.Visible;
+                NewSpecBtn.Visibility = Visibility.Visible;
+                SettingsLabel.Visibility = Visibility.Hidden;
+                Next_year.Visibility = Visibility.Visible;
+                LoadXlsxBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                CreateNewStudentBtn.Visibility = Visibility.Hidden;
+                NewGroupBtn.Visibility = Visibility.Hidden;
+                NewSpecBtn.Visibility = Visibility.Hidden;
+                SettingsLabel.Visibility = Visibility.Hidden;
+                Next_year.Visibility = Visibility.Hidden;
+                LoadXlsxBtn.Visibility = Visibility.Visible;
+            }
         }
 
         private void fContainer_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)

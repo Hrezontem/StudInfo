@@ -71,8 +71,8 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             dgvStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvStudents.Columns[5].Visibility = Visibility.Hidden;
             dgvStudents.Columns[1].Header = "ФИО";
-            dgvStudents.Columns[2].Header = "Группа";
-            dgvStudents.Columns[3].Header = "Номер билета";
+            dgvStudents.Columns[2].Header = "Номер билета";
+            dgvStudents.Columns[3].Header = "Группа";
             dgvStudents.Columns[4].Header = "Дата рождения";
             dgvStudents.Columns[6].Header = "Дата поступления";
             dgvStudents.Columns[7].Visibility = Visibility.Hidden;
@@ -86,8 +86,8 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
             dgvHistoryStudents.Columns[0].Visibility = Visibility.Hidden;
             dgvHistoryStudents.Columns[5].Visibility = Visibility.Hidden;
             dgvHistoryStudents.Columns[1].Header = "ФИО";
-            dgvHistoryStudents.Columns[2].Header = "Группа";
-            dgvHistoryStudents.Columns[3].Header = "Номер билета";
+            dgvHistoryStudents.Columns[2].Header = "Номер билета";
+            dgvHistoryStudents.Columns[3].Header = "Группа";
             dgvHistoryStudents.Columns[4].Header = "Дата рождения";
             dgvHistoryStudents.Columns[6].Header = "Дата поступления";
             dgvHistoryStudents.Columns[7].Visibility = Visibility.Hidden;
@@ -106,7 +106,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
 
             var searchText = searchTextBox.Text.ToLower();
 
-            if (searchText != "поиск..." && dgvStudents.ItemsSource != null) 
+            if (searchText != "поиск..." && dgvStudents.ItemsSource != null && dgvStudents.Visibility != Visibility.Hidden) 
             {
                 _collectionView.Filter = item =>
                 {
@@ -125,7 +125,7 @@ $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.S
                     }
                     return false;
                 };
-            } else if (searchText != "поиск..." && dgvHistoryStudents.ItemsSource != null)
+            } else if (searchText != "поиск..." && dgvHistoryStudents.ItemsSource != null && dgvHistoryStudents.Visibility != Visibility.Hidden)
             {
                 _history_collectionView.Filter = item =>
                 {

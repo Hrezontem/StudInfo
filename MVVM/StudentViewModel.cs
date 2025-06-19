@@ -44,8 +44,8 @@ namespace StudentSystem
                         {
                             int id = reader.GetInt16(0);
                             string name = reader.GetValue(1).ToString();
-                            string group = reader.GetValue(3).ToString();
-                            string card = reader.GetValue(2).ToString();
+                            string group = reader.GetValue(2).ToString();
+                            string card = reader.GetValue(3).ToString();
                             string dateBirth = reader.GetValue(4).ToString();
                             string[] date = dateBirth.Split(" ");
                             dateBirth = date[0];

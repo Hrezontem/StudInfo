@@ -133,7 +133,7 @@ namespace StudInfo.Pages
                         sqlConn.Open();
                         DataRowView selectedSpec = (DataRowView)SpecComboBox.SelectedItem;
 
-                        using (NpgsqlCommand cmd = new NpgsqlCommand("call update_group(cast(@group_id as int), cast(@buildings_id as int), cast(@specializations_id as int), cast(@group_num as int), cast(@start_year as varchar) , cast(@end_year as varchar), cast(@current_year as varchar))", sqlConn))
+                        using (NpgsqlCommand cmd = new NpgsqlCommand("call update_group(cast(@group_id as int), cast(@buildings_id as int), cast(@specializations_id as int), cast(@group_num as int), cast(@start_year as int) , cast(@end_year as int), cast(@current_year as int))", sqlConn))
                         {
                             var years = dateTextBox.Text.Split("-");
                             cmd.Parameters.AddWithValue("@group_id", _selectedGroup.Id);
