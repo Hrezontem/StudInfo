@@ -1,0 +1,47 @@
+﻿<Window x:Class="StudInfo.Pages.ListViewUpdateSpec"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentSystem"
+        mc:Ignorable="d"
+        Height="400" Width="400"
+        Title="ListViewNewStudent" Background="Transparent" 
+        WindowStyle="None" MouseDown="Window_MouseDown" ResizeMode="NoResize"  AllowsTransparency="True" 
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" WindowStartupLocation="CenterScreen">
+    <Border Background="White"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="310" Height="300" CornerRadius="10" >
+        <Border.Effect>
+            <DropShadowEffect Color="Gray" RenderingBias="Performance" BlurRadius="10" Direction="267"/>
+        </Border.Effect>
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="Изменение специальности" x:Name="ChangeSpecLabel" FontFamily="SF Pro Display" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 10 0 10" Foreground="#44546F"/>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Полное наименование специальности" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <TextBox Style="{DynamicResource CostomTextBox}" x:Name="SpecFullTitleTextBox"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Наименование группы" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <TextBox Style="{DynamicResource CostomTextBox}" x:Name="SpecTitleTextBox"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Код специальности" FontFamily="SF Pro Display" FontSize="11" Padding="4 5 0 2" FontWeight="Bold" Foreground="#44546F"/>
+                            <Label Content="*" Foreground="Red" FontFamily="SF Pro Display" FontSize="11" Padding="0 4 0 0"/>
+                        </StackPanel>
+                        <TextBox Style="{DynamicResource CostomTextBox}" x:Name="SpecCodeTextBox"/>
+                    </StackPanel>
+                    <Grid>
+                        <Button Style="{DynamicResource GrayCostomBtn}" Margin="10 30 0 15" HorizontalAlignment="Left"  Name="BackBtn"  VerticalAlignment="Bottom" Content="Отмена" Width="75" Height="26" Background="#0F091E42" Click="BackBtn_Click"/>
+                        <Button Style="{DynamicResource CostomBtn}" Margin="105 30 10 15" Name="SaveNewSpecBtn" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Сохранить" Width="75" Height="26" Click="SaveNewSpecBtn_Click"/>
+                    </Grid>
+
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

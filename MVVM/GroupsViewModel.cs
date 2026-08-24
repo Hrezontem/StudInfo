@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Npgsql;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Npgsql;
 
 namespace StudentSystem
 {
     internal class GroupsViewModel : INotifyPropertyChanged
     {
-        private string conn = "Server=localhost;Port=5432;User Id=postgres;Password=123; Database=postgres";
-        private string sql = @"select * from groups";
+        private string conn = String.Format("Server={0};Port={1};" +
+            "User Id={2};Password={3};Database={4}",
+            $"{StudInfo.Properties.Settings.Default.BaseIP}", $"{StudInfo.Properties.Settings.Default.BasePort}", $"{StudInfo.Properties.Settings.Default.BaseLogIn}",
+            $"{StudInfo.Properties.Settings.Default.BasePassword}", $"{StudInfo.Properties.Settings.Default.BaseName}");
+        private string sql = @"select * from group_display";
         public ObservableCollection<Groups> Groups { get; set; }
 
         public GroupsViewModel()
@@ -33,11 +29,18 @@ namespace StudentSystem
                     {
                         while (reader.Read())
                         {
-                            string title = reader.GetValue(1).ToString();
-                            string specTitle = reader.GetValue(2).ToString();
-                            string code = reader.GetValue(3).ToString();
+                            Groups.Add(new Groups
+                            {
+                                Id = reader.GetInt16(0),
+                                Title = reader.GetValue(1).ToString(),
+                                GroupNum = reader.GetValue(2).ToString(),
+                                FullTitle = reader.GetValue(3).ToString(),
+                                BuildingId = reader.GetInt16(4),
+                                CurrentYear = reader.GetValue(5).ToString(),
+                                StartYear = reader.GetValue(6).ToString(),
+                                EndYear = reader.GetValue(7).ToString()
+                            });
 
-                            Groups.Add(new Groups { Title = title, SpecTitle = specTitle, Code = code }); 
                         }
                     }
                 }

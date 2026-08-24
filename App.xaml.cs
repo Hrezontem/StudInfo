@@ -9,6 +9,15 @@ namespace StudInfo
     /// </summary>
     public partial class App : Application
     {
+        private void DeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
 }

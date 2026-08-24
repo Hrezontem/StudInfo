@@ -11,17 +11,31 @@ namespace StudentSystem
 {
     public class Student : INotifyPropertyChanged
     {
+        private int id;
         private string name;
         private string card;
         private string group;
+        private string dateBirth;
+        private string description;
+        private string enrollment_date;
+        private string status;
 
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("id");
+            }
+        }
         public string Name
         {
             get { return name; }
             set
             {
                 name = value;
-                OnPropertyChanged("Name");
+                OnPropertyChanged("ФИО");
             }
         }
         public string Card
@@ -30,7 +44,7 @@ namespace StudentSystem
             set
             {
                 card = value;
-                OnPropertyChanged("Card");
+                OnPropertyChanged("Студенческий билет");
             }
         }
         public string Group
@@ -39,7 +53,46 @@ namespace StudentSystem
             set
             {
                 group = value;
-                OnPropertyChanged("Group");
+                OnPropertyChanged("Группа");
+            }
+        }
+        public string DateBirth
+        {
+            get { return dateBirth; }
+            set
+            {
+                dateBirth = value;
+                OnPropertyChanged("Дата рождения");
+            }
+        }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnPropertyChanged("Описание");
+            }
+        }
+
+
+        public string EnrollmentDate
+        {
+            get { return enrollment_date; }
+            set
+            {
+                enrollment_date = value;
+                OnPropertyChanged("enrollment_date");
+            }
+        }
+
+        public string Status
+        {
+            get { return status; }
+            set
+            {
+                status = value;
+                OnPropertyChanged("status");
             }
         }
 

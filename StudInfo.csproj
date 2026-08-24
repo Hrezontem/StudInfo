@@ -6,10 +6,77 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Logo_2_.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\CreateGroup.png" />
+    <None Remove="Resources\Images\DateImg.png" />
+    <None Remove="Resources\Images\DelST.png" />
+    <None Remove="Resources\Images\Logo.png" />
+    <None Remove="Resources\Images\LogoMainWindow.png" />
+    <None Remove="Resources\Images\NewGroup.png" />
+    <None Remove="Resources\Images\NewSpec.png" />
+    <None Remove="Resources\Images\NewST.png" />
+    <None Remove="Resources\Images\next_year.png" />
+    <None Remove="Resources\Images\PostgreSQLlogo.svg" />
+    <None Remove="Resources\Images\Xlsx.png" />
+    <None Remove="Resources\Images\_UploadIcon_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Logo_2_.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.3.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="Npgsql" Version="9.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\CreateGroup.png" />
+    <Resource Include="Resources\Images\DateImg.png" />
+    <Resource Include="Resources\Images\DelST.png" />
+    <Resource Include="Resources\Images\Logo.png" />
+    <Resource Include="Resources\Images\LogoMainWindow.png" />
+    <Resource Include="Resources\Images\NewGroup.png" />
+    <Resource Include="Resources\Images\NewSpec.png" />
+    <Resource Include="Resources\Images\NewST.png" />
+    <Resource Include="Resources\Images\next_year.png" />
+    <Resource Include="Resources\Images\PostgreSQLlogo.svg">
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Resource Include="Resources\Images\Xlsx.png" />
+    <Resource Include="Resources\Images\_UploadIcon_.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

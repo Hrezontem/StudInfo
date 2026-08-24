@@ -8,11 +8,47 @@ using System.Threading.Tasks;
 
 namespace StudentSystem
 {
-    internal class Groups : INotifyPropertyChanged
+    public class Groups : INotifyPropertyChanged
     {
+        private int id;
+        private int buildingId;
+        private string groupNum;
         private string title;
-        private string code;
-        private string specTitle;
+        private string fullTitle;
+        private string startYear;
+        private string endYear;
+        private string currentYear;
+
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("id");
+            }
+        }
+
+        public int BuildingId
+        {
+            get { return buildingId; }
+            set
+            {
+                buildingId = value;
+                OnPropertyChanged("buildingId");
+            }
+        }
+
+        public string GroupNum
+        {
+            get { return groupNum; }
+            set
+            {
+                groupNum = value;
+                OnPropertyChanged("groupNum");
+            }
+        }
 
         public string Title
         {
@@ -23,25 +59,45 @@ namespace StudentSystem
                 OnPropertyChanged("Title");
             }
         }
-        public string Code
+        public string FullTitle
         {
-            get { return code; }
+            get { return fullTitle; }
             set
             {
-                code = value;
-                OnPropertyChanged("Code");
+                fullTitle = value;
+                OnPropertyChanged("fullTitle");
             }
         }
-        public string SpecTitle
+        public string StartYear
         {
-            get { return specTitle; }
+            get { return startYear; }
             set
             {
-                specTitle = value;
-                OnPropertyChanged("SpecTitle");
+                startYear = value;
+                OnPropertyChanged("startYear");
             }
         }
 
+        public string EndYear
+        {
+            get { return endYear; }
+            set
+            {
+                endYear = value;
+                OnPropertyChanged("endYear");
+            }
+        }
+
+        public string CurrentYear
+        {
+            get { return currentYear; }
+            set
+            {
+                currentYear = value;
+                OnPropertyChanged("currentYear");
+            }
+        }
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

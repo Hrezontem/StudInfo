@@ -8,70 +8,109 @@
         Title="SystemWindow" Height="686" Width="1093" WindowStyle="None" 
         Background="Transparent" 
         MouseDown="Window_MouseDown" ResizeMode="CanResizeWithGrip"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" 
-        >
+        Margin="0 0 0 0" SnapsToDevicePixels="True"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Border  Background="#F7F8F9"  CornerRadius="8 8 8 8">
 
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition  Height="30"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="75"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="187"/>
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image HorizontalAlignment="Center" Width="50" Source="/peeing-man-icon-1615c4.png" Height="50" VerticalAlignment="Center" Grid.Row="1"/>
+            
+            <Grid Grid.Row="1"  Grid.Column="0">
+                <StackPanel Orientation="Vertical"  Margin="50 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label Content="StudInfo" FontFamily="SF Pro Display"
+                        FontSize="14" FontWeight="Bold" Padding="5 0 0 0" Foreground="#44546F"/>
+                    <Label Content="База данных для &#xD;&#xA;отслеживания движения&#xD;&#xA; контингента студентов" FontFamily="SF Pro Display"
+                        FontSize="12" Padding="5 0 0 0" Foreground="#44546F"/>
+                </StackPanel>
+                <Image Source="/Resources/Images/LogoMainWindow.png" 
+                        Margin="0 0 150 0" Panel.ZIndex="100"
+                        Height="30" Width="30"/>
+                <Rectangle HorizontalAlignment="Right" Fill="#28091E42"  Width="2" Grid.Row="1"/>
+            </Grid>
             <StackPanel Grid.Row="2" Orientation="Horizontal">
 
-                <StackPanel x:Name="MenuButton" Margin="20,0,0,10" Width="156" >
+                <StackPanel x:Name="MenuButton" Margin="5,19,7,0" Width="200"  >
                     <RadioButton
                         GroupName="Btn"
                         Content="Главная" 
                         Style="{StaticResource MenuButton}"
                         Height="35"
-                        Click="btnMenu1_Click"
+                        x:Name="MainPage"
+                        Click="MainPage_Click"
                         IsChecked="True" FontFamily="SF Pro Display" 
+                        />
+                    <RadioButton 
+                        GroupName="Btn"
+                        Content="Студенты" 
+                        Style="{StaticResource MenuButton}" 
+                        Height="35"
+                        x:Name="StudentsMenuBtn"
+                        Click="StudentsMenuBtn_Click" FontFamily="SF Pro Display" 
                         />
                     <RadioButton 
                         GroupName="Btn"
                         Content="Группы" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu2_Click" FontFamily="SF Pro Display" 
+                        x:Name="GroupMenuBtn"
+                        Click="GroupMenuBtn_Click" FontFamily="SF Pro Display" 
                         />
                     <RadioButton 
                         GroupName="Btn"
-                        Content="Пользователи" 
+                        Content="Специальности" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu3_Click" FontFamily="SF Pro Display" 
+                        x:Name="SpecMenuBtn"
+                        Click="SpecMenuBtn_Click" FontFamily="SF Pro Display" 
                         />
+
+                    <Rectangle HorizontalAlignment="Center" Margin="0 0 0 0" Fill="#28091E42" Panel.ZIndex="1000" Width="300" Height="2"/>
                     <RadioButton 
                         GroupName="Btn"
-                        Content="Настройки" 
+                        x:Name="ExcelLoadMenuBtn"
+                        Content="Загрузка Excel" 
                         Style="{StaticResource MenuButton}" 
                         Height="35"
-                        Click="btnMenu4_Click" FontFamily="SF Pro Display" 
+                        Click="ExcelLoadMenuBtn_Click" FontFamily="SF Pro Display" 
+                        Margin="0 0 0 0"
                         />
+
+
                 </StackPanel>
-                <Rectangle Margin="46 0 0 0" Fill="#28091E42"  Width="2" Grid.Row="2"/>
+
+                <Rectangle HorizontalAlignment="Right" Margin="0 0 0 0" Fill="#28091E42"  Width="2" Grid.Row="1"/>
+                
             </StackPanel>
-
-            <Grid Grid.Column="1" Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="529*"/>
-                    <ColumnDefinition Width="84*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" VerticalAlignment="Center" >
-
+            
+            <Grid Grid.Column="1" Grid.Row="1" >
+                <Label x:Name="SettingsLabel" FontSize="30" Foreground="#44546F" FontFamily="SF Pro Display" Content="Настройки приложения" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 40" Panel.ZIndex="100">
+                    <Image x:Name="LoadXlsxBtn" MouseDown="LoadXlsxBtn_MouseDown" Source="/Resources/Images/Xlsx.png" Height="22"  Width="22"  Margin="14 0 5 0"/>
+                    <Image x:Name="CreateNewStudentBtn" MouseDown="CreateNewStudentBtn_MouseDown" Source="/Resources/Images/NewST.png" Height="24" Width="24" Margin="0 0 7 0"/>
+                    <Image x:Name="NewGroupBtn" MouseDown="NewGroupBtn_MouseDown" Source="/Resources/Images/NewGroup.png"  Height="19"  Width="19"  Margin="0 0 7 0"/>
+                    <Image x:Name="NewSpecBtn" MouseDown="NewSpecBtn_MouseDown" Source="/Resources/Images/NewSpec.png" Height="22"  Width="22"  Margin="0 0 10 0"/>
+                    <Image x:Name="Next_year" MouseDown="Next_year_MouseDown" Source="/Resources/Images/next_year.png" Height="22"  Width="22"  Margin="0 0 10 0"/>
                 </StackPanel>
             </Grid>
-            <Frame Grid.Column="1" Grid.Row="2"
+            <Grid Grid.Column="1" Grid.Row="1">
+                <!--<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="529*"/>
+                    <ColumnDefinition Width="84*"/>
+                </Grid.ColumnDefinitions>-->           
+            </Grid>
+            <Frame Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
                    Name="fContainer"
                    NavigationUIVisibility="Hidden"
-                   Margin="10,0,20,42"
+                   Margin="10,0,20,42" Navigated="fContainer_Navigated"
             />
             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{DynamicResource SystemButtonMinimize}" x:Name="btnMinimize" Click="btnMinimize_Click" Padding="5"  Margin="0,0,23,0" Width="30" >

@@ -16,17 +16,72 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ListBox x:Name="ListBoxStudent" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="85"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Grid>
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0">
+                    <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
+                    <ComboBox x:Name="TableComboBox" SelectionChanged="ComboBox_SelectionChanged" Margin="13 0 0 0" Style="{StaticResource ComboBoxStyle}" Width="100">
+                        <ComboBoxItem>Актуальные</ComboBoxItem>
+                        <ComboBoxItem>Архив</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+            <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
+        </StackPanel>
+        <ListBox x:Name="ListBoxGroup" Grid.Row="1" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent" Margin="0 5 0 4">
+            <ListBox.ContextMenu>
+                <ContextMenu Background="White" BorderThickness="2" BorderBrush="LightGray">
+                    <MenuItem Header="Просмотр" x:Name="ViewBtn" Click="ViewBtn_Click"/>
+                    <MenuItem Header="Изменить" x:Name="UpdateBtn" Click="UpdateBtn_Click"/>
+                    <MenuItem Header="Удалить" x:Name="DeleteBtn" Click="DeleteBtn_Click"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel   Margin="5">
-                        <TextBlock FontSize="18" Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
-                        <TextBlock Text="{Binding Path=SpecTitle}" FontFamily="SF Pro Display" Foreground="#44546F" />
-                        <TextBlock Text="{Binding Path=Code}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                        <TextBlock FontSize="18" Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F"/>
+                        <TextBlock FontSize="13"  FontFamily="SF Pro Display" Foreground="#44546F">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartYear"/>
+                                    <Binding Path="EndYear"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
                     </StackPanel>
+                    
                 </DataTemplate>
+                
             </ListBox.ItemTemplate>
+
         </ListBox>
+        <ListBox x:Name="ListBoxHistoryGroup" Visibility="Hidden" Grid.Row="1" ItemsSource="{Binding Groups}" BorderBrush="Transparent" Background="Transparent" Margin="0 5 0 4">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel   Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding Path=FullTitle}" FontFamily="SF Pro Display" Foreground="#44546F"/>
+                        <TextBlock FontSize="13"  FontFamily="SF Pro Display" Foreground="#44546F">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0}-{1}">
+                                    <Binding Path="StartYear"/>
+                                    <Binding Path="EndYear"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                        <TextBlock Text="{Binding Path=Title}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                    </StackPanel>
+
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+        <Rectangle HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 1" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
     </Grid>
 
 </Page>

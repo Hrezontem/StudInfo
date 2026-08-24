@@ -23,9 +23,9 @@
                 <DataTemplate>
                     <Border  CornerRadius="8 8 8 8" Padding="2" UseLayoutRounding="True">
                         <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                            <TextBlock  FontSize="18" Text="{Binding Path=Name}" FontFamily="SF Pro Display" Foreground="#44546F" />
-                            <TextBlock  FontSize="16" Text="{Binding Path=Card}" FontFamily="SF Pro Display" Foreground="#44546F" />
-                            <TextBlock  FontSize="16" Text="{Binding Path=Group}" FontFamily="SF Pro Display" Foreground="#44546F" />
+                            <TextBlock  FontSize="18" Text="{Binding Path=Name}" FontFamily="SF Pro Display" Foreground="#44546F" Padding="4 0 0 0" />
+                            <TextBlock  FontSize="16" Text="{Binding Path=Card}" FontFamily="SF Pro Display" Foreground="#44546F" Padding="4 0 0 0" />
+                            <TextBlock  FontSize="16" Text="{Binding Path=Group}" FontFamily="SF Pro Display" Foreground="#44546F" Padding="4 0 0 0" />
                         </StackPanel>
                     </Border>
 

@@ -8,22 +8,75 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DataGridStudents"
-      Loaded="dgvStudents_Loaded">
+      Loaded="dgvStudents_Loaded"
+      xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="203*"/>
+            <RowDefinition Height="85"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" Width="150" VerticalAlignment="Center" HorizontalAlignment="Left" x:Name="searchTextBox" KeyUp="searchTextBox_KeyUp" TextChanged="searchTextBox_TextChanged" />
-        <DataGrid Grid.Row="1" RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" RowStyle="{DynamicResource DataRowStudent}"  x:Name="dgvStudents" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" SelectionMode="Single"  BorderBrush="#00688CAF" Grid.RowSpan="2">
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <Grid >
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Top" Margin="0 43 0 0">
+                    <TextBox Style="{DynamicResource SearchTextBox}" Margin="0 0 0 0" Width="284" Height="32" FontSize="15" VerticalAlignment="Center" x:Name="searchTextBox" TextChanged="searchTextBox_TextChanged" BorderThickness="1" />
+                    <ComboBox  SelectionChanged="ComboBox_SelectionChanged" Margin="0 0 0 0" Style="{StaticResource ComboBoxStyle}" Width="100">
+                        <ComboBoxItem>Актуальные</ComboBoxItem>
+                        <ComboBoxItem>Архив</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+            <Rectangle HorizontalAlignment="Center" Margin="0 7 0 10" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
+        </StackPanel>
+
+
+        <DataGrid RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" 
+                  RowStyle="{DynamicResource DataRowStudent}"  x:Name="dgvStudents" 
+                  VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                  GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
+                  FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
+                  SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1"
+                  DataGridCell.Selected="dgvStudents_Selected" MouseDoubleClick="dgvStudents_MouseDoubleClick"
+                  Margin="0 7 0 13"  ColumnWidth="*">
+            <DataGrid.Columns>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu Background="White" BorderThickness="2" BorderBrush="LightGray" >
+                    <Label Content="Просмотр" x:Name="InformationLabel" MouseDown="InformationLabel_MouseDown"/>
+                    <Label Content="Изменить" x:Name="UpdateLabel" MouseDown="UpdateLabel_MouseDown"/>
+                    <Label Content="Удалить" x:Name="DeleteStudentLabel" MouseDown="DeleteStudentLabel_MouseDown"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="Background" Value="Transparent" />
                     <Setter Property="FontWeight" Value="SemiBold"/>
+
                 </Style>
             </DataGrid.ColumnHeaderStyle>
         </DataGrid>
+        <DataGrid RowDetailsTemplate="{DynamicResource DataGridRowDetailsTemplate1}"  CellStyle="{DynamicResource DataGridCellStyle1}" 
+          RowStyle="{DynamicResource DataRowStudent}"  x:Name="dgvHistoryStudents" 
+          VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+          GridLinesVisibility="None" IsReadOnly="True" Background="{x:Null}" 
+          FontFamily="SF Pro Display" FontSize="16" Foreground="#FF44546F" 
+          SelectionMode="Single"  BorderBrush="#00688CAF" Grid.Row="1" Visibility="Hidden" 
+          MouseDoubleClick="dgvHistoryStudents_MouseDoubleClick" Loaded="dgvHistoryStudents_Loaded"
+          AutoGenerateColumns="True" ColumnWidth="*"
+          Margin="0 7 0 13">
+            <DataGrid.Columns>
+            </DataGrid.Columns>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="FontWeight" Value="SemiBold"/>
+
+                </Style>
+                
+            </DataGrid.ColumnHeaderStyle>
+        </DataGrid>
+        <Rectangle HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom" Margin="0 0 0 1" Fill="#28091E42" Panel.ZIndex="1000" Width="100000" Height="2"/>
     </Grid>
 </Page>
